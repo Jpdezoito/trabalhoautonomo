@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f3ed;
+  --foreground: #202522;
+  --surface: #ffffff;
+  --surface-muted: #f2eee6;
+  --surface-strong: #ebe4d7;
+  --border: #ddd5c6;
+  --border-strong: #c9bea8;
+  --primary: #0f766e;
+  --primary-strong: #0b5f59;
+  --primary-soft: #dff4ef;
+  --accent: #e7b84b;
+  --accent-strong: #b7791f;
+  --danger: #b9433b;
+  --danger-soft: #f8dfdc;
+  --success: #237a57;
+  --success-soft: #dff3e8;
+  --warning: #9a6a16;
+  --warning-soft: #f7edcc;
+  --info: #3a6f8f;
+  --info-soft: #deedf5;
+  --muted: #66736b;
+  --muted-strong: #47544c;
+  --shadow-sm: 0 1px 2px rgb(32 37 34 / 0.05), 0 8px 20px rgb(32 37 34 / 0.03);
+  --shadow-md: 0 14px 34px rgb(32 37 34 / 0.08), 0 4px 14px rgb(32 37 34 / 0.05);
+  --shadow-lg: 0 28px 90px rgb(32 37 34 / 0.14), 0 10px 28px rgb(32 37 34 / 0.08);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background:
+    radial-gradient(circle at top, rgb(231 184 75 / 0.07), transparent 30%),
+    linear-gradient(180deg, #f7f3eb 0%, var(--background) 20%, var(--background) 100%);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--foreground);
+}
+
+input,
+select,
+textarea {
+  color: var(--foreground);
+  outline-color: var(--primary);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 1.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 1024px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 3px rgb(15 118 110 / 0.22);
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+img {
+  image-rendering: auto;
+}
+
+.premium-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #ffffff 0%, #fcfbf8 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.premium-card-elevated {
+  border: 1px solid color-mix(in srgb, var(--border) 82%, white);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.section-y {
+  padding-block: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: 4.5rem;
+  }
+}
+
+.surface-outline {
+  border: 1px solid color-mix(in srgb, var(--border) 90%, white);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.94), rgb(251 249 244 / 0.96));
+  box-shadow: var(--shadow-sm);
+}
+
+.text-balance {
+  text-wrap: balance;
 }

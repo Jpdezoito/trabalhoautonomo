@@ -1,0 +1,988 @@
+Perfeito — vamos montar isso do jeito certo, para o **Codex construir um site completo, moderno, organizado e profissional**, sem virar bagunça.
+
+A ideia é criar uma plataforma completa com:
+
+* página inicial moderna
+* cadastro e login
+* cadastro separado para **cliente** e **trabalhador**
+* perfil público do trabalhador
+* portfólio
+* busca e filtros
+* categorias de serviços
+* sistema de orçamento
+* avaliações
+* favoritos
+* painel do cliente
+* painel do trabalhador
+* painel admin
+* configurações
+* menus completos
+* design premium
+* versão mobile e desktop
+
+Vou te passar os **prompts em ordem**, prontos para colar no Codex.
+
+---
+
+# Estrutura da ideia
+
+Esse site pode ser tipo uma plataforma para:
+
+* pedreiro
+* mecânico
+* montador de móveis
+* eletricista
+* encanador
+* pintor
+* técnico
+* reformador
+* diarista
+* marceneiro
+* instalador
+* freelancer de serviços em geral
+
+---
+
+# Stack ideal para pedir ao Codex
+
+Pede assim para ele montar profissional:
+
+* **Next.js**
+* **TypeScript**
+* **Tailwind CSS**
+* **Prisma**
+* **PostgreSQL**
+* **NextAuth**
+* **Upload de imagens**
+* **Dashboard completo**
+* **Arquitetura modular**
+* **Design premium**
+
+---
+
+# Ordem certa para colar no Codex
+
+## Prompt 1 — Prompt mestre do projeto
+
+Cole esse primeiro:
+
+```text
+You are a senior full-stack engineer specialized in building modern, scalable, production-ready marketplace platforms with excellent UI/UX.
+
+I want you to build a complete professional service marketplace website inside this project.
+
+The platform is for autonomous workers and service providers, such as:
+- mechanics
+- builders
+- electricians
+- plumbers
+- painters
+- furniture assemblers
+- renovators
+- appliance repair workers
+- technicians
+- local service professionals in general
+
+Main goal:
+Create a complete, organized, modern platform where:
+- workers can create detailed public profiles
+- clients can register, search, contact, request quotes, favorite workers, and leave reviews
+- administrators can manage the whole platform
+
+The project must be:
+- complete
+- modern
+- responsive
+- very well organized
+- production-style
+- scalable
+- visually polished
+- modular
+- cleanly coded
+
+Required features:
+1. Public homepage
+2. Search by service type
+3. Search by city and neighborhood
+4. Worker public profile pages
+5. Registration and login
+6. Separate flows for client and worker accounts
+7. Worker dashboard
+8. Client dashboard
+9. Admin dashboard
+10. Portfolio/gallery system
+11. Quote request system
+12. Reviews and ratings
+13. Favorites system
+14. Category management
+15. Contact options including WhatsApp
+16. Profile verification and moderation
+17. Platform settings and configuration areas
+18. Professional menus and navigation
+19. Mobile and desktop responsive layouts
+20. Premium modern design
+
+Recommended stack:
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Prisma
+- PostgreSQL
+- NextAuth
+
+Important rules:
+- Build this as a real professional platform, not a toy project.
+- Keep everything organized inside the project.
+- Do not place everything in a single file.
+- Use reusable components.
+- Use scalable folder structure.
+- User-facing texts must be in Brazilian Portuguese.
+- Technical code can be in English.
+- Always explain what files you will create or modify before generating code.
+- Always preserve architecture quality.
+- Build step by step, not in one messy giant block.
+
+Before writing code:
+1. inspect the current project
+2. propose the ideal architecture
+3. define routes, modules, components, layouts, and database models
+4. define the implementation roadmap
+5. then begin implementation step by step
+```
+
+---
+
+## Prompt 2 — Arquitetura completa
+
+```text
+Now create the full professional architecture for this platform inside the project.
+
+The architecture must include:
+- public pages
+- authentication
+- worker dashboard
+- client dashboard
+- admin dashboard
+- reusable layouts
+- reusable components
+- search system
+- profile system
+- portfolio system
+- quote system
+- review system
+- favorites system
+- moderation system
+- settings system
+
+Please do this in phases.
+
+Phase 1:
+- show the complete folder tree
+- explain the responsibility of each major folder
+- explain the route map
+- explain the main application flow
+
+Phase 2:
+- generate the base project files with a clean and scalable architecture
+
+Do not build everything at once in a messy way.
+Keep the architecture professional and modular.
+```
+
+---
+
+## Prompt 3 — Banco de dados completo
+
+```text
+Now design the complete database schema for the platform using Prisma and PostgreSQL.
+
+The platform must support:
+- users
+- clients
+- workers
+- admin users
+- categories
+- services
+- worker profiles
+- portfolio images
+- cities
+- neighborhoods
+- quote requests
+- reviews
+- favorites
+- contact requests
+- moderation reports
+- verification status
+- admin logs
+- notifications
+- settings where relevant
+
+Requirements:
+- use proper relationships
+- include timestamps
+- include status fields where needed
+- support scalability
+- support moderation
+- support account role separation
+- support worker profile approval
+- support review moderation
+- support quote request statuses
+- use soft delete strategy where appropriate
+
+Before generating code:
+1. explain the schema logic
+2. explain relationships between models
+3. then generate the Prisma schema inside the project
+```
+
+---
+
+## Prompt 4 — Design system premium
+
+```text
+Now create the design system and visual foundation for the platform.
+
+I want a premium, modern, polished design with:
+- strong visual hierarchy
+- elegant spacing
+- responsive layout
+- premium cards
+- beautiful forms
+- polished navigation
+- clean typography
+- modern buttons
+- status badges
+- section consistency
+- mobile-first responsiveness
+
+Requirements:
+- use Tailwind CSS
+- build reusable UI primitives and components
+- create a consistent color palette
+- create a consistent spacing system
+- define card patterns
+- define button patterns
+- define form patterns
+- define dashboard patterns
+- define modal and dropdown patterns
+
+User-facing text must remain in Brazilian Portuguese.
+
+Before coding:
+1. explain the design strategy
+2. list the files to create or modify
+3. then implement the design foundation inside the project
+```
+
+---
+
+## Prompt 5 — Página inicial completa
+
+```text
+Now build the complete public homepage.
+
+The homepage must include:
+- premium hero section
+- search form by service and location
+- category highlights
+- featured workers
+- how it works section
+- trust section
+- testimonials preview
+- CTA for workers to register
+- CTA for clients to find professionals
+- footer with useful links
+- mobile and desktop responsive behavior
+
+The homepage should feel like a real premium startup marketplace.
+
+User-facing text must be in Brazilian Portuguese.
+
+Before coding:
+1. explain the homepage structure
+2. list the files to create or modify
+3. then implement the homepage inside the project
+```
+
+---
+
+## Prompt 6 — Cadastro e login completo
+
+```text
+Now implement the complete authentication system.
+
+Requirements:
+- registration
+- login
+- logout
+- password validation
+- secure sessions
+- role-based access
+- separate account flows for:
+  - clients
+  - workers
+- route protection
+- friendly form validation
+- friendly error states
+
+Registration must allow the user to choose:
+- Cliente
+- Trabalhador
+
+After registration:
+- clients go to a client onboarding flow
+- workers go to a worker onboarding flow with richer profile setup
+
+User-facing text must be in Brazilian Portuguese.
+
+Before coding:
+1. explain the auth architecture
+2. explain the user flow
+3. list files to create or modify
+4. implement it inside the project
+```
+
+---
+
+## Prompt 7 — Onboarding do trabalhador
+
+```text
+Now implement the worker onboarding flow.
+
+The worker onboarding must allow:
+- profile photo upload
+- cover image upload
+- profession title
+- category selection
+- service area selection
+- city and neighborhood
+- description
+- service list
+- starting prices
+- WhatsApp number
+- contact details
+- availability information
+- portfolio upload
+- account completion progress
+
+Requirements:
+- clean multi-step flow
+- excellent UX
+- validation
+- draft saving where possible
+- responsive design
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the onboarding flow
+2. list the files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 8 — Onboarding do cliente
+
+```text
+Now implement the client onboarding flow.
+
+The client onboarding must support:
+- basic profile completion
+- preferred location
+- saved service interests
+- favorite categories
+- profile photo optional
+- contact information
+
+Requirements:
+- simple and clean flow
+- lighter than the worker flow
+- responsive design
+- validation
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the onboarding flow
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 9 — Perfil público do trabalhador
+
+```text
+Now implement the complete public worker profile page.
+
+Each worker profile must include:
+- profile photo
+- cover image
+- full name
+- profession title
+- categories
+- city and neighborhood
+- about section
+- service list
+- starting prices
+- availability information
+- WhatsApp contact button
+- quote request button
+- favorites button
+- rating summary
+- reviews list
+- portfolio gallery
+- verification badge if applicable
+
+The page must feel premium, organized, and trustworthy.
+
+User-facing text must be in Brazilian Portuguese.
+
+Before coding:
+1. explain the page structure
+2. list files to create or modify
+3. implement the profile page inside the project
+```
+
+---
+
+## Prompt 10 — Busca e filtros
+
+```text
+Now implement the complete search and filtering system.
+
+The public search page must support:
+- keyword search
+- search by category
+- search by city
+- search by neighborhood
+- filter by rating
+- filter by price range
+- filter by availability
+- filter by verified workers
+- sorting options
+
+Search results must display:
+- profile image
+- worker name
+- profession title
+- short description
+- city/neighborhood
+- rating
+- starting price
+- quick actions
+
+Requirements:
+- premium search layout
+- reusable filter components
+- responsive design
+- good UX
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the search architecture
+2. list files to create or modify
+3. implement the system inside the project
+```
+
+---
+
+## Prompt 11 — Categorias e páginas de serviços
+
+```text
+Now implement the categories and services browsing system.
+
+The platform must include:
+- categories page
+- individual category pages
+- category cards
+- service exploration sections
+- category-based search entry points
+
+Each category page should:
+- explain the service type
+- show related workers
+- allow filtering
+- have strong visual organization
+
+Requirements:
+- reusable category components
+- modern and premium layout
+- responsive design
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the category structure
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 12 — Sistema de portfólio
+
+```text
+Now implement the worker portfolio system.
+
+Workers must be able to:
+- upload portfolio images
+- add titles and descriptions to portfolio items
+- reorder portfolio items
+- delete portfolio items
+- mark featured portfolio items
+
+The public profile must display the portfolio beautifully.
+
+Requirements:
+- clean upload flow
+- image validation
+- responsive gallery layout
+- good dashboard management UX
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the portfolio architecture
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 13 — Sistema de orçamento
+
+```text
+Now implement the complete quote request system.
+
+Clients must be able to:
+- open a quote request form from a worker profile
+- describe the service needed
+- provide contact information
+- inform location
+- select preferred date if relevant
+- send extra notes
+- submit the quote request
+
+Workers must be able to:
+- view received requests in the dashboard
+- see request details
+- update status such as:
+  - novo
+  - em contato
+  - aceito
+  - recusado
+  - concluído
+
+Requirements:
+- secure flow
+- dashboard integration
+- database integration
+- responsive forms
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the quote flow
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 14 — Avaliações e notas
+
+```text
+Now implement the reviews and ratings system.
+
+Clients must be able to:
+- rate workers from 1 to 5
+- leave written reviews
+- submit reviews after a service interaction or contact
+
+The system must:
+- calculate average rating
+- show total review count
+- display recent reviews
+- support moderation status
+- allow admin to hide or review inappropriate content
+
+Requirements:
+- proper database relationships
+- secure review submission flow
+- premium UI
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the review logic
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 15 — Favoritos
+
+```text
+Now implement the favorites system.
+
+Clients must be able to:
+- favorite workers
+- remove workers from favorites
+- access a favorites page in their dashboard
+
+Requirements:
+- quick favorite action from worker profile and search results
+- clean UI states
+- database integration
+- protected access
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the favorites flow
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 16 — Painel do trabalhador
+
+```text
+Now implement the complete worker dashboard.
+
+The worker dashboard must include:
+- overview page
+- profile management
+- portfolio management
+- services management
+- availability settings
+- quote request inbox
+- reviews overview
+- account settings
+- notification area
+
+Requirements:
+- premium dashboard layout
+- sidebar navigation
+- mobile responsive dashboard behavior
+- strong information hierarchy
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the dashboard structure
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 17 — Painel do cliente
+
+```text
+Now implement the complete client dashboard.
+
+The client dashboard must include:
+- overview page
+- favorites page
+- quote request history
+- profile settings
+- saved preferences
+- notifications area
+
+Requirements:
+- premium dashboard design
+- reusable dashboard layout
+- mobile responsive behavior
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the dashboard structure
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 18 — Painel admin
+
+```text
+Now implement the complete admin dashboard.
+
+The admin dashboard must allow:
+- viewing users
+- viewing workers
+- approving or rejecting worker profiles
+- moderating reviews
+- moderating reports
+- managing categories
+- viewing quote request statistics
+- viewing platform activity overview
+- managing verification statuses
+
+Requirements:
+- secure admin route protection
+- scalable architecture
+- premium admin layout
+- clean modular sections
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the admin architecture
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 19 — Configurações completas
+
+```text
+Now implement the settings system for the platform.
+
+Settings areas must include:
+- account settings
+- password settings
+- contact settings
+- notification preferences
+- worker visibility settings
+- profile privacy options where relevant
+- admin platform settings where relevant
+
+Requirements:
+- clean forms
+- reusable settings components
+- strong validation
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the settings architecture
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 20 — Menus, header, footer, navegação
+
+```text
+Now implement the full navigation system.
+
+The platform must include:
+- public header
+- public footer
+- authenticated navigation
+- worker dashboard sidebar
+- client dashboard sidebar
+- admin sidebar
+- mobile navigation menu
+- dropdown menus where needed
+- profile menu
+- clean navigation states
+
+Requirements:
+- modern premium feel
+- excellent responsiveness
+- reusable navigation components
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the navigation structure
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 21 — Contato por WhatsApp e ações rápidas
+
+```text
+Now implement the contact action system.
+
+Workers must be able to expose:
+- WhatsApp contact button
+- phone contact if enabled
+- quote request action
+- profile sharing action
+
+Requirements:
+- clean call-to-action design
+- configurable visibility
+- proper formatting for WhatsApp links
+- responsive UI
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the contact action architecture
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 22 — Páginas extras institucionais
+
+```text
+Now implement the institutional pages.
+
+Create:
+- Sobre
+- Contato
+- Termos de Uso
+- Política de Privacidade
+- Como Funciona
+
+Requirements:
+- professional layout
+- clean content structure
+- modern design
+- Brazilian Portuguese interface text
+
+Before coding:
+1. explain the structure
+2. list files to create or modify
+3. implement the pages
+```
+
+---
+
+## Prompt 23 — Melhorar tudo para nível premium
+
+```text
+Now perform a full premium UI/UX refinement across the platform.
+
+Goals:
+- make the entire platform look more polished
+- improve spacing and consistency
+- improve typography hierarchy
+- improve card design
+- improve forms
+- improve dashboard visuals
+- improve responsiveness
+- improve empty states
+- improve loading states
+- improve trust and clarity
+
+Important:
+- keep the existing architecture
+- do not break functionality
+- do not rewrite the whole project in a messy way
+- refine the visual quality systematically
+
+Before coding:
+1. explain the refinement strategy
+2. list files to update
+3. then implement the premium refinements
+```
+
+---
+
+## Prompt 24 — Seed de dados para testes
+
+```text
+Now create development seed data for the platform.
+
+The seed data should include:
+- sample categories
+- sample workers
+- sample client account
+- sample worker accounts
+- sample portfolio items
+- sample reviews
+- sample quote requests
+
+Requirements:
+- realistic Brazilian Portuguese content
+- useful for testing the full UI
+- cleanly integrated with Prisma
+
+Before coding:
+1. explain the seed strategy
+2. list files to create or modify
+3. implement it inside the project
+```
+
+---
+
+## Prompt 25 — Regras para o Codex não bagunçar
+
+Esse você pode colar sempre que ele começar a se perder:
+
+```text
+Important implementation rules:
+
+- Keep the project architecture clean and modular.
+- Do not place too much logic in a single file.
+- Do not break existing features.
+- Reuse components whenever possible.
+- Keep the code production-style.
+- Always explain what will be changed before generating code.
+- Always maintain consistency between database, authentication, API, and UI.
+- User-facing text must remain in Brazilian Portuguese.
+- Focus on professional quality, organization, scalability, and polished design.
+- Do not skip steps.
+- Do not generate incomplete fake implementations if a proper foundation is needed first.
+```
+
+---
+
+# Ordem ideal para você usar
+
+Usa nessa ordem:
+
+1. Prompt 1
+2. Prompt 2
+3. Prompt 3
+4. Prompt 4
+5. Prompt 5
+6. Prompt 6
+7. Prompt 7
+8. Prompt 8
+9. Prompt 9
+10. Prompt 10
+11. Prompt 11
+12. Prompt 12
+13. Prompt 13
+14. Prompt 14
+15. Prompt 15
+16. Prompt 16
+17. Prompt 17
+18. Prompt 18
+19. Prompt 19
+20. Prompt 20
+21. Prompt 21
+22. Prompt 22
+23. Prompt 23
+24. Prompt 24
+25. Prompt 25
+
+---
+
+# Como pedir visual mais forte
+
+Se quiser reforçar pro Codex fazer algo muito bonito, cola isso também:
+
+```text
+I want the platform to feel premium, trustworthy, modern, elegant, and highly polished, similar to a real startup marketplace. Focus heavily on spacing, typography, cards, forms, responsive dashboards, and overall professional visual coherence.
+```
+
+---
+
+# Como pedir o nome do projeto
+
+Você pode mandar ele usar um nome provisório, por exemplo:
+
+```text
+Use a temporary project name like "TrampoFácil", "ServiPro", or "LigaServiços" until branding is finalized.
+```
+
+---
+
+# Minha recomendação prática
+
+O melhor começo é:
+
+* colar o **Prompt 1**
+* depois o **Prompt 2**
+* depois o **Prompt 3**
+* seguir a ordem
+
+Assim o Codex monta a base certa antes de sair criando tela torta.
+
+Se você quiser, eu posso no próximo passo fazer uma versão ainda mais forte: **um pacote Prompt 01 até Prompt 30**, com foco total em **design premium, animações, admin poderoso, chat interno, notificações e mapa por localização**.

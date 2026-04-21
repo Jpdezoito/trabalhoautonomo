@@ -1,65 +1,322 @@
 import Image from "next/image";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CheckCircle2,
+  ClipboardCheck,
+  HeartHandshake,
+  MessageCircle,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Users,
+} from "lucide-react";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { CategoryGrid } from "@/components/marketplace/category-grid";
+import { SearchPanel } from "@/components/marketplace/search-panel";
+import { WorkerCard } from "@/components/marketplace/worker-card";
+import { Badge } from "@/components/ui/badge";
+import { LinkButton } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/section-header";
+import { StatCard } from "@/components/ui/stat-card";
+import { routes } from "@/config/routes";
+import { workers } from "@/lib/marketplace-data";
+
+const heroStats = [
+  { value: "1.200+", label: "profissionais ativos" },
+  { value: "8.400+", label: "orcamentos enviados" },
+  { value: "4,8/5", label: "media de avaliacao" },
+];
+
+const howItWorks = [
+  {
+    title: "Busque por servico e bairro",
+    text: "Filtre por categoria, cidade e regiao para encontrar profissionais perto de voce.",
+    icon: Search,
+  },
+  {
+    title: "Compare perfis completos",
+    text: "Veja portfolio, avaliacoes, disponibilidade, especialidades e verificacao.",
+    icon: BadgeCheck,
+  },
+  {
+    title: "Solicite orcamento",
+    text: "Envie os detalhes do servico e fale pelo canal mais conveniente, incluindo WhatsApp.",
+    icon: MessageCircle,
+  },
+  {
+    title: "Avalie a experiencia",
+    text: "Depois do atendimento, publique uma avaliacao para fortalecer a comunidade.",
+    icon: Star,
+  },
+];
+
+const trustItems = [
+  "Perfis com status de aprovacao e verificacao",
+  "Avaliacoes moderadas antes da publicacao",
+  "Historico de orcamentos e contatos organizado",
+  "Categorias, servicos e regioes estruturados",
+  "Administracao com logs, moderacao e configuracoes",
+];
+
+const testimonials = [
+  {
+    author: "Mariana Almeida",
+    role: "Cliente em Sao Paulo",
+    text: "Encontrei um eletricista no meu bairro, comparei avaliacoes e recebi o orcamento no mesmo dia.",
+    rating: 5,
+  },
+  {
+    author: "Paulo Cesar",
+    role: "Cliente em Pinheiros",
+    text: "O portfolio ajudou muito na escolha. A reforma foi planejada com prazo, custo e contato claro.",
+    rating: 5,
+  },
+  {
+    author: "Carlos Mendes",
+    role: "Profissional verificado",
+    text: "Meu perfil passou mais confianca e os pedidos chegam com informacoes melhores para responder rapido.",
+    rating: 5,
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
+      <main>
+        <section className="relative overflow-hidden bg-[#202522] text-white">
+          <Image
+            src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2200&q=85"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-32"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#202522] via-[#202522]/88 to-[#202522]/42" />
+          <div className="relative container-page grid gap-10 pb-14 pt-24 sm:pb-16 sm:pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:items-center lg:pb-20 lg:pt-28">
+            <div className="max-w-4xl">
+              <Badge variant="warning" className="bg-white/12 text-accent ring-white/20 backdrop-blur">
+                Marketplace premium para servicos locais
+              </Badge>
+              <h1 className="mt-6 text-balance text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl lg:text-6xl 2xl:text-7xl">
+                Encontre profissionais confiaveis para resolver servicos com rapidez.
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#eee7d9]">
+                Busque autonomos por servico, cidade e bairro. Compare perfis, veja portfolios, solicite orcamentos e fale direto com profissionais avaliados.
+              </p>
+              <div className="mt-8 max-w-5xl">
+                <SearchPanel />
+              </div>
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className="rounded-[8px] border border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.14)_0%,rgba(255,255,255,0.08)_100%)] p-4 backdrop-blur">
+                    <p className="text-2xl font-black text-white">{stat.value}</p>
+                    <p className="mt-1 text-sm font-semibold text-[#d8d0c2]">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4 lg:justify-items-end lg:pl-8">
+              <Card variant="elevated" className="w-full max-w-[560px] overflow-hidden border-white/20 bg-white/96 shadow-[var(--shadow-lg)]">
+                <div className="relative h-44 sm:h-52">
+                  <Image src={workers[1].coverImage} alt="" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
+                </div>
+                <CardContent className="p-5 sm:p-6">
+                  <div className="flex min-w-0 items-center gap-4">
+                    <Image src={workers[1].image} alt={workers[1].name} width={78} height={78} className="size-[78px] shrink-0 rounded-[8px] border border-border object-cover shadow-[var(--shadow-md)]" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-xl font-black leading-tight text-foreground">{workers[1].name}</h2>
+                        <BadgeCheck className="shrink-0 text-primary" size={18} />
+                      </div>
+                      <p className="text-sm font-semibold leading-5 text-muted">{workers[1].role}</p>
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-muted">{workers[1].headline}</p>
+                  <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+                    <Metric value="4,8" label="nota" />
+                    <Metric value="148" label="servicos" />
+                    <Metric value="Hoje" label="resposta" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="container-page py-8">
+          <div className="grid gap-4 md:grid-cols-3">
+            <StatCard label="Profissionais ativos" value="1.200+" detail="Base organizada por categoria, bairro e disponibilidade." icon={<Users size={22} />} />
+            <StatCard label="Perfis moderados" value="98%" detail="Fluxo de verificacao, documentos e revisao administrativa." icon={<ShieldCheck size={22} />} />
+            <StatCard label="Orcamentos gerados" value="8.400+" detail="Pedidos rastreados entre cliente e profissional." icon={<ClipboardCheck size={22} />} />
+          </div>
+        </section>
+
+        <section className="section-y bg-surface">
+          <div className="container-page">
+            <SectionHeader
+              eyebrow="Categorias"
+              title="Servicos mais procurados"
+              description="Escolha a especialidade certa para cada tipo de reparo, reforma, instalacao ou atendimento tecnico."
+              action={
+                <LinkButton href={routes.search} variant="outline">
+                  Ver todos <ArrowRight className="ml-2" size={18} />
+                </LinkButton>
+              }
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <CategoryGrid />
+          </div>
+        </section>
+
+        <section className="section-y">
+          <div className="container-page">
+            <SectionHeader
+              eyebrow="Destaques"
+              title="Profissionais prontos para atender"
+              description="Perfis com portfolio, avaliacoes, servicos cadastrados e opcoes diretas de contato."
+            />
+            <div className="grid gap-6 lg:grid-cols-3">
+              {workers.map((worker) => (
+                <WorkerCard key={worker.slug} worker={worker} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-y bg-surface">
+          <div className="container-page">
+            <SectionHeader
+              eyebrow="Como funciona"
+              title="Do problema resolvido ao servico avaliado"
+              description="Um fluxo simples para contratar com mais informacao, controle e seguranca."
+              align="center"
+            />
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {howItWorks.map((step, index) => {
+                const Icon = step.icon;
+
+                return (
+                  <Card key={step.title} className="p-5">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="flex size-11 items-center justify-center rounded-[8px] bg-primary-soft text-primary">
+                        <Icon size={22} />
+                      </span>
+                      <span className="text-sm font-black text-muted">0{index + 1}</span>
+                    </div>
+                    <h3 className="mt-5 text-lg font-black text-foreground">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-muted">{step.text}</p>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-y bg-[#202522] text-white">
+          <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <Badge variant="warning" className="bg-white/10 text-accent ring-white/20">
+                Confianca operacional
+              </Badge>
+              <h2 className="mt-5 text-3xl font-black tracking-tight sm:text-5xl">
+                Uma plataforma preparada para crescer com moderacao e qualidade.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-[#d8d0c2]">
+                A experiencia publica e conectada a uma estrutura de administracao com verificacao de perfis, revisao de avaliacoes, status de orcamentos, notificacoes e configuracoes.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <LinkButton href={routes.search} variant="secondary">
+                  Encontrar profissional
+                </LinkButton>
+                <LinkButton href={routes.registerWorker} variant="outline" className="border-white/25 bg-white/8 text-white hover:bg-white/14">
+                  Cadastrar servico
+                </LinkButton>
+              </div>
+            </div>
+            <div className="grid gap-3">
+              {trustItems.map((item) => (
+                <div key={item} className="flex items-start gap-3 rounded-[8px] border border-white/12 bg-white/8 p-4">
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-accent" size={20} />
+                  <p className="font-semibold leading-6 text-[#f2eadc]">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-y">
+          <div className="container-page">
+            <SectionHeader
+              eyebrow="Depoimentos"
+              title="Quem usa entende a diferenca"
+              description="Clientes e profissionais ganham clareza antes, durante e depois do atendimento."
+            />
+            <div className="grid gap-5 lg:grid-cols-3">
+              {testimonials.map((testimonial) => (
+                <Card key={testimonial.author} className="p-6">
+                  <div className="flex gap-1 text-accent">
+                    {Array.from({ length: testimonial.rating }).map((_, index) => (
+                      <Star key={index} size={17} className="fill-current" />
+                    ))}
+                  </div>
+                  <p className="mt-5 leading-7 text-muted">&quot;{testimonial.text}&quot;</p>
+                  <div className="mt-6 border-t border-border pt-4">
+                    <p className="font-black text-foreground">{testimonial.author}</p>
+                    <p className="text-sm font-semibold text-muted">{testimonial.role}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="pb-16">
+          <div className="container-page">
+            <div className="grid overflow-hidden rounded-[8px] border border-border bg-surface shadow-[var(--shadow-lg)] lg:grid-cols-2">
+              <div className="p-6 sm:p-8 lg:p-10">
+                <Sparkles className="text-primary" size={28} />
+                <h2 className="mt-5 text-3xl font-black tracking-tight text-foreground">
+                  Precisa resolver um servico?
+                </h2>
+                <p className="mt-3 leading-7 text-muted">
+                  Encontre profissionais por especialidade e regiao, veja provas de trabalho e solicite orcamentos com detalhes.
+                </p>
+                <LinkButton href={routes.search} className="mt-6">
+                  Buscar profissionais <ArrowRight className="ml-2" size={18} />
+                </LinkButton>
+              </div>
+              <div className="border-t border-border bg-primary-soft p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
+                <HeartHandshake className="text-primary" size={30} />
+                <h2 className="mt-5 text-3xl font-black tracking-tight text-foreground">
+                  Trabalha com servicos locais?
+                </h2>
+                <p className="mt-3 leading-7 text-muted">
+                  Crie um perfil profissional com portfolio, areas atendidas, verificacao e canal direto para receber pedidos melhores.
+                </p>
+                <LinkButton href={routes.registerWorker} variant="secondary" className="mt-6">
+                  Cadastrar como profissional <ArrowRight className="ml-2" size={18} />
+                </LinkButton>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+      <SiteFooter />
+    </div>
+  );
+}
+
+function Metric({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-[8px] bg-surface-muted p-3">
+      <p className="font-black text-foreground">{value}</p>
+      <p className="text-xs font-bold text-muted">{label}</p>
     </div>
   );
 }

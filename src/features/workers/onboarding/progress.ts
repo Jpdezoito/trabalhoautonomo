@@ -1,0 +1,75 @@
+import { createDefaultFacialEnrollmentDraft } from "@/features/identity/utils";
+import type { WorkerOnboardingDraft } from "@/features/workers/onboarding/types";
+
+export const defaultWorkerOnboardingDraft: WorkerOnboardingDraft = {
+  fullName: "",
+  publicName: "",
+  professionTitle: "",
+  categorySlug: "",
+  additionalCategorySlugs: [],
+  services: [],
+  startingPrice: "",
+  city: "",
+  neighborhood: "",
+  serviceAreas: [],
+  workAreaSummary: "",
+  description: "",
+  whatsapp: "",
+  phone: "",
+  email: "",
+  availability: "",
+  emergencyAvailable: false,
+  identityDocumentReference: "",
+  termsAccepted: false,
+  verificationConsentAccepted: false,
+  facialEnrollment: createDefaultFacialEnrollmentDraft(),
+  portfolio: [],
+  experienceYears: "",
+  experienceSummary: "",
+  educationLevel: "",
+  courseSummary: "",
+  collegeName: "",
+  licenseRegistrationNumber: "",
+  meiNumber: "",
+  companyName: "",
+  companyDocument: "",
+  qualifications: [],
+};
+
+export function calculateWorkerOnboardingProgress(draft: WorkerOnboardingDraft) {
+  const checks = [
+    draft.fullName.length >= 3,
+    Boolean(draft.profilePhotoPreview),
+    Boolean(draft.coverImagePreview),
+    draft.publicName.length >= 2,
+    draft.professionTitle.length >= 3,
+    draft.categorySlug.length >= 2,
+    draft.services.length > 0,
+    draft.startingPrice.length >= 2,
+    draft.city.length >= 2,
+    draft.neighborhood.length >= 2,
+    draft.serviceAreas.length > 0,
+    draft.workAreaSummary.length >= 10,
+    draft.description.length >= 40,
+    draft.whatsapp.length >= 10,
+    draft.phone.length >= 10,
+    draft.email.includes("@"),
+    draft.availability.length >= 5,
+    draft.identityDocumentReference.length >= 4,
+    Boolean(draft.identityDocumentPreview),
+    Boolean(draft.addressProofPreview),
+    draft.termsAccepted,
+    draft.verificationConsentAccepted,
+    draft.facialEnrollment.consentAccepted,
+    Boolean(draft.facialEnrollment.captureSource),
+    Boolean(draft.facialEnrollment.previewUrl),
+    draft.facialEnrollment.status === "em_analise" || draft.facialEnrollment.status === "aprovado",
+    draft.portfolio.length >= 3,
+    draft.portfolio.some((item) => item.workerVisible),
+    draft.experienceYears.length > 0 || draft.experienceSummary.length > 0,
+  ];
+
+  const completed = checks.filter(Boolean).length;
+
+  return Math.round((completed / checks.length) * 100);
+}

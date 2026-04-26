@@ -183,6 +183,7 @@ export function mapWorkerProfileToMarketplaceWorker(
     responseTime: "Responde em ate 24h",
     verified: workerProfile.verificationStatus === "APPROVED",
     available: workerProfile.isAvailable,
+    plan: workerProfile.plan,
     image: workerProfile.user.image ?? "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
     coverImage:
       workerProfile.portfolioImages[0]?.imageUrl ??

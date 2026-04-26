@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { quoteRequestSchema } from "@/features/quotes/schemas";
 import { findServiceByName, findWorkerProfileBySlug, generateQuoteCode, getOrCreateClientProfile } from "@/lib/marketplace-server";
 import { prisma } from "@/lib/prisma";
+import { estimateQuotePrice } from "@/lib/quote-pricing";
 
 export async function POST(request: Request) {
   const payload = await request.json().catch(() => null);
@@ -41,6 +42,13 @@ export async function POST(request: Request) {
     }),
     findServiceByName(parsed.data.serviceType),
   ]);
+  const estimate = estimateQuotePrice({
+    serviceType: parsed.data.serviceType,
+    description: parsed.data.description,
+    city: parsed.data.city,
+    neighborhood: parsed.data.neighborhood,
+    workerStartingPrice: worker.basePriceDescription,
+  });
 
   const quote = await prisma.quoteRequest.create({
     data: {
@@ -55,6 +63,12 @@ export async function POST(request: Request) {
       preferredDate: parsed.data.preferredDate ? new Date(parsed.data.preferredDate) : null,
       budgetMin: parsed.data.budgetMin,
       budgetMax: parsed.data.budgetMax,
+      platformEstimateMin: estimate.min,
+      platformEstimateMax: estimate.max,
+      platformFeePercent: estimate.platformFeePercent,
+      platformFeeAmount: estimate.platformFeeAmount,
+      professionalNetMin: estimate.professionalNetMin,
+      professionalNetMax: estimate.professionalNetMax,
       status: "OPEN",
       priority: "NORMAL",
     },
@@ -66,6 +80,7 @@ export async function POST(request: Request) {
       id: quote.id,
       code: quote.code,
       status: quote.status,
+      estimate,
     },
     { status: 201 },
   );

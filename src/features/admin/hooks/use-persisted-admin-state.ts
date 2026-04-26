@@ -7,17 +7,24 @@ export function usePersistedAdminState<T>(storageKey: string, initialValue: T) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(storageKey);
+    const timeout = window.setTimeout(() => {
+      let nextValue = initialValue;
 
-      if (raw) {
-        setValue(JSON.parse(raw) as T);
+      try {
+        const raw = window.localStorage.getItem(storageKey);
+
+        if (raw) {
+          nextValue = JSON.parse(raw) as T;
+        }
+      } catch {
+        nextValue = initialValue;
+      } finally {
+        setValue(nextValue);
+        setReady(true);
       }
-    } catch {
-      setValue(initialValue);
-    } finally {
-      setReady(true);
-    }
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
   }, [initialValue, storageKey]);
 
   useEffect(() => {

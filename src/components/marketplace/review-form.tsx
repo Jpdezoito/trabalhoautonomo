@@ -65,6 +65,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
             <Field>
               <Label htmlFor="review-author">Seu nome</Label>
               <Input id="review-author" name="author" placeholder="Ex.: Mariana Almeida" />
+              <FieldHint>Nome exibido junto da avaliacao publica.</FieldHint>
               <FieldMessage errors={fieldErrors?.author} />
             </Field>
             <Field>

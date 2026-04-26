@@ -28,6 +28,7 @@ async function main() {
   await prisma.facialEnrollment.deleteMany();
   await prisma.verificationRequest.deleteMany();
   await prisma.contactRequest.deleteMany();
+  await prisma.lead.deleteMany();
   await prisma.notification.deleteMany();
   await prisma.adminLog.deleteMany();
   await prisma.platformSetting.deleteMany();
@@ -280,6 +281,9 @@ async function main() {
           whatsapp: "+5511999991001",
           websiteUrl: "https://autonomopro.local/carlos-mendes",
           isAvailable: true,
+          plan: "DESTAQUE",
+          planStartedAt: new Date("2026-04-01T00:00:00.000Z"),
+          planExpiresAt: new Date("2026-05-01T00:00:00.000Z"),
           approvalStatus: "APPROVED",
           verificationStatus: "APPROVED",
           approvedAt: new Date(),
@@ -316,6 +320,9 @@ async function main() {
           whatsapp: "+5511999991002",
           websiteUrl: "https://autonomopro.local/fernanda-rocha",
           isAvailable: true,
+          plan: "PRO",
+          planStartedAt: new Date("2026-04-05T00:00:00.000Z"),
+          planExpiresAt: new Date("2026-05-05T00:00:00.000Z"),
           approvalStatus: "APPROVED",
           verificationStatus: "APPROVED",
           approvedAt: new Date(),
@@ -351,6 +358,9 @@ async function main() {
           whatsapp: "+5511999991004",
           websiteUrl: "https://autonomopro.local/rafael-oliveira",
           isAvailable: true,
+          plan: "DESTAQUE",
+          planStartedAt: new Date("2026-04-10T00:00:00.000Z"),
+          planExpiresAt: new Date("2026-05-10T00:00:00.000Z"),
           approvalStatus: "PENDING_REVIEW",
           verificationStatus: "PENDING",
           averageRating: "4.70",
@@ -570,6 +580,29 @@ async function main() {
         email: "paulo@email.com",
         phone: "(11) 99999-3030",
         message: "Gostaria de entender prazo medio e etapas da reforma.",
+      },
+    ],
+  });
+
+  await prisma.lead.createMany({
+    data: [
+      {
+        clientProfileId: clientOneUser.clientProfile.id,
+        workerProfileId: workerProfiles.carlos.id,
+        channel: "WHATSAPP",
+        source: "worker_profile",
+        city: "Sao Paulo",
+        neighborhood: "Tatuape",
+        referrer: "/profissionais/carlos-mendes-eletricista",
+      },
+      {
+        clientProfileId: clientTwoUser.clientProfile.id,
+        workerProfileId: workerProfiles.fernanda.id,
+        channel: "WHATSAPP",
+        source: "search_results",
+        city: "Sao Paulo",
+        neighborhood: "Pinheiros",
+        referrer: "/buscar",
       },
     ],
   });

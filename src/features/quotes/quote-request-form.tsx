@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarDays, CheckCircle2, MessageCircle, Send } from "lucide-react";
+import { CalendarDays, CheckCircle2, Send } from "lucide-react";
 import { z } from "zod";
-import { Button, LinkButton } from "@/components/ui/button";
+import { LeadWhatsappButton } from "@/components/marketplace/lead-whatsapp-button";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, Input, Label, Textarea } from "@/components/ui/form";
 import { quoteRequestSchema } from "@/features/quotes/schemas";
-import { getWhatsappUrl } from "@/lib/utils";
+import { estimateQuotePrice, formatCurrency, type QuotePricingEstimate } from "@/lib/quote-pricing";
 import type { Worker } from "@/types/marketplace";
 
 type QuoteRequestFormProps = {
@@ -42,8 +44,16 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [protocol, setProtocol] = useState("");
+  const [confirmedEstimate, setConfirmedEstimate] = useState<QuotePricingEstimate | null>(null);
 
   const message = `Ola, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de solicitar um orcamento.`;
+  const estimate = estimateQuotePrice({
+    serviceType: form.serviceType,
+    description: form.description,
+    city: form.city,
+    neighborhood: form.neighborhood,
+    worker,
+  });
 
   function updateField<Key extends keyof FormState>(key: Key, value: FormState[Key]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -77,6 +87,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
       }
 
       setProtocol(data.code ?? "ORC-DEMO");
+      setConfirmedEstimate(data.estimate ?? estimate);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -89,8 +100,9 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
         <CheckCircle2 className="text-success" size={28} />
         <h3 className="mt-3 text-xl font-black text-foreground">Pedido enviado</h3>
         <p className="mt-2 text-sm leading-6 text-muted">
-          Seu pedido foi registrado com o protocolo <strong>{protocol}</strong>. O profissional recebera os detalhes para entrar em contato.
+          Seu pedido foi registrado com o protocolo <strong>{protocol}</strong>. A AutonomoPro calculou uma faixa inicial para alinhar cliente, profissional e taxa da plataforma.
         </p>
+        {confirmedEstimate ? <QuoteEstimateSummary estimate={confirmedEstimate} /> : null}
         <Button type="button" variant="outline" className="mt-4" onClick={() => setStatus("idle")}>
           Enviar outro pedido
         </Button>
@@ -147,7 +159,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
           </div>
         </Field>
         <Field>
-          <Label>Faixa de orçamento</Label>
+          <Label>Limite de orcamento opcional</Label>
           <Input
             value={form.budgetMax?.toString() ?? ""}
             onChange={(event) => updateField("budgetMax", event.target.value ? Number(event.target.value) : undefined)}
@@ -169,6 +181,8 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
         <InlineError message={errors.extraNotes} />
       </Field>
 
+      <QuoteEstimateSummary estimate={estimate} />
+
       {status === "error" && !Object.keys(errors).length ? (
         <p className="rounded-[8px] bg-danger-soft p-3 text-sm font-bold text-danger">Nao foi possivel enviar o pedido agora. Tente novamente.</p>
       ) : null}
@@ -177,11 +191,39 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
         <Send className="mr-2" size={18} />
         {status === "submitting" ? "Enviando..." : "Enviar pedido"}
       </Button>
-      <LinkButton href={getWhatsappUrl(worker.whatsapp, message)} variant="secondary" className="w-full" target="_blank" rel="noreferrer">
-        <MessageCircle className="mr-2" size={18} />
-        Chamar no WhatsApp
-      </LinkButton>
+      <LeadWhatsappButton worker={worker} message={message} source="quote_request_form" className="w-full" />
     </form>
+  );
+}
+
+function QuoteEstimateSummary({ estimate }: { estimate: QuotePricingEstimate }) {
+  return (
+    <div className="rounded-[8px] border border-border bg-surface-muted p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <p className="text-sm font-black text-foreground">Estimativa AutonomoPro</p>
+          <p className="mt-1 text-xs font-semibold text-muted">Faixa sugerida antes da validacao final de escopo e materiais.</p>
+        </div>
+        <Badge variant={estimate.confidence === "alta" ? "success" : estimate.confidence === "media" ? "info" : "warning"}>
+          Confianca {estimate.confidence}
+        </Badge>
+      </div>
+      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        <EstimateMetric label="Cliente paga" value={`${formatCurrency(estimate.min)} - ${formatCurrency(estimate.max)}`} />
+        <EstimateMetric label="Taxa plataforma" value={`${estimate.platformFeePercent}% | ${formatCurrency(estimate.platformFeeAmount)}`} />
+        <EstimateMetric label="Profissional recebe" value={`${formatCurrency(estimate.professionalNetMin)} - ${formatCurrency(estimate.professionalNetMax)}`} />
+      </div>
+      <p className="mt-3 text-xs font-semibold leading-5 text-muted">Base: {estimate.factors.join(", ")}.</p>
+    </div>
+  );
+}
+
+function EstimateMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-[8px] bg-surface p-3">
+      <p className="text-xs font-bold text-muted">{label}</p>
+      <p className="mt-1 text-sm font-black text-foreground">{value}</p>
+    </div>
   );
 }
 

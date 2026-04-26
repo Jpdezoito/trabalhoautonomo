@@ -7,7 +7,7 @@ export function QuoteRequestPanel({ worker }: { worker: Worker }) {
     <Card id="orcamento" className="min-w-0 p-5">
       <h2 className="text-2xl font-black text-foreground">Solicitar orcamento</h2>
       <p className="mt-2 text-sm leading-6 text-muted">
-        Envie os detalhes do servico para o profissional analisar prazo, materiais e disponibilidade.
+        Envie os detalhes do servico. A AutonomoPro calcula uma faixa inicial com taxa da plataforma e valor estimado para o profissional.
       </p>
       <QuoteRequestForm worker={worker} />
     </Card>

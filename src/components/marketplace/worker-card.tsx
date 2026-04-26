@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { BadgeCheck, MapPin, Star } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 import { FavoriteButton } from "@/components/marketplace/favorite-button";
+import { PlanBadge, TrustBadge } from "@/components/marketplace/trust-badge";
 import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,7 +20,7 @@ export function WorkerCard({ worker }: { worker: Worker }) {
           <div className="min-w-0 flex-1 pt-4">
             <div className="flex items-center gap-2">
               <h3 className="truncate text-lg font-black text-foreground">{worker.name}</h3>
-              {worker.verified ? <BadgeCheck className="shrink-0 text-primary" size={18} aria-label="Verificado" /> : null}
+              <TrustBadge worker={worker} compact />
             </div>
             <p className="text-sm font-semibold text-muted">{worker.role}</p>
           </div>
@@ -27,6 +28,8 @@ export function WorkerCard({ worker }: { worker: Worker }) {
         </div>
         <p className="mt-4 line-clamp-2 text-sm leading-6 text-muted">{worker.headline}</p>
         <div className="mt-4 flex flex-wrap gap-2">
+          <TrustBadge worker={worker} />
+          <PlanBadge plan={worker.plan} />
           {worker.services.slice(0, 3).map((service) => (
             <Badge key={service} variant="primary">
               {service}

@@ -16,6 +16,7 @@ import { FavoriteButton } from "@/components/marketplace/favorite-button";
 import { QuoteRequestPanel } from "@/components/marketplace/quote-request-panel";
 import { ReviewForm } from "@/components/marketplace/review-form";
 import { ReviewSummary } from "@/components/marketplace/review-summary";
+import { PlanBadge, TrustBadge } from "@/components/marketplace/trust-badge";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatRating } from "@/lib/utils";
@@ -36,10 +37,9 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
             <div className="max-w-4xl">
               <div className="flex flex-wrap items-center gap-2">
                 {worker.verified ? (
-                  <Badge variant="success" className="bg-white/12 text-[#dff3e8] ring-white/20">
-                    <BadgeCheck size={15} />
-                    {trustVerified ? "Conta verificada" : "Conta com verificacao basica"}
-                  </Badge>
+                  <span className="[&>span]:bg-white/12 [&>span]:text-[#dff3e8] [&>span]:ring-white/20">
+                    <TrustBadge worker={worker} />
+                  </span>
                 ) : trustInReview ? (
                   <Badge variant="warning" className="bg-white/12 text-accent ring-white/20">
                     Verificacao de identidade em analise
@@ -54,6 +54,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                     Confianca e protecao
                   </Badge>
                 ) : null}
+                <PlanBadge plan={worker.plan} />
                 <Badge variant="neutral" className="bg-white/12 text-white ring-white/20">
                   {worker.available ? "Disponivel para novos pedidos" : "Agenda pausada"}
                 </Badge>

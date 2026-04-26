@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
-import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/config/routes";
+import { signInWithCredentials } from "@/lib/next-auth-client";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -19,12 +19,19 @@ export function LoginForm() {
     setSubmitting(true);
     setError(null);
 
-    const response = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-      callbackUrl: routes.postLogin,
-    });
+    let response;
+
+    try {
+      response = await signInWithCredentials({
+        email,
+        password,
+        callbackUrl: routes.postLogin,
+      });
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Nao foi possivel entrar agora.");
+      setSubmitting(false);
+      return;
+    }
 
     if (!response || response.error) {
       setError(mapLoginError(response?.error));

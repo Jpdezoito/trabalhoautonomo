@@ -30,6 +30,12 @@ enum WorkerApprovalStatus {
   ARCHIVED
 }
 
+enum ProfessionalPlan {
+  FREE
+  PRO
+  DESTAQUE
+}
+
 enum VerificationStatus {
   NOT_REQUESTED
   PENDING
@@ -408,6 +414,7 @@ model ClientProfile {
   reviews                 Review[]
   favorites               Favorite[]
   contactRequests         ContactRequest[]
+  leads                   Lead[]
   trustVerifications      TrustVerificationRequest[]
   deletedAt               DateTime?
   createdAt               DateTime                   @default(now())
@@ -452,6 +459,9 @@ model WorkerProfile {
   portfolioProofStatus    VerificationStatus         @default(NOT_REQUESTED)
   minimumPortfolioMet     Boolean                    @default(false)
   isAvailable             Boolean                    @default(true)
+  plan                    ProfessionalPlan           @default(FREE)
+  planStartedAt           DateTime?
+  planExpiresAt           DateTime?
   approvalStatus          WorkerApprovalStatus       @default(DRAFT)
   verificationStatus      VerificationStatus         @default(NOT_REQUESTED)
   trustVerificationStatus TrustVerificationStatus    @default(NOT_VERIFIED)
@@ -471,6 +481,7 @@ model WorkerProfile {
   reviews                 Review[]
   favorites               Favorite[]
   contactRequests         ContactRequest[]
+  leads                   Lead[]
   verificationRequests    VerificationRequest[]
   trustVerifications      TrustVerificationRequest[]
   moderationReports       ModerationReport[]
@@ -482,6 +493,7 @@ model WorkerProfile {
   @@index([trustVerificationStatus, publicTrustBadgeEnabled])
   @@index([identityDocumentStatus, addressProofStatus, activityProofStatus, portfolioProofStatus])
   @@index([cityId, neighborhoodId])
+  @@index([plan, planExpiresAt])
   @@index([isAvailable, averageRating])
   @@index([deletedAt])
 }
@@ -710,6 +722,12 @@ model QuoteRequest {
   preferredDate   DateTime?
   budgetMin       Decimal?           @db.Decimal(10, 2)
   budgetMax       Decimal?           @db.Decimal(10, 2)
+  platformEstimateMin Decimal?       @db.Decimal(10, 2)
+  platformEstimateMax Decimal?       @db.Decimal(10, 2)
+  platformFeePercent  Decimal?       @db.Decimal(5, 2)
+  platformFeeAmount   Decimal?       @db.Decimal(10, 2)
+  professionalNetMin  Decimal?       @db.Decimal(10, 2)
+  professionalNetMax  Decimal?       @db.Decimal(10, 2)
   quotedAmount    Decimal?           @db.Decimal(10, 2)
   status          QuoteStatus        @default(OPEN)
   priority        QuotePriority      @default(NORMAL)
@@ -818,6 +836,26 @@ model ContactRequest {
   @@index([clientProfileId])
   @@index([channel, createdAt])
   @@index([deletedAt])
+}
+
+model Lead {
+  id              String         @id @default(cuid())
+  clientProfileId String?
+  clientProfile   ClientProfile? @relation(fields: [clientProfileId], references: [id], onDelete: SetNull)
+  workerProfileId String
+  workerProfile   WorkerProfile  @relation(fields: [workerProfileId], references: [id], onDelete: Restrict)
+  channel         ContactChannel @default(WHATSAPP)
+  source          String
+  city            String?
+  neighborhood    String?
+  referrer        String?
+  userAgent       String?
+  metadata        Json?
+  createdAt       DateTime       @default(now())
+
+  @@index([workerProfileId, createdAt])
+  @@index([channel, createdAt])
+  @@index([city, neighborhood])
 }
 
 model VerificationRequest {

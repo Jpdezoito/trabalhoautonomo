@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Activity, ArrowRight, ClipboardCheck, Flag, ShieldAlert, Users } from "lucide-react";
 import { QuoteTable } from "@/components/dashboard/quote-table";
 import { Badge } from "@/components/ui/badge";
-import { Button, LinkButton } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatCard } from "@/components/ui/stat-card";
 import { routes } from "@/config/routes";
@@ -66,7 +66,9 @@ export function AdminOverview() {
                     </div>
                     <Badge variant={item.status === "open" ? "warning" : item.status === "in_review" ? "info" : "danger"}>{item.id}</Badge>
                   </div>
-                  <Button />
+                  <LinkButton href={`${routes.adminModeration}#${item.id}`} variant="outline" size="sm" className="mt-3">
+                    Analisar caso
+                  </LinkButton>
                 </div>
               ))}
             </div>

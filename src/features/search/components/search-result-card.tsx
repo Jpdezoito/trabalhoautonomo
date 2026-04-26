@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { BadgeCheck, MapPin, MessageCircle, Star, WalletCards } from "lucide-react";
+import { MapPin, Star, WalletCards } from "lucide-react";
 import { FavoriteButton } from "@/components/marketplace/favorite-button";
+import { LeadWhatsappButton } from "@/components/marketplace/lead-whatsapp-button";
+import { PlanBadge, TrustBadge } from "@/components/marketplace/trust-badge";
 import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { routes } from "@/config/routes";
-import { formatRating, getWhatsappUrl } from "@/lib/utils";
+import { formatRating } from "@/lib/utils";
 import type { SearchResultWorker } from "@/features/search/types";
 
 type SearchResultCardProps = {
@@ -28,11 +30,12 @@ export function SearchResultCard({ result }: SearchResultCardProps) {
             <div className="min-w-0 flex-1">
               <div className="flex min-w-0 items-center gap-2">
                 <h2 className="truncate text-xl font-black text-foreground">{worker.name}</h2>
-                {worker.verified ? <BadgeCheck className="shrink-0 text-primary" size={18} /> : null}
+                <TrustBadge worker={worker} compact />
               </div>
               <p className="mt-1 text-sm font-bold text-muted">{worker.role}</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {worker.verified ? <Badge variant="success">Verificado</Badge> : null}
+                <TrustBadge worker={worker} />
+                <PlanBadge plan={worker.plan} />
                 {worker.available ? <Badge variant="info">Disponivel</Badge> : null}
               </div>
             </div>
@@ -71,10 +74,7 @@ export function SearchResultCard({ result }: SearchResultCardProps) {
             <LinkButton href={`${routes.workerProfile(worker.slug)}#orcamento`} variant="outline" className="flex-1">
               Pedir orcamento
             </LinkButton>
-            <LinkButton href={getWhatsappUrl(worker.whatsapp, message)} variant="secondary" target="_blank" rel="noreferrer" className="flex-1">
-              <MessageCircle className="mr-2" size={18} />
-              WhatsApp
-            </LinkButton>
+            <LeadWhatsappButton worker={worker} message={message} source="search_results" className="flex-1" />
           </div>
         </div>
       </div>

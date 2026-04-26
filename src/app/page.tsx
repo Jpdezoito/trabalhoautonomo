@@ -83,6 +83,36 @@ const testimonials = [
   },
 ];
 
+const professionalPlans = [
+  {
+    name: "Free",
+    price: "R$ 0",
+    description: "Para entrar na plataforma, criar perfil e receber pedidos organicos.",
+    features: ["Perfil publico", "Portfolio basico", "Orcamentos pela plataforma", "Selo de verificacao quando aprovado"],
+    cta: "Comecar gratis",
+    href: routes.registerWorker,
+    highlighted: false,
+  },
+  {
+    name: "Pro",
+    price: "R$ 29/mes",
+    description: "Para profissionais que querem mais visibilidade e mais controle comercial.",
+    features: ["Prioridade sobre perfis Free", "Mais destaque nos cards", "Leads de WhatsApp rastreados", "Badge Plano Pro"],
+    cta: "Virar Pro",
+    href: routes.registerWorker,
+    highlighted: true,
+  },
+  {
+    name: "Destaque",
+    price: "R$ 59/mes",
+    description: "Para aparecer no topo do bairro/cidade e acelerar captacao local.",
+    features: ["Topo por relevancia local", "Badge Destaque no bairro", "Mais exposicao em /buscar", "Ideal para dominar uma regiao"],
+    cta: "Quero destaque",
+    href: routes.registerWorker,
+    highlighted: false,
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
@@ -270,6 +300,44 @@ export default function Home() {
                     <p className="font-black text-foreground">{testimonial.author}</p>
                     <p className="text-sm font-semibold text-muted">{testimonial.role}</p>
                   </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-y bg-surface">
+          <div className="container-page">
+            <SectionHeader
+              eyebrow="Planos para profissionais"
+              title="Comece gratis e cresca por bairro"
+              description="O plano do profissional define visibilidade no marketplace. Perfis Destaque aparecem antes em buscas locais relevantes."
+              align="center"
+            />
+            <div className="grid gap-5 lg:grid-cols-3">
+              {professionalPlans.map((plan) => (
+                <Card key={plan.name} variant={plan.highlighted ? "elevated" : "default"} className={plan.highlighted ? "border-primary shadow-[var(--shadow-lg)]" : undefined}>
+                  <CardContent className="grid h-full gap-6">
+                    <div>
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="text-2xl font-black text-foreground">{plan.name}</h3>
+                        {plan.highlighted ? <Badge variant="success">Mais indicado</Badge> : null}
+                      </div>
+                      <p className="mt-4 text-4xl font-black tracking-tight text-foreground">{plan.price}</p>
+                      <p className="mt-3 text-sm leading-6 text-muted">{plan.description}</p>
+                    </div>
+                    <div className="grid gap-3">
+                      {plan.features.map((feature) => (
+                        <div key={feature} className="flex items-start gap-3">
+                          <CheckCircle2 className="mt-0.5 shrink-0 text-primary" size={18} />
+                          <p className="text-sm font-semibold leading-6 text-muted-strong">{feature}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <LinkButton href={plan.href} variant={plan.highlighted ? "primary" : "outline"} className="mt-auto w-full">
+                      {plan.cta}
+                    </LinkButton>
+                  </CardContent>
                 </Card>
               ))}
             </div>

@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { routes } from "@/config/routes";
 import { adminUsers, moderationCases, verificationQueue } from "@/features/admin/admin-data";
 import { publicCategories, workers } from "@/lib/marketplace-data";
 
@@ -31,6 +35,8 @@ export function AdminUsersTable() {
 }
 
 export function AdminWorkersTable() {
+  const [openWorkerSlug, setOpenWorkerSlug] = useState<string | null>(null);
+
   return (
     <Card>
       <CardHeader>
@@ -38,21 +44,57 @@ export function AdminWorkersTable() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
-          {workers.map((worker) => (
-            <div key={worker.slug} className="grid gap-3 rounded-[8px] border border-border bg-surface p-4 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <p className="font-black text-foreground">{worker.name}</p>
-                <p className="mt-1 text-sm text-muted">{worker.role} - {worker.neighborhood}, {worker.city}</p>
+          {workers.map((worker) => {
+            const isOpen = openWorkerSlug === worker.slug;
+            const trustStatus = worker.trustVerification?.status ?? "em_analise";
+
+            return (
+              <div key={worker.slug} className="grid gap-4 rounded-[8px] border border-border bg-surface p-4">
+                <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+                  <div>
+                    <p className="font-black text-foreground">{worker.name}</p>
+                    <p className="mt-1 text-sm text-muted">{worker.role} - {worker.neighborhood}, {worker.city}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant={worker.available ? "success" : "warning"}>{worker.available ? "Disponivel" : "Pausado"}</Badge>
+                    <Badge variant={trustStatus === "verificado" ? "success" : trustStatus === "rejeitado" ? "danger" : "warning"}>
+                      {trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em analise"}
+                    </Badge>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenWorkerSlug(isOpen ? null : worker.slug)}
+                    >
+                      {isOpen ? "Ocultar revisao" : "Revisar"}
+                    </Button>
+                  </div>
+                </div>
+
+                {isOpen ? (
+                  <div className="grid gap-4 rounded-[8px] border border-border bg-surface-muted p-4 lg:grid-cols-[1fr_auto]">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <VerificationDetail label="Profissional" value={worker.name} />
+                      <VerificationDetail label="Servico" value={worker.role} />
+                      <VerificationDetail label="Regiao" value={`${worker.neighborhood}, ${worker.city}`} />
+                      <VerificationDetail label="Disponibilidade" value={worker.available ? "Disponivel" : "Pausado"} />
+                      <VerificationDetail label="Status da conta" value={trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em analise"} />
+                      <VerificationDetail label="Origem" value="Perfil de teste do marketplace" />
+                    </div>
+                    <div className="flex flex-wrap items-start gap-2 lg:justify-end">
+                      <LinkButton href={routes.workerProfile(worker.slug)} variant="outline" size="sm">
+                        Abrir perfil
+                      </LinkButton>
+                      <LinkButton href={routes.adminVerification} variant="outline" size="sm">
+                        Ver verificacoes
+                      </LinkButton>
+                    </div>
+                  </div>
+                ) : null}
               </div>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant={worker.available ? "success" : "warning"}>{worker.available ? "Disponivel" : "Pausado"}</Badge>
-                <Badge variant={worker.trustVerification?.status === "verificado" ? "success" : worker.trustVerification?.status === "rejeitado" ? "danger" : "warning"}>
-                  {worker.trustVerification?.status === "verificado" ? "Conta verificada" : worker.trustVerification?.status === "rejeitado" ? "Rejeitado" : "Em analise"}
-                </Badge>
-                <Button type="button" variant="outline" size="sm">Revisar</Button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </CardContent>
     </Card>
@@ -80,6 +122,16 @@ export function AdminCategoriesGrid() {
 }
 
 export function AdminModerationTable() {
+  const [openCaseId, setOpenCaseId] = useState<string | null>(null);
+  const [caseStatuses, setCaseStatuses] = useState<Record<string, ModerationDecision>>({});
+
+  function updateCaseStatus(id: string, decision: ModerationDecision) {
+    setCaseStatuses((current) => ({
+      ...current,
+      [id]: decision,
+    }));
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -87,25 +139,92 @@ export function AdminModerationTable() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
-          {moderationCases.map((item) => (
-            <div key={item.id} className="grid gap-3 rounded-[8px] border border-border bg-surface p-4 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <p className="font-black text-foreground">{item.target}</p>
-                <p className="mt-1 text-sm text-muted">{item.detail}</p>
+          {moderationCases.map((item) => {
+            const isOpen = openCaseId === item.id;
+            const decision = caseStatuses[item.id] ?? getInitialModerationDecision(item.status);
+
+            return (
+              <div id={item.id} key={item.id} className="scroll-mt-24 grid gap-4 rounded-[8px] border border-border bg-surface p-4">
+                <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+                  <div>
+                    <p className="font-black text-foreground">{item.target}</p>
+                    <p className="mt-1 text-sm text-muted">{item.detail}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant={getModerationVariant(decision)}>{getModerationLabel(decision)}</Badge>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenCaseId(isOpen ? null : item.id)}
+                    >
+                      {isOpen ? "Ocultar analise" : "Analisar"}
+                    </Button>
+                  </div>
+                </div>
+
+                {isOpen ? (
+                  <div className="grid gap-4 rounded-[8px] border border-border bg-surface-muted p-4 lg:grid-cols-[1fr_auto]">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <VerificationDetail label="Caso" value={item.id} />
+                      <VerificationDetail label="Alvo" value={item.target} />
+                      <VerificationDetail label="Fila" value={item.queue} />
+                      <VerificationDetail label="Motivo" value={item.reason} />
+                      <VerificationDetail label="Status" value={getModerationLabel(decision)} />
+                      <VerificationDetail label="Origem" value="Dados de teste da moderacao" />
+                    </div>
+                    <div className="flex flex-wrap items-start gap-2 lg:justify-end">
+                      <Button type="button" variant="outline" size="sm" onClick={() => updateCaseStatus(item.id, "approved")}>
+                        Liberar
+                      </Button>
+                      <Button type="button" variant="outline" size="sm" onClick={() => updateCaseStatus(item.id, "needs_changes")}>
+                        Solicitar ajuste
+                      </Button>
+                      <Button type="button" variant="danger" size="sm" onClick={() => updateCaseStatus(item.id, "rejected")}>
+                        Rejeitar
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
               </div>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant={item.status === "open" ? "warning" : item.status === "in_review" ? "info" : "danger"}>{item.reason}</Badge>
-                <Button type="button" variant="outline" size="sm">Analisar</Button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </CardContent>
     </Card>
   );
 }
 
+type ModerationDecision = "open" | "in_review" | "needs_changes" | "approved" | "rejected";
+
+function getInitialModerationDecision(status: string): ModerationDecision {
+  if (status === "in_review") return "in_review";
+  if (status === "action_required") return "needs_changes";
+
+  return "open";
+}
+
+function getModerationLabel(decision: ModerationDecision) {
+  if (decision === "approved") return "Liberado";
+  if (decision === "rejected") return "Rejeitado";
+  if (decision === "needs_changes") return "Ajuste solicitado";
+  if (decision === "in_review") return "Em analise";
+
+  return "Aberto";
+}
+
+function getModerationVariant(decision: ModerationDecision) {
+  if (decision === "approved") return "success";
+  if (decision === "rejected") return "danger";
+  if (decision === "in_review") return "info";
+
+  return "warning";
+}
+
 export function AdminVerificationTable() {
+  const [openVerificationId, setOpenVerificationId] = useState<string | null>(null);
+
   return (
     <Card>
       <CardHeader>
@@ -113,28 +232,69 @@ export function AdminVerificationTable() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
-          {verificationQueue.map((item) => (
-            <div key={item.id} className="grid gap-3 rounded-[8px] border border-border bg-surface p-4 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <p className="font-black text-foreground">{item.workerName}</p>
-                <p className="mt-1 text-sm text-muted">{item.category} - {item.city}</p>
-                <p className="mt-1 text-xs font-bold uppercase tracking-normal text-primary">Captura facial enviada em {item.submittedAt}</p>
-                <p className="mt-1 text-sm text-muted">
-                  Origem: {item.captureSource === "webcam" ? "Verificacao facial por webcam" : "Upload seguro"} | Tentativas: {item.retryCount}
-                </p>
+          {verificationQueue.map((item) => {
+            const isOpen = openVerificationId === item.id;
+
+            return (
+              <div key={item.id} className="grid gap-4 rounded-[8px] border border-border bg-surface p-4">
+                <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+                  <div>
+                    <p className="font-black text-foreground">{item.workerName}</p>
+                    <p className="mt-1 text-sm text-muted">{item.category} - {item.city}</p>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-normal text-primary">Captura facial enviada em {item.submittedAt}</p>
+                    <p className="mt-1 text-sm text-muted">
+                      Origem: {item.captureSource === "webcam" ? "Verificacao facial por webcam" : "Upload seguro"} | Tentativas: {item.retryCount}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant={item.status === "approved" ? "success" : item.status === "pending" ? "warning" : "info"}>
+                      {item.status === "approved" ? "Aprovado" : item.status === "pending" ? "Em analise" : "Rejeitado"}
+                    </Badge>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenVerificationId(isOpen ? null : item.id)}
+                    >
+                      {isOpen ? "Ocultar verificacao" : "Ver verificacao"}
+                    </Button>
+                  </div>
+                </div>
+
+                {isOpen ? (
+                  <div className="grid gap-4 rounded-[8px] border border-border bg-surface-muted p-4 lg:grid-cols-[1fr_auto]">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <VerificationDetail label="Protocolo" value={item.id} />
+                      <VerificationDetail label="Profissional" value={item.workerName} />
+                      <VerificationDetail label="Categoria" value={item.category} />
+                      <VerificationDetail label="Cidade" value={item.city} />
+                      <VerificationDetail label="Origem" value={item.captureSource === "webcam" ? "Webcam" : "Upload seguro"} />
+                      <VerificationDetail label="Tentativas" value={String(item.retryCount)} />
+                      <VerificationDetail label="Ambiente" value="Dados de teste" />
+                      <VerificationDetail label="Captura facial" value="Registro simulado para validacao do fluxo administrativo." />
+                    </div>
+                    <div className="flex flex-wrap items-start gap-2 lg:justify-end">
+                      <LinkButton href={routes.workerProfile(item.workerSlug)} variant="outline" size="sm">
+                        Abrir perfil
+                      </LinkButton>
+                    </div>
+                  </div>
+                ) : null}
               </div>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant={item.status === "approved" ? "success" : item.status === "pending" ? "warning" : "info"}>
-                  {item.status === "approved" ? "Aprovado" : item.status === "pending" ? "Em analise" : "Rejeitado"}
-                </Badge>
-                <Button type="button" variant="outline" size="sm">
-                  {item.status === "approved" ? "Ver verificacao" : "Enviar nova verificacao"}
-                </Button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+function VerificationDetail({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-xs font-black uppercase tracking-normal text-muted">{label}</p>
+      <p className="mt-1 text-sm font-semibold text-foreground">{value}</p>
+    </div>
   );
 }

@@ -97,8 +97,15 @@ function sortSearchResults(a: SearchResultWorker, b: SearchResultWorker, sortBy:
       return b.worker.yearsExperience - a.worker.yearsExperience;
     case "relevance":
     default:
-      return Number(b.worker.verified) - Number(a.worker.verified) || b.worker.rating - a.worker.rating;
+      return getPlanScore(b.worker.plan) - getPlanScore(a.worker.plan) || Number(b.worker.verified) - Number(a.worker.verified) || b.worker.rating - a.worker.rating;
   }
+}
+
+function getPlanScore(plan: Worker["plan"]) {
+  if (plan === "DESTAQUE") return 3;
+  if (plan === "PRO") return 2;
+
+  return 1;
 }
 
 function getResponseScore(responseTime: string) {

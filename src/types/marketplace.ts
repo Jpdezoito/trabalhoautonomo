@@ -32,6 +32,8 @@ export type WorkerContactSettings = {
   allowShare?: boolean;
 };
 
+export type ProfessionalPlan = "FREE" | "PRO" | "DESTAQUE";
+
 export type Review = {
   author: string;
   rating: number;
@@ -97,6 +99,7 @@ export type Worker = {
   responseTime: string;
   verified: boolean;
   available: boolean;
+  plan?: ProfessionalPlan;
   image: string;
   coverImage: string;
   services: string[];

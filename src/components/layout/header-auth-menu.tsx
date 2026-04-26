@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut, Settings, ShieldCheck, UserRound } from "lucide-react";
-import { signOut } from "next-auth/react";
 import { Dropdown, DropdownItem } from "@/components/ui/dropdown";
 import { routes } from "@/config/routes";
 import { getDashboardRouteByRole, getSettingsRouteByRole } from "@/lib/role-routing";
+import { signOutFromNextAuth } from "@/lib/next-auth-client";
 
 type HeaderAuthMenuProps = {
   name: string;
@@ -30,7 +30,7 @@ export function HeaderAuthMenu({ name, role, mode = "next-auth" }: HeaderAuthMen
       return;
     }
 
-    await signOut({ callbackUrl: routes.home });
+    await signOutFromNextAuth(routes.home);
   }
 
   return (

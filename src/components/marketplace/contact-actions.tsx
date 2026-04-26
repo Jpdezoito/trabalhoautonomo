@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Link as LinkIcon, MessageCircle, Phone, Share2 } from "lucide-react";
+import { Link as LinkIcon, Phone, Share2 } from "lucide-react";
+import { LeadWhatsappButton } from "@/components/marketplace/lead-whatsapp-button";
 import { Button, LinkButton } from "@/components/ui/button";
-import { getPhoneUrl, getWhatsappUrl } from "@/lib/utils";
+import { getPhoneUrl } from "@/lib/utils";
 import type { Worker } from "@/types/marketplace";
 
 export function ContactActions({ worker, className }: { worker: Worker; className?: string }) {
@@ -41,10 +42,7 @@ export function ContactActions({ worker, className }: { worker: Worker; classNam
     <div className={className}>
       <div className="grid gap-3">
         {settings.showWhatsapp ? (
-          <LinkButton href={getWhatsappUrl(worker.whatsapp, whatsappMessage)} variant="secondary" target="_blank" rel="noreferrer" className="w-full">
-            <MessageCircle className="mr-2" size={18} />
-            Chamar no WhatsApp
-          </LinkButton>
+          <LeadWhatsappButton worker={worker} message={whatsappMessage} source="worker_profile" className="w-full" />
         ) : null}
 
         {settings.showPhone && worker.phone ? (

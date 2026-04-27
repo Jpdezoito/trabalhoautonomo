@@ -462,6 +462,7 @@ model WorkerProfile {
   plan                    ProfessionalPlan           @default(FREE)
   planStartedAt           DateTime?
   planExpiresAt           DateTime?
+  ultimaAtividade         DateTime                   @default(now())
   approvalStatus          WorkerApprovalStatus       @default(DRAFT)
   verificationStatus      VerificationStatus         @default(NOT_REQUESTED)
   trustVerificationStatus TrustVerificationStatus    @default(NOT_VERIFIED)
@@ -494,6 +495,7 @@ model WorkerProfile {
   @@index([identityDocumentStatus, addressProofStatus, activityProofStatus, portfolioProofStatus])
   @@index([cityId, neighborhoodId])
   @@index([plan, planExpiresAt])
+  @@index([isAvailable, ultimaAtividade])
   @@index([isAvailable, averageRating])
   @@index([deletedAt])
 }
@@ -769,10 +771,13 @@ model Review {
   id              String             @id @default(cuid())
   workerProfileId String
   workerProfile   WorkerProfile      @relation(fields: [workerProfileId], references: [id], onDelete: Restrict)
-  clientProfileId String
-  clientProfile   ClientProfile      @relation(fields: [clientProfileId], references: [id], onDelete: Restrict)
+  clientProfileId String?
+  clientProfile   ClientProfile?     @relation(fields: [clientProfileId], references: [id], onDelete: SetNull)
   quoteRequestId  String?            @unique
   quoteRequest    QuoteRequest?      @relation(fields: [quoteRequestId], references: [id], onDelete: SetNull)
+  clienteNome     String?
+  clienteEmail    String?
+  mostrarNome     Boolean            @default(false)
   rating          Int
   title           String
   comment         String             @db.Text

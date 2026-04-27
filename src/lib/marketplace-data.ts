@@ -369,6 +369,7 @@ export const workers: Worker[] = [
     reviews: [
       {
         author: "Mariana A.",
+        showName: true,
         rating: 5,
         title: "Servico limpo e pontual",
         comment: "Explicou o problema, trouxe os materiais certos e deixou tudo funcionando no mesmo dia.",
@@ -376,6 +377,7 @@ export const workers: Worker[] = [
       },
       {
         author: "Ricardo T.",
+        showName: false,
         rating: 5,
         title: "Resolveu uma emergencia",
         comment: "Chegou rapido no apartamento e corrigiu um curto no quadro com muita transparencia.",
@@ -463,6 +465,7 @@ export const workers: Worker[] = [
     reviews: [
       {
         author: "Paulo C.",
+        showName: true,
         rating: 5,
         title: "Obra organizada",
         comment: "A equipe cumpriu o cronograma e manteve o apartamento limpo ao final de cada etapa.",
@@ -470,6 +473,7 @@ export const workers: Worker[] = [
       },
       {
         author: "Renata L.",
+        showName: false,
         rating: 4,
         title: "Acabamento excelente",
         comment: "Gostei muito do cuidado com detalhes e da clareza nos custos extras.",

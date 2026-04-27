@@ -35,7 +35,9 @@ export type WorkerContactSettings = {
 export type ProfessionalPlan = "FREE" | "PRO" | "DESTAQUE";
 
 export type Review = {
-  author: string;
+  author?: string;
+  email?: string;
+  showName?: boolean;
   rating: number;
   title: string;
   comment: string;
@@ -99,6 +101,7 @@ export type Worker = {
   responseTime: string;
   verified: boolean;
   available: boolean;
+  lastActivityAt?: string;
   plan?: ProfessionalPlan;
   image: string;
   coverImage: string;

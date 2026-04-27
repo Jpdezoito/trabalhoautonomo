@@ -26,6 +26,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
       workerSlug: worker.slug,
       author: formData.get("author"),
       email: formData.get("email"),
+      showName: formData.get("showName") === "on",
       serviceReference: formData.get("serviceReference"),
       rating,
       title: formData.get("title"),
@@ -65,16 +66,21 @@ export function ReviewForm({ worker }: { worker: Worker }) {
             <Field>
               <Label htmlFor="review-author">Seu nome</Label>
               <Input id="review-author" name="author" placeholder="Ex.: Mariana Almeida" />
-              <FieldHint>Nome exibido junto da avaliacao publica.</FieldHint>
+              <FieldHint className="min-h-10">Opcional. Se preencher, mostraremos apenas o primeiro nome.</FieldHint>
               <FieldMessage errors={fieldErrors?.author} />
             </Field>
             <Field>
               <Label htmlFor="review-email">E-mail</Label>
               <Input id="review-email" name="email" type="email" placeholder="voce@email.com" />
-              <FieldHint>Usado apenas para verificacao interna.</FieldHint>
+              <FieldHint className="min-h-10">Opcional. Usado apenas para verificacao interna, nunca sera exibido.</FieldHint>
               <FieldMessage errors={fieldErrors?.email} />
             </Field>
           </FieldGroup>
+
+          <label className="flex items-start gap-3 rounded-[8px] border border-border bg-surface-muted p-3 text-sm font-semibold text-muted-strong">
+            <input name="showName" type="checkbox" className="mt-1 size-4 rounded border-border accent-primary" />
+            Quero exibir meu nome na avaliacao
+          </label>
 
           <Field>
             <Label>Nota do atendimento</Label>

@@ -36,7 +36,7 @@ export function SearchResultCard({ result }: SearchResultCardProps) {
               <div className="mt-3 flex flex-wrap gap-2">
                 <TrustBadge worker={worker} />
                 <PlanBadge plan={worker.plan} />
-                {worker.available ? <Badge variant="info">Disponivel</Badge> : null}
+                {worker.available ? <Badge variant="info">Disponivel agora</Badge> : null}
               </div>
             </div>
             <FavoriteButton workerSlug={worker.slug} workerName={worker.name} compact />

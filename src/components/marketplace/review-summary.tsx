@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getPublishedReviews, getReviewDistribution } from "@/features/reviews";
+import { getPublicReviewAuthor, getPublishedReviews, getReviewDistribution } from "@/features/reviews";
 import { formatRating } from "@/lib/utils";
 import type { Worker } from "@/types/marketplace";
 
@@ -50,12 +50,12 @@ export function ReviewSummary({ worker }: { worker: Worker }) {
 
         <div className="mt-6 grid gap-4">
           {publishedReviews.map((review) => (
-            <article key={`${review.author}-${review.title}`} className="rounded-[8px] border border-border bg-surface p-4">
+            <article key={`${review.title}-${review.date}`} className="rounded-[8px] border border-border bg-surface p-4">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <h3 className="font-black text-foreground">{review.title}</h3>
                   <p className="mt-1 text-sm font-semibold text-muted">
-                    {review.author} - {review.date}
+                    {getPublicReviewAuthor(review)} - {review.date}
                   </p>
                 </div>
                 <span className="inline-flex items-center gap-1 rounded-[8px] bg-warning-soft px-3 py-1 text-sm font-black text-warning">

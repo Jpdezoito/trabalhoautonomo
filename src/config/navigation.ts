@@ -33,6 +33,7 @@ export const workerNavigation = [
 export const adminNavigation = [
   { href: routes.admin, label: "Visao geral" },
   { href: routes.adminUsers, label: "Usuarios" },
+  { href: routes.adminClients, label: "Clientes" },
   { href: routes.adminCategories, label: "Categorias" },
   { href: routes.adminWorkers, label: "Profissionais" },
   { href: routes.adminQuotes, label: "Orcamentos" },

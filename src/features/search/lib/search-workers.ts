@@ -84,6 +84,12 @@ export function getWorkerStartingPriceAmount(worker: Worker) {
 }
 
 function sortSearchResults(a: SearchResultWorker, b: SearchResultWorker, sortBy: SearchFilters["sortBy"] = "relevance") {
+  const availabilityOrder = Number(b.worker.available) - Number(a.worker.available);
+
+  if (availabilityOrder !== 0) {
+    return availabilityOrder;
+  }
+
   switch (sortBy) {
     case "rating":
       return b.worker.rating - a.worker.rating || b.worker.reviewsCount - a.worker.reviewsCount;

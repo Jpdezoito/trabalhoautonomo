@@ -17,6 +17,8 @@ export async function SiteHeader() {
     role === "ADMIN" || role === "SUPER_ADMIN"
       ? [
           { href: routes.admin, label: "Administracao" },
+          { href: routes.adminClients, label: "Clientes" },
+          { href: routes.adminWorkers, label: "Profissionais" },
           { href: routes.adminModeration, label: "Moderacao" },
           { href: routes.adminVerification, label: "Verificacoes" },
         ]

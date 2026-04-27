@@ -165,7 +165,7 @@ export function mapWorkerProfileToMarketplaceWorker(
       qualifications: true;
       services: { include: { service: { include: { category: true } } } };
       portfolioImages: true;
-      reviews: { include: { clientProfile: { include: { user: true } } } };
+    reviews: { include: { clientProfile: { include: { user: true } } } };
     };
   }>,
 ): Worker {
@@ -183,6 +183,7 @@ export function mapWorkerProfileToMarketplaceWorker(
     responseTime: "Responde em ate 24h",
     verified: workerProfile.verificationStatus === "APPROVED",
     available: workerProfile.isAvailable,
+    lastActivityAt: workerProfile.ultimaAtividade.toISOString(),
     plan: workerProfile.plan,
     image: workerProfile.user.image ?? "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
     coverImage:
@@ -282,7 +283,9 @@ export function mapWorkerProfileToMarketplaceWorker(
       evidenceLabel: item.evidenceType ? item.evidenceType.toLowerCase().replaceAll("_", " ") : "resultado final",
     })),
     reviews: workerProfile.reviews.map((review) => ({
-      author: review.clientProfile.user.name,
+      author: review.clienteNome ?? review.clientProfile?.user.name,
+      email: undefined,
+      showName: review.mostrarNome,
       rating: review.rating,
       title: review.title,
       comment: review.comment,

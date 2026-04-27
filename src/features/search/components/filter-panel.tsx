@@ -91,7 +91,7 @@ export function FilterPanel({ filters }: FilterPanelProps) {
             </label>
             <label className="flex items-center gap-3 text-sm font-bold text-muted-strong">
               <input name="disponivel" value="true" type="checkbox" defaultChecked={filters.availableOnly} />
-              Disponiveis para novos pedidos
+              Mostrar so disponiveis
             </label>
             <label className="flex items-center gap-3 text-sm font-bold text-muted-strong">
               <input name="portfolio" value="true" type="checkbox" defaultChecked={filters.withPortfolio} />

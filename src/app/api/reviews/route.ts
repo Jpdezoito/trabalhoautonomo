@@ -23,25 +23,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Profissional nao encontrado." }, { status: 404 });
   }
 
-  if (!parsed.data.email) {
-    return NextResponse.json(
-      {
-        message: "Informe um e-mail para identificar a avaliacao.",
-        errors: { email: ["Informe um e-mail valido."] },
-      },
-      { status: 422 },
-    );
-  }
-
-  const clientProfile = await getOrCreateClientProfile({
-    email: parsed.data.email,
-    name: parsed.data.author,
-  });
+  const clientProfile = parsed.data.email
+    ? await getOrCreateClientProfile({
+        email: parsed.data.email,
+        name: parsed.data.author?.trim() || "Cliente verificado",
+      })
+    : null;
 
   const review = await prisma.review.create({
     data: {
       workerProfileId: worker.id,
-      clientProfileId: clientProfile.id,
+      clientProfileId: clientProfile?.id,
+      clienteNome: parsed.data.author?.trim() || null,
+      clienteEmail: parsed.data.email?.trim().toLowerCase() || null,
+      mostrarNome: Boolean(parsed.data.showName && parsed.data.author?.trim()),
       rating: parsed.data.rating,
       title: parsed.data.title,
       comment: parsed.data.comment,

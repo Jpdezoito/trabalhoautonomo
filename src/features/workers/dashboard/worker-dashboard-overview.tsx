@@ -18,16 +18,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatCard } from "@/components/ui/stat-card";
 import { routes } from "@/config/routes";
 import { getFacialStatusLabel } from "@/features/identity/utils";
+import { AvailabilityToggle } from "@/features/workers/dashboard/availability-toggle";
 import { quotes } from "@/lib/marketplace-data";
 import { formatRating } from "@/lib/utils";
 import type { Worker } from "@/types/marketplace";
 
-export function WorkerDashboardOverview({ worker }: { worker: Worker }) {
+export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: Worker; readOnly?: boolean }) {
   const profileScore = getProfileScore(worker);
   const openQuotes = quotes.filter((quote) => quote.worker === worker.name || quote.worker !== "").slice(0, 3);
 
   return (
     <div className="grid gap-6">
+      {readOnly ? (
+        <Card variant="muted">
+          <CardContent>
+            <Badge variant="info">Modo preview admin</Badge>
+            <p className="mt-2 text-sm leading-6 text-muted">Visualizacao somente leitura do painel profissional.</p>
+          </CardContent>
+        </Card>
+      ) : (
+        <AvailabilityToggle initialAvailable={worker.available} />
+      )}
+
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Leads do mes" value="28" detail="Pedidos recebidos no periodo." icon={<MessageSquareText size={22} />} />
         <StatCard label="Servicos concluidos" value={`${worker.jobsDone}`} detail="Historico visivel no perfil." icon={<BriefcaseBusiness size={22} />} />
@@ -45,9 +57,11 @@ export function WorkerDashboardOverview({ worker }: { worker: Worker }) {
                   Perfis completos tendem a receber pedidos mais qualificados e melhores respostas dos clientes.
                 </p>
               </div>
-              <LinkButton href={routes.workerProfileSettings} variant="outline">
-                Editar perfil
-              </LinkButton>
+              {readOnly ? null : (
+                <LinkButton href={routes.workerProfileSettings} variant="outline">
+                  Editar perfil
+                </LinkButton>
+              )}
             </div>
           </CardHeader>
           <CardContent>

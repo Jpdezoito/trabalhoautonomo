@@ -20,7 +20,7 @@ export type QuotePricingEstimate = {
   factors: string[];
 };
 
-const platformFeePercent = 12;
+const platformFeePercent = 5;
 
 const serviceBasePrices = [
   { pattern: /quadro|energia|eletric|tomada|chuveiro|ilumin/i, min: 120, max: 420, label: "servico eletrico residencial" },

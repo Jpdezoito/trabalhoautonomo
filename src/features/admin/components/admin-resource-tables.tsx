@@ -60,6 +60,9 @@ export function AdminWorkersTable() {
                     <Badge variant={trustStatus === "verificado" ? "success" : trustStatus === "rejeitado" ? "danger" : "warning"}>
                       {trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em analise"}
                     </Badge>
+                    <LinkButton href={`/admin/preview/profissional/${worker.slug}`} variant="outline" size="sm">
+                      Preview
+                    </LinkButton>
                     <Button
                       type="button"
                       variant="outline"
@@ -95,6 +98,37 @@ export function AdminWorkersTable() {
               </div>
             );
           })}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+export function AdminClientsTable() {
+  const clients = adminUsers.filter((user) => user.role === "Cliente");
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Clientes</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid gap-3">
+          {clients.map((client) => (
+            <div key={client.id} className="grid gap-3 rounded-[8px] border border-border bg-surface p-4 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <p className="font-black text-foreground">{client.name}</p>
+                <p className="mt-1 text-sm text-muted">{client.email} - {client.city}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="primary">{client.role}</Badge>
+                <Badge variant="success">{client.status}</Badge>
+                <LinkButton href={`/admin/preview/cliente/${client.id}`} variant="outline" size="sm">
+                  Preview
+                </LinkButton>
+              </div>
+            </div>
+          ))}
         </div>
       </CardContent>
     </Card>

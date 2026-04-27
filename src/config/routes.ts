@@ -32,6 +32,7 @@ export const routes = {
   workerSettings: "/painel/profissional/configuracoes",
   admin: "/admin",
   adminUsers: "/admin/usuarios",
+  adminClients: "/admin/clientes",
   adminCategories: "/admin/categorias",
   adminWorkers: "/admin/profissionais",
   adminQuotes: "/admin/orcamentos",

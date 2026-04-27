@@ -9,6 +9,7 @@ export default function AdminReviewsPage() {
     worker.reviews.map((review, reviewIndex) => ({
       ...review,
       id: `${worker.slug}-${reviewIndex}`,
+      email: getMockReviewEmail(workerIndex, reviewIndex),
       workerSlug: worker.slug,
       workerName: worker.name,
       status: getMockStatus(workerIndex, reviewIndex),
@@ -24,6 +25,19 @@ export default function AdminReviewsPage() {
       <ReviewModerationTable reviews={reviews} />
     </DashboardShell>
   );
+}
+
+function getMockReviewEmail(workerIndex: number, reviewIndex: number) {
+  const emails = [
+    ["mariana@email.com", "ricardo@email.com"],
+    ["paulo@email.com", "renata@email.com"],
+    ["andreia@email.com"],
+    ["luciana@email.com"],
+    ["empresa-alfa@email.com"],
+    ["camila@email.com"],
+  ];
+
+  return emails[workerIndex]?.[reviewIndex];
 }
 
 function getMockStatus(workerIndex: number, reviewIndex: number): ReviewStatus {

@@ -8,12 +8,21 @@ import { StatCard } from "@/components/ui/stat-card";
 import { routes } from "@/config/routes";
 import { categories, quotes, workers } from "@/lib/marketplace-data";
 
-export function ClientDashboardOverview() {
+export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boolean }) {
   const favoriteWorkers = workers.slice(0, 2);
   const pendingReviews = workers.slice(0, 3);
 
   return (
     <div className="grid gap-6">
+      {readOnly ? (
+        <Card variant="muted">
+          <CardContent>
+            <Badge variant="info">Modo preview admin</Badge>
+            <p className="mt-2 text-sm leading-6 text-muted">Visualizacao somente leitura do painel do cliente.</p>
+          </CardContent>
+        </Card>
+      ) : null}
+
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Orcamentos ativos" value="3" detail="Pedidos aguardando resposta ou decisao." icon={<MessageSquareText size={22} />} />
         <StatCard label="Favoritos" value="6" detail="Profissionais salvos para contato rapido." icon={<Heart size={22} />} />

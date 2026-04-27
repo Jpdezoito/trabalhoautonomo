@@ -28,6 +28,19 @@ export function getReviewDistribution(reviews: Review[]) {
   });
 }
 
+export function getPublicReviewAuthor(review: Pick<Review, "author" | "showName">) {
+  const author = review.author?.trim();
+
+  if (!author || !review.showName) {
+    return "Cliente verificado";
+  }
+
+  const [firstName, secondName] = author.split(/\s+/);
+  const initial = secondName?.charAt(0);
+
+  return initial ? `${firstName} ${initial}.` : firstName;
+}
+
 export function createReviewDraft(input: {
   workerSlug: string;
   author: string;
@@ -39,6 +52,7 @@ export function createReviewDraft(input: {
     id: `REV-${Date.now()}`,
     workerSlug: input.workerSlug,
     author: input.author,
+    showName: false,
     rating: input.rating,
     title: input.title,
     comment: input.comment,

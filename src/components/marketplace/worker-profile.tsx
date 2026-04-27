@@ -56,7 +56,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                 ) : null}
                 <PlanBadge plan={worker.plan} />
                 <Badge variant="neutral" className="bg-white/12 text-white ring-white/20">
-                  {worker.available ? "Disponivel para novos pedidos" : "Agenda pausada"}
+                  {worker.available ? "Disponivel agora" : "Agenda pausada"}
                 </Badge>
               </div>
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import { forwardRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const variants = {
@@ -28,15 +28,19 @@ type CommonProps = {
 type ButtonProps = CommonProps & ButtonHTMLAttributes<HTMLButtonElement>;
 type LinkButtonProps = CommonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
 
-export function Button({
-  children,
-  variant = "primary",
-  size = "md",
-  className,
-  ...props
-}: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    children,
+    variant = "primary",
+    size = "md",
+    className,
+    ...props
+  },
+  ref,
+) {
   return (
     <button
+      ref={ref}
       className={cn(
         "inline-flex items-center justify-center rounded-[8px] font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#0f6b5f]/30",
         "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
@@ -49,7 +53,7 @@ export function Button({
       {children}
     </button>
   );
-}
+});
 
 export function LinkButton({
   children,

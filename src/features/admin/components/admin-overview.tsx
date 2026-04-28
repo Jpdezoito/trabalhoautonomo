@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, ArrowRight, ClipboardCheck, Flag, ShieldAlert, Users } from "lucide-react";
+import { Activity, ArrowRight, BriefcaseBusiness, ClipboardCheck, Flag, ShieldAlert, UserRound, Users } from "lucide-react";
 import { QuoteTable } from "@/components/dashboard/quote-table";
 import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
@@ -11,6 +11,42 @@ import { adminActivity, moderationCases, verificationQueue } from "@/features/ad
 export function AdminOverview() {
   return (
     <div className="grid gap-6">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <CardContent className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div className="flex min-w-0 items-start gap-3">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-[8px] bg-primary-soft text-primary">
+                <UserRound size={22} />
+              </span>
+              <div className="min-w-0">
+                <h2 className="text-xl font-black text-foreground">Preview do Cliente</h2>
+                <p className="mt-1 text-sm leading-6 text-muted">Visualize o painel do cliente em modo somente leitura.</p>
+              </div>
+            </div>
+            <LinkButton href="/admin/preview/cliente/USR-1001" variant="outline" size="md" className="w-full whitespace-nowrap sm:w-auto">
+              Acessar
+            </LinkButton>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div className="flex min-w-0 items-start gap-3">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-[8px] bg-primary-soft text-primary">
+                <BriefcaseBusiness size={22} />
+              </span>
+              <div className="min-w-0">
+                <h2 className="text-xl font-black text-foreground">Preview do Profissional</h2>
+                <p className="mt-1 text-sm leading-6 text-muted">Abra o painel profissional sem entrar na conta dele.</p>
+              </div>
+            </div>
+            <LinkButton href="/admin/preview/profissional/carlos-mendes-eletricista" variant="outline" size="md" className="w-full whitespace-nowrap sm:w-auto">
+              Acessar
+            </LinkButton>
+          </CardContent>
+        </Card>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Usuarios" value="2.846" detail="Clientes e profissionais ativos." icon={<Users size={22} />} />
         <StatCard label="Verificacoes" value={String(verificationQueue.length)} detail="Perfis aguardando analise." icon={<ClipboardCheck size={22} />} />

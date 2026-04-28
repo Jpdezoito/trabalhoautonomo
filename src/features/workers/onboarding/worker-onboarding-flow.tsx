@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
+import { useEnterToNextField } from "@/features/quotes/useEnterToNextField";
 import {
   ArrowLeft,
   ArrowRight,
@@ -55,6 +56,16 @@ const steps: OnboardingStep[] = [
 type DraftKey = keyof WorkerOnboardingDraft;
 
 export function WorkerOnboardingFlow() {
+  // Refs para navegação por Enter na etapa 'account'
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const publicNameRef = useRef<HTMLInputElement>(null);
+  const professionTitleRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const whatsappRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const continueButtonRef = useRef<HTMLButtonElement>(null);
+  const accountFieldRefs = [fullNameRef, publicNameRef, professionTitleRef, emailRef, whatsappRef, phoneRef, continueButtonRef];
+  const handleEnterNav = useEnterToNextField(accountFieldRefs);
   const [initialState] = useState(getInitialDraftState);
   const [draft, setDraft] = useState<WorkerOnboardingDraft>(initialState.draft);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
@@ -261,7 +272,20 @@ export function WorkerOnboardingFlow() {
           </CardHeader>
           <CardContent>
             {activeStep.id === "account" ? (
-              <AccountStep draft={draft} errors={errors} onChange={updateDraft} onImagePreview={handleImagePreview} />
+              <AccountStep
+                draft={draft}
+                errors={errors}
+                onChange={updateDraft}
+                onImagePreview={handleImagePreview}
+                fullNameRef={fullNameRef}
+                publicNameRef={publicNameRef}
+                professionTitleRef={professionTitleRef}
+                emailRef={emailRef}
+                whatsappRef={whatsappRef}
+                phoneRef={phoneRef}
+                continueButtonRef={continueButtonRef}
+                handleEnterNav={handleEnterNav}
+              />
             ) : null}
             {activeStep.id === "services" ? (
               <ServicesStep draft={draft} errors={errors} onChange={updateDraft} onAddItem={addListItem} onRemoveItem={removeListItem} />
@@ -294,7 +318,7 @@ export function WorkerOnboardingFlow() {
                   Enviar para analise
                 </Button>
               ) : (
-                <Button type="button" onClick={goNext}>
+                <Button type="button" onClick={goNext} ref={activeStep.id === "account" ? continueButtonRef : undefined}>
                   Continuar
                   <ArrowRight className="ml-2" size={18} />
                 </Button>
@@ -312,11 +336,27 @@ function AccountStep({
   errors,
   onChange,
   onImagePreview,
+  fullNameRef,
+  publicNameRef,
+  professionTitleRef,
+  emailRef,
+  whatsappRef,
+  phoneRef,
+  continueButtonRef,
+  handleEnterNav,
 }: {
   draft: WorkerOnboardingDraft;
   errors: Record<string, string>;
   onChange: <Key extends DraftKey>(key: Key, value: WorkerOnboardingDraft[Key]) => void;
   onImagePreview: (key: "profilePhotoPreview" | "coverImagePreview" | "identityDocumentPreview" | "addressProofPreview", file?: File) => void;
+  fullNameRef: React.RefObject<HTMLInputElement>;
+  publicNameRef: React.RefObject<HTMLInputElement>;
+  professionTitleRef: React.RefObject<HTMLInputElement>;
+  emailRef: React.RefObject<HTMLInputElement>;
+  whatsappRef: React.RefObject<HTMLInputElement>;
+  phoneRef: React.RefObject<HTMLInputElement>;
+  continueButtonRef: React.RefObject<HTMLButtonElement>;
+  handleEnterNav: (e: React.KeyboardEvent) => void;
 }) {
   return (
     <div className="grid gap-6">
@@ -340,36 +380,73 @@ function AccountStep({
       <FieldGroup>
         <Field>
           <Label>Nome completo</Label>
-          <Input value={draft.fullName} onChange={(event) => onChange("fullName", event.target.value)} placeholder="Seu nome completo" />
+          <Input
+            ref={fullNameRef}
+            value={draft.fullName}
+            onChange={(event) => onChange("fullName", event.target.value)}
+            onKeyDown={handleEnterNav}
+            placeholder="Seu nome completo"
+          />
           <InlineError message={errors.fullName} />
         </Field>
         <Field>
           <Label>Nome publico</Label>
-          <Input value={draft.publicName} onChange={(event) => onChange("publicName", event.target.value)} placeholder="Ex.: Carlos Mendes" />
+          <Input
+            ref={publicNameRef}
+            value={draft.publicName}
+            onChange={(event) => onChange("publicName", event.target.value)}
+            onKeyDown={handleEnterNav}
+            placeholder="Ex.: Carlos Mendes"
+          />
           <InlineError message={errors.publicName} />
         </Field>
       </FieldGroup>
       <FieldGroup>
         <Field>
           <Label>Titulo profissional</Label>
-          <Input value={draft.professionTitle} onChange={(event) => onChange("professionTitle", event.target.value)} placeholder="Ex.: Eletricista residencial e predial" />
+          <Input
+            ref={professionTitleRef}
+            value={draft.professionTitle}
+            onChange={(event) => onChange("professionTitle", event.target.value)}
+            onKeyDown={handleEnterNav}
+            placeholder="Ex.: Eletricista residencial e predial"
+          />
           <InlineError message={errors.professionTitle} />
         </Field>
         <Field>
           <Label>E-mail</Label>
-          <Input type="email" value={draft.email} onChange={(event) => onChange("email", event.target.value)} placeholder="contato@seudominio.com.br" />
+          <Input
+            ref={emailRef}
+            type="email"
+            value={draft.email}
+            onChange={(event) => onChange("email", event.target.value)}
+            onKeyDown={handleEnterNav}
+            placeholder="contato@seudominio.com.br"
+          />
           <InlineError message={errors.email} />
         </Field>
       </FieldGroup>
       <FieldGroup>
         <Field>
           <Label>WhatsApp</Label>
-          <Input value={draft.whatsapp} onChange={(event) => onChange("whatsapp", event.target.value)} placeholder="(11) 99999-9999" />
+          <Input
+            ref={whatsappRef}
+            value={draft.whatsapp}
+            onChange={(event) => onChange("whatsapp", event.target.value)}
+            onKeyDown={handleEnterNav}
+            placeholder="(11) 99999-9999"
+          />
           <InlineError message={errors.whatsapp} />
         </Field>
         <Field>
           <Label>Telefone</Label>
-          <Input value={draft.phone} onChange={(event) => onChange("phone", event.target.value)} placeholder="(11) 3333-3333" />
+          <Input
+            ref={phoneRef}
+            value={draft.phone}
+            onChange={(event) => onChange("phone", event.target.value)}
+            onKeyDown={handleEnterNav}
+            placeholder="(11) 3333-3333"
+          />
           <InlineError message={errors.phone} />
         </Field>
       </FieldGroup>

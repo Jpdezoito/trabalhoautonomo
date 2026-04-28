@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
+import { useEnterToNextField } from "@/features/quotes/useEnterToNextField";
 import { ArrowLeft, ArrowRight, Camera, Check, Heart, MapPin, Plus, Save, Send, Trash2, UserRound } from "lucide-react";
 import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
@@ -45,12 +46,22 @@ const baseSteps: ClientOnboardingStep[] = [
 
 type DraftKey = keyof ClientOnboardingDraft;
 
-export function ClientOnboardingFlow() {
+function ClientOnboardingFlow() {
+  // refs para navegação por Enter
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const whatsappRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const fieldRefs = [fullNameRef, emailRef, whatsappRef, phoneRef, buttonRef];
+  const handleEnterNav = useEnterToNextField(fieldRefs);
+
   const [initialState] = useState(getInitialDraftState);
   const [draft, setDraft] = useState<ClientOnboardingDraft>(initialState.draft);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [draftStatus, setDraftStatus] = useState(initialState.status);
+  // draftStatus inicial fixo para evitar mismatch
+  const [draftStatus, setDraftStatus] = useState("Rascunho nao salvo");
   const steps = useMemo<ClientOnboardingStep[]>(
     () =>
       identityFeatureFlags.clientEnrollmentEnabled
@@ -81,12 +92,14 @@ export function ClientOnboardingFlow() {
   const progress = calculateClientOnboardingProgress(draft);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      window.localStorage.setItem(storageKey, JSON.stringify(draft));
-      setDraftStatus("Rascunho salvo automaticamente");
-    }, 450);
-
-    return () => window.clearTimeout(timeout);
+    // Atualiza status do rascunho só no client
+    if (typeof window !== "undefined") {
+      const timeout = window.setTimeout(() => {
+        window.localStorage.setItem(storageKey, JSON.stringify(draft));
+        setDraftStatus("Rascunho salvo automaticamente");
+      }, 450);
+      return () => window.clearTimeout(timeout);
+    }
   }, [draft]);
 
   const stepSummary = useMemo(
@@ -133,8 +146,10 @@ export function ClientOnboardingFlow() {
   }
 
   function saveDraftNow() {
-    window.localStorage.setItem(storageKey, JSON.stringify(draft));
-    setDraftStatus("Rascunho salvo agora");
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(storageKey, JSON.stringify(draft));
+      setDraftStatus("Rascunho salvo agora");
+    }
   }
 
   function finishOnboarding() {
@@ -178,6 +193,7 @@ export function ClientOnboardingFlow() {
     );
   }
 
+  // O return deve estar dentro da função, sem chave extra antes
   return (
     <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
       <aside className="lg:sticky lg:top-24 lg:h-fit">
@@ -239,12 +255,12 @@ export function ClientOnboardingFlow() {
             />
           </CardHeader>
           <CardContent>
-            {activeStep.id === "profile" ? <ProfileStep draft={draft} errors={errors} onChange={updateDraft} onImagePreview={handleImagePreview} /> : null}
+            {activeStep.id === "profile" ? <ProfileStep draft={draft} errors={errors} onChange={updateDraft} onImagePreview={handleImagePreview} fullNameRef={fullNameRef} handleEnterNav={handleEnterNav} /> : null}
             {activeStep.id === "location" ? <LocationStep draft={draft} errors={errors} onChange={updateDraft} /> : null}
             {activeStep.id === "interests" ? (
               <InterestsStep draft={draft} errors={errors} onToggleCategory={toggleCategory} onAddInterest={addInterest} onRemoveInterest={removeInterest} />
             ) : null}
-            {activeStep.id === "contact" ? <ContactStep draft={draft} errors={errors} onChange={updateDraft} /> : null}
+            {activeStep.id === "contact" ? <ContactStep draft={draft} errors={errors} onChange={updateDraft} emailRef={emailRef} whatsappRef={whatsappRef} phoneRef={phoneRef} handleEnterNav={handleEnterNav} /> : null}
             {activeStep.id === "verification" ? (
               <FacialEnrollmentStep
                 audience="cliente"
@@ -261,7 +277,11 @@ export function ClientOnboardingFlow() {
                 Voltar
               </Button>
               {activeStep.id === "review" ? (
-                <Button type="button" onClick={finishOnboarding}>
+                <Button ref={buttonRef} type="button" onClick={finishOnboarding} onKeyDown={e => {
+                  if (e.key === "Enter" && !draft.fullName) {
+                    e.preventDefault();
+                  }
+                }}>
                   <Send className="mr-2" size={18} />
                   Finalizar cadastro
                 </Button>
@@ -279,16 +299,22 @@ export function ClientOnboardingFlow() {
   );
 }
 
+export { ClientOnboardingFlow };
+
 function ProfileStep({
   draft,
   errors,
   onChange,
   onImagePreview,
+  fullNameRef,
+  handleEnterNav,
 }: {
   draft: ClientOnboardingDraft;
   errors: Record<string, string>;
   onChange: <Key extends DraftKey>(key: Key, value: ClientOnboardingDraft[Key]) => void;
   onImagePreview: (file?: File) => void;
+  fullNameRef: React.RefObject<HTMLInputElement>;
+  handleEnterNav: (e: React.KeyboardEvent) => void;
 }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
@@ -296,7 +322,7 @@ function ProfileStep({
       <div className="grid gap-4">
         <Field>
           <Label>Nome completo</Label>
-          <Input value={draft.fullName} onChange={(event) => onChange("fullName", event.target.value)} placeholder="Seu nome completo" />
+          <Input ref={fullNameRef} value={draft.fullName} onChange={(event) => onChange("fullName", event.target.value)} placeholder="Seu nome completo" onKeyDown={handleEnterNav} />
           <InlineError message={errors.fullName} />
         </Field>
         <Field>
@@ -402,28 +428,36 @@ function ContactStep({
   draft,
   errors,
   onChange,
+  emailRef,
+  whatsappRef,
+  phoneRef,
+  handleEnterNav,
 }: {
   draft: ClientOnboardingDraft;
   errors: Record<string, string>;
   onChange: <Key extends DraftKey>(key: Key, value: ClientOnboardingDraft[Key]) => void;
+  emailRef: React.RefObject<HTMLInputElement>;
+  whatsappRef: React.RefObject<HTMLInputElement>;
+  phoneRef: React.RefObject<HTMLInputElement>;
+  handleEnterNav: (e: React.KeyboardEvent) => void;
 }) {
   return (
     <div className="grid gap-5">
       <FieldGroup>
         <Field>
           <Label>WhatsApp</Label>
-          <Input value={draft.whatsapp} onChange={(event) => onChange("whatsapp", event.target.value)} placeholder="(11) 99999-9999" />
+          <Input ref={whatsappRef} value={draft.whatsapp} onChange={(event) => onChange("whatsapp", event.target.value)} placeholder="(11) 99999-9999" onKeyDown={handleEnterNav} />
           <InlineError message={errors.whatsapp} />
         </Field>
         <Field>
           <Label>Telefone alternativo</Label>
-          <Input value={draft.phone} onChange={(event) => onChange("phone", event.target.value)} placeholder="(11) 3333-3333" />
+          <Input ref={phoneRef} value={draft.phone} onChange={(event) => onChange("phone", event.target.value)} placeholder="(11) 3333-3333" onKeyDown={handleEnterNav} />
           <InlineError message={errors.phone} />
         </Field>
       </FieldGroup>
       <Field>
         <Label>E-mail</Label>
-        <Input type="email" value={draft.email} onChange={(event) => onChange("email", event.target.value)} placeholder="voce@email.com" />
+        <Input ref={emailRef} type="email" value={draft.email} onChange={(event) => onChange("email", event.target.value)} placeholder="voce@email.com" onKeyDown={handleEnterNav} />
         <InlineError message={errors.email} />
       </Field>
     </div>

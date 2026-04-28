@@ -1,3 +1,9 @@
+enum ClientAvailabilityStatus {
+  AT_HOME
+  AWAY_RETURNING
+  AWAY_UNAVAILABLE
+  NOT_INFORMED
+}
 generator client {
   provider = "prisma-client-js"
 }
@@ -737,6 +743,9 @@ model QuoteRequest {
   acceptedAt      DateTime?
   completedAt     DateTime?
   cancelledAt     DateTime?
+  clientAvailabilityStatus ClientAvailabilityStatus @default(NOT_INFORMED)
+  availabilityNote         String?                  @db.VarChar(200)
+  lastAvailabilityUpdate   DateTime?
   messages        QuoteMessage[]
   review          Review?
   reports         ModerationReport[]

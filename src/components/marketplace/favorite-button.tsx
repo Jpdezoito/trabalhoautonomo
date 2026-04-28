@@ -23,6 +23,7 @@ export function FavoriteButton({
 }: FavoriteButtonProps) {
   const [favorited, setFavorited] = useState(() => getStoredFavoriteState(workerSlug, initialFavorited));
   const [pending, setPending] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     function syncFavoriteState(event: StorageEvent) {
@@ -38,30 +39,36 @@ export function FavoriteButton({
   async function toggleFavorite() {
     const nextFavorited = !favorited;
 
+    setMessage("");
     setFavorited(nextFavorited);
     setPending(true);
     window.localStorage.setItem(getAnonymousFavoriteKey(workerSlug), String(nextFavorited));
 
-    const response = await fetch("/api/favorites", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        workerSlug,
-        action: nextFavorited ? "add" : "remove",
-      }),
-    });
+    try {
+      const response = await fetch("/api/favorites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          workerSlug,
+          action: nextFavorited ? "add" : "remove",
+        }),
+      });
 
-    if (response.status === 401) {
-      window.location.href = "/entrar";
-      return;
+      if (response.status === 401 || response.status === 403) {
+        setMessage("Favorito salvo neste navegador.");
+        return;
+      }
+
+      if (!response.ok) {
+        setFavorited(!nextFavorited);
+        window.localStorage.setItem(getAnonymousFavoriteKey(workerSlug), String(!nextFavorited));
+        setMessage("Nao foi possivel sincronizar favorito.");
+      }
+    } catch {
+      setMessage("Favorito salvo neste navegador.");
+    } finally {
+      setPending(false);
     }
-
-    if (!response.ok) {
-      setFavorited(!nextFavorited);
-      window.localStorage.setItem(getAnonymousFavoriteKey(workerSlug), String(!nextFavorited));
-    }
-
-    setPending(false);
   }
 
   if (compact) {
@@ -84,10 +91,13 @@ export function FavoriteButton({
   }
 
   return (
-    <Button type="button" variant={favorited ? "danger" : "outline"} className={className} onClick={toggleFavorite} disabled={pending} aria-pressed={favorited}>
-      <Heart className={cn("mr-2", favorited && "fill-current")} size={18} />
-      {favorited ? "Favorito" : "Salvar nos favoritos"}
-    </Button>
+    <div className={className}>
+      <Button type="button" variant={favorited ? "danger" : "outline"} className="w-full" onClick={toggleFavorite} disabled={pending} aria-pressed={favorited}>
+        <Heart className={cn("mr-2", favorited && "fill-current")} size={18} />
+        {favorited ? "Favorito" : "Salvar nos favoritos"}
+      </Button>
+      {message ? <p className="mt-2 text-xs font-semibold text-muted">{message}</p> : null}
+    </div>
   );
 }
 

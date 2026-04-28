@@ -1,12 +1,5 @@
 import { cities, neighborhoods, publicCategories } from "@/lib/marketplace-data";
 
-export const ratingOptions = [
-  { label: "Todas as notas", value: "" },
-  { label: "4,5 ou mais", value: "4.5" },
-  { label: "4,0 ou mais", value: "4" },
-  { label: "3,5 ou mais", value: "3.5" },
-] as const;
-
 export const priceOptions = [
   { label: "Qualquer preco", min: "", max: "" },
   { label: "Ate R$ 100", min: "0", max: "100" },
@@ -28,7 +21,6 @@ export const searchFilterOptions = {
   categories: publicCategories,
   cities,
   neighborhoods,
-  ratings: ratingOptions,
   prices: priceOptions,
   sorting: sortOptions,
 };

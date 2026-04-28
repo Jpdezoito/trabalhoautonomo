@@ -48,10 +48,17 @@ export function filterWorkers(workers: Worker[], filters: SearchFilters) {
       worker.areas.some((area) => area.toLowerCase().includes(neighborhood));
     const matchesVerification = !filters.verifiedOnly || worker.verified;
     const matchesAvailability = !filters.availableOnly || worker.available;
-    const matchesRating = !filters.minimumRating || worker.rating >= filters.minimumRating;
     const matchesMinPrice = filters.minPrice === undefined || priceAmount >= filters.minPrice;
     const matchesMaxPrice = filters.maxPrice === undefined || priceAmount <= filters.maxPrice;
     const matchesPortfolio = !filters.withPortfolio || worker.portfolio.length > 0;
+
+    // Novo filtro positivo de qualidade
+    let matchesQuality = true;
+    if (filters.quality === "verificado") matchesQuality = worker.verified;
+    if (filters.quality === "perfil_completo") matchesQuality = worker.profileComplete;
+    if (filters.quality === "portfolio") matchesQuality = worker.portfolio.length > 0;
+    if (filters.quality === "disponivel") matchesQuality = worker.available;
+    if (filters.quality === "responde_rapido") matchesQuality = worker.responseTime && worker.responseTime.toLowerCase().includes("min");
 
     return (
       matchesKeyword &&
@@ -61,10 +68,10 @@ export function filterWorkers(workers: Worker[], filters: SearchFilters) {
       matchesNeighborhood &&
       matchesVerification &&
       matchesAvailability &&
-      matchesRating &&
       matchesMinPrice &&
       matchesMaxPrice &&
-      matchesPortfolio
+      matchesPortfolio &&
+      matchesQuality
     );
   }).sort((a, b) => sortSearchResults(a, b, filters.sortBy));
 }

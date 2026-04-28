@@ -1,0 +1,1 @@
+ALTER TABLE "QuoteRequest" ADD COLUMN "clientAvailabilityStatus" "ClientAvailabilityStatus" NOT NULL DEFAULT 'NOT_INFORMED', ADD COLUMN "availabilityNote" VARCHAR(200), ADD COLUMN "lastAvailabilityUpdate" TIMESTAMP(3);

@@ -29,7 +29,6 @@ export function WorkerCard({ worker }: { worker: Worker }) {
         <p className="mt-4 line-clamp-2 text-sm leading-6 text-muted">{worker.headline}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           <TrustBadge worker={worker} />
-          <PlanBadge plan={worker.plan} />
           {worker.services.slice(0, 3).map((service) => (
             <Badge key={service} variant="primary">
               {service}

@@ -1,12 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CalendarDays, CheckCircle2, Send } from "lucide-react";
 import { z } from "zod";
 import { LeadWhatsappButton } from "@/components/marketplace/lead-whatsapp-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, Input, Label, Textarea } from "@/components/ui/form";
+import { AutocompleteInput } from "@/components/ui/autocomplete-input";
+import { useEnterToNextField } from "./useEnterToNextField";
+// Mock de cidades e bairros
+const cityOptions = [
+  "São Paulo",
+  "Serra",
+  "Vitória",
+  "Vila Velha",
+  "Cariacica"
+];
+
+const neighborhoodOptionsByCity: Record<string, string[]> = {
+  "Serra": [
+    "Balneário de Carapebus",
+    "Laranjeiras",
+    "Jacaraípe",
+    "Manguinhos",
+    "Barcelona",
+    "Jardim Limoeiro",
+    "Serra Sede"
+  ],
+  "São Paulo": [
+    "Pinheiros",
+    "Tatuapé",
+    "Moema",
+    "Vila Mariana",
+    "Santana"
+  ]
+};
 import { quoteRequestSchema } from "@/features/quotes/schemas";
 import { estimateQuotePrice, formatCurrency, type QuotePricingEstimate } from "@/lib/quote-pricing";
 import type { Worker } from "@/types/marketplace";
@@ -34,6 +63,32 @@ const initialFormState: FormState = {
 };
 
 export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
+  // Refs para navegação por Enter (devem estar dentro do componente)
+  const serviceTypeRef = useRef<HTMLInputElement>(null);
+  const clientNameRef = useRef<HTMLInputElement>(null);
+  const clientPhoneRef = useRef<HTMLInputElement>(null);
+  const clientEmailRef = useRef<HTMLInputElement>(null);
+  const cityRef = useRef<HTMLInputElement>(null);
+  const neighborhoodRef = useRef<HTMLInputElement>(null);
+  const preferredDateRef = useRef<HTMLInputElement>(null);
+  const budgetMaxRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const extraNotesRef = useRef<HTMLTextAreaElement>(null);
+
+  // Ordem dos campos navegáveis
+  const fieldRefs = [
+    serviceTypeRef,
+    clientNameRef,
+    clientPhoneRef,
+    clientEmailRef,
+    cityRef,
+    neighborhoodRef,
+    preferredDateRef,
+    budgetMaxRef,
+    descriptionRef,
+    extraNotesRef,
+  ];
+  const handleEnterNav = useEnterToNextField(fieldRefs);
   const [form, setForm] = useState<FormState>({
     ...initialFormState,
     workerId: worker.slug,
@@ -114,70 +169,131 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
     <form className="mt-5 grid min-w-0 gap-4">
       <Field>
         <Label>Servico desejado</Label>
-        <Input value={form.serviceType} onChange={(event) => updateField("serviceType", event.target.value)} placeholder="Ex.: trocar tomadas da cozinha" />
+        <Input
+          value={form.serviceType}
+          onChange={(event) => updateField("serviceType", event.target.value)}
+          placeholder="Ex.: trocar tomadas da cozinha"
+          ref={serviceTypeRef}
+          onKeyDown={handleEnterNav}
+        />
         <InlineError message={errors.serviceType} />
       </Field>
 
-      <FieldGroup className="sm:grid-cols-1 xl:grid-cols-2">
-        <Field>
-          <Label>Seu nome</Label>
-          <Input value={form.clientName} onChange={(event) => updateField("clientName", event.target.value)} placeholder="Nome completo" />
-          <InlineError message={errors.clientName} />
-        </Field>
-        <Field>
-          <Label>WhatsApp ou telefone</Label>
-          <Input value={form.clientPhone} onChange={(event) => updateField("clientPhone", event.target.value)} placeholder="(11) 99999-9999" />
-          <InlineError message={errors.clientPhone} />
-        </Field>
-      </FieldGroup>
+      <Field>
+        <Label>Seu nome</Label>
+        <Input
+          value={form.clientName}
+          onChange={(event) => updateField("clientName", event.target.value)}
+          placeholder="Nome completo"
+          ref={clientNameRef}
+          onKeyDown={handleEnterNav}
+        />
+        <InlineError message={errors.clientName} />
+      </Field>
+      <Field>
+        <Label>WhatsApp ou telefone</Label>
+        <Input
+          value={form.clientPhone}
+          onChange={(event) => updateField("clientPhone", event.target.value)}
+          placeholder="(11) 99999-9999"
+          ref={clientPhoneRef}
+          onKeyDown={handleEnterNav}
+        />
+        <InlineError message={errors.clientPhone} />
+      </Field>
 
       <Field>
         <Label>E-mail</Label>
-        <Input type="email" value={form.clientEmail} onChange={(event) => updateField("clientEmail", event.target.value)} placeholder="voce@email.com" />
+        <Input
+          type="email"
+          value={form.clientEmail}
+          onChange={(event) => updateField("clientEmail", event.target.value)}
+          placeholder="voce@email.com"
+          ref={clientEmailRef}
+          onKeyDown={handleEnterNav}
+        />
         <InlineError message={errors.clientEmail} />
       </Field>
 
-      <FieldGroup className="sm:grid-cols-1 xl:grid-cols-2">
-        <Field>
-          <Label>Cidade</Label>
-          <Input value={form.city} onChange={(event) => updateField("city", event.target.value)} placeholder="Sao Paulo" />
-          <InlineError message={errors.city} />
-        </Field>
-        <Field>
-          <Label>Bairro</Label>
-          <Input value={form.neighborhood} onChange={(event) => updateField("neighborhood", event.target.value)} placeholder="Tatuape" />
-          <InlineError message={errors.neighborhood} />
-        </Field>
-      </FieldGroup>
+      <Field>
+        <AutocompleteInput
+          label="Cidade"
+          value={form.city}
+          onChange={(val) => {
+            updateField("city", val);
+            // Limpa bairro se cidade mudar
+            if (form.neighborhood && !((neighborhoodOptionsByCity[val] || []).includes(form.neighborhood))) {
+              updateField("neighborhood", "");
+            }
+          }}
+          options={cityOptions}
+          placeholder="Selecione ou digite a cidade"
+          inputRef={cityRef}
+          onEnterNext={() => fieldRefs[5].current?.focus()}
+        />
+        <InlineError message={errors.city} />
+      </Field>
+      <Field>
+        <AutocompleteInput
+          label="Bairro"
+          value={form.neighborhood}
+          onChange={(val) => updateField("neighborhood", val)}
+          options={neighborhoodOptionsByCity[form.city] || []}
+          placeholder="Selecione ou digite o bairro"
+          notFoundMessage={form.city ? "Bairro não encontrado" : "Selecione uma cidade"}
+          inputRef={neighborhoodRef}
+          onEnterNext={() => fieldRefs[6].current?.focus()}
+        />
+        <InlineError message={errors.neighborhood} />
+      </Field>
 
-      <FieldGroup className="sm:grid-cols-1 xl:grid-cols-2">
-        <Field>
-          <Label>Data preferida</Label>
-          <div className="relative">
-            <CalendarDays className="pointer-events-none absolute left-3 top-3 text-muted" size={17} />
-            <Input type="date" value={form.preferredDate} onChange={(event) => updateField("preferredDate", event.target.value)} className="pl-9" />
-          </div>
-        </Field>
-        <Field>
-          <Label>Limite de orcamento opcional</Label>
+      <Field>
+        <Label>Data preferida</Label>
+        <div className="relative">
+          <CalendarDays className="pointer-events-none absolute left-3 top-3 text-muted" size={17} />
           <Input
-            value={form.budgetMax?.toString() ?? ""}
-            onChange={(event) => updateField("budgetMax", event.target.value ? Number(event.target.value) : undefined)}
-            placeholder="Ex.: 500"
-            inputMode="numeric"
+            type="date"
+            value={form.preferredDate}
+            onChange={(event) => updateField("preferredDate", event.target.value)}
+            className="pl-9"
+            ref={preferredDateRef}
+            onKeyDown={handleEnterNav}
           />
-        </Field>
-      </FieldGroup>
+        </div>
+      </Field>
+      <Field>
+        <Label>Orçamento máximo</Label>
+        <Input
+          value={form.budgetMax?.toString() ?? ""}
+          onChange={(event) => updateField("budgetMax", event.target.value ? Number(event.target.value) : undefined)}
+          placeholder="Opcional. Ex.: 500"
+          inputMode="numeric"
+          ref={budgetMaxRef}
+          onKeyDown={handleEnterNav}
+        />
+      </Field>
 
       <Field>
         <Label>Descricao</Label>
-        <Textarea value={form.description} onChange={(event) => updateField("description", event.target.value)} placeholder="Inclua medidas, urgencia, fotos disponiveis e melhor horario para contato." />
+        <Textarea
+          value={form.description}
+          onChange={(event) => updateField("description", event.target.value)}
+          placeholder="Inclua medidas, urgencia, fotos disponiveis e melhor horario para contato."
+          ref={descriptionRef}
+          onKeyDown={e => handleEnterNav(e)}
+        />
         <InlineError message={errors.description} />
       </Field>
 
       <Field>
         <Label>Observacoes extras</Label>
-        <Textarea value={form.extraNotes} onChange={(event) => updateField("extraNotes", event.target.value)} placeholder="Ex.: prefiro contato pela manha, estacionamento no local, acesso por portaria." />
+        <Textarea
+          value={form.extraNotes}
+          onChange={(event) => updateField("extraNotes", event.target.value)}
+          placeholder="Ex.: prefiro contato pela manha, estacionamento no local, acesso por portaria."
+          ref={extraNotesRef}
+          onKeyDown={e => handleEnterNav(e)}
+        />
         <InlineError message={errors.extraNotes} />
       </Field>
 

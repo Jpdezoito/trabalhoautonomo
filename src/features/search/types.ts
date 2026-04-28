@@ -6,11 +6,11 @@ export type SearchFilters = {
   neighborhood?: string;
   verifiedOnly?: boolean;
   availableOnly?: boolean;
-  minimumRating?: number;
   minPrice?: number;
   maxPrice?: number;
   withPortfolio?: boolean;
   sortBy?: SearchSortOption;
+  quality?: string;
 };
 
 export type SearchSortOption = "relevance" | "rating" | "price_asc" | "price_desc" | "response_time" | "experience";

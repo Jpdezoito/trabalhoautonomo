@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, LabelHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { forwardRef, type InputHTMLAttributes, type LabelHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export function FieldGroup({ className, children }: { className?: string; children: ReactNode }) {
@@ -20,9 +20,9 @@ export function Label({ className, children, ...props }: LabelHTMLAttributes<HTM
 const controlClass =
   "h-11 w-full min-w-0 rounded-[8px] border border-border bg-[linear-gradient(180deg,#ffffff_0%,#fbfaf8_100%)] px-3 text-sm text-foreground shadow-[var(--shadow-sm)] transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-muted";
 
-export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={cn(controlClass, className)} {...props} />;
-}
+export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input({ className, ...props }, ref) {
+  return <input ref={ref} className={cn(controlClass, className)} {...props} />;
+});
 
 export function Select({ className, children, ...props }: SelectHTMLAttributes<HTMLSelectElement>) {
   return (
@@ -32,9 +32,10 @@ export function Select({ className, children, ...props }: SelectHTMLAttributes<H
   );
 }
 
-export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function Textarea({ className, ...props }, ref) {
   return (
     <textarea
+      ref={ref}
       className={cn(
         "min-h-28 w-full rounded-[8px] border border-border bg-surface p-3 text-sm text-foreground shadow-sm transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-muted",
         "bg-[linear-gradient(180deg,#ffffff_0%,#fbfaf8_100%)] shadow-[var(--shadow-sm)]",
@@ -43,7 +44,7 @@ export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTex
       {...props}
     />
   );
-}
+});
 
 export function FieldHint({ className, children }: { className?: string; children: ReactNode }) {
   return <p className={cn("text-xs leading-5 text-muted", className)}>{children}</p>;

@@ -313,7 +313,7 @@ function ProfileStep({
   errors: Record<string, string>;
   onChange: <Key extends DraftKey>(key: Key, value: ClientOnboardingDraft[Key]) => void;
   onImagePreview: (file?: File) => void;
-  fullNameRef: React.RefObject<HTMLInputElement>;
+  fullNameRef: React.RefObject<HTMLInputElement | null>;
   handleEnterNav: (e: React.KeyboardEvent) => void;
 }) {
   return (
@@ -436,9 +436,9 @@ function ContactStep({
   draft: ClientOnboardingDraft;
   errors: Record<string, string>;
   onChange: <Key extends DraftKey>(key: Key, value: ClientOnboardingDraft[Key]) => void;
-  emailRef: React.RefObject<HTMLInputElement>;
-  whatsappRef: React.RefObject<HTMLInputElement>;
-  phoneRef: React.RefObject<HTMLInputElement>;
+  emailRef: React.RefObject<HTMLInputElement | null>;
+  whatsappRef: React.RefObject<HTMLInputElement | null>;
+  phoneRef: React.RefObject<HTMLInputElement | null>;
   handleEnterNav: (e: React.KeyboardEvent) => void;
 }) {
   return (

@@ -55,10 +55,10 @@ export function filterWorkers(workers: Worker[], filters: SearchFilters) {
     // Novo filtro positivo de qualidade
     let matchesQuality = true;
     if (filters.quality === "verificado") matchesQuality = worker.verified;
-    if (filters.quality === "perfil_completo") matchesQuality = worker.profileComplete;
+    if (filters.quality === "perfil_completo") matchesQuality = Boolean(worker.profileStrength) && worker.portfolio.length > 0;
     if (filters.quality === "portfolio") matchesQuality = worker.portfolio.length > 0;
     if (filters.quality === "disponivel") matchesQuality = worker.available;
-    if (filters.quality === "responde_rapido") matchesQuality = worker.responseTime && worker.responseTime.toLowerCase().includes("min");
+    if (filters.quality === "responde_rapido") matchesQuality = worker.responseTime.toLowerCase().includes("min");
 
     return (
       matchesKeyword &&

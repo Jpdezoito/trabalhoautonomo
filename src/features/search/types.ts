@@ -6,6 +6,7 @@ export type SearchFilters = {
   neighborhood?: string;
   verifiedOnly?: boolean;
   availableOnly?: boolean;
+  minimumRating?: number;
   minPrice?: number;
   maxPrice?: number;
   withPortfolio?: boolean;

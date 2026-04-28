@@ -349,13 +349,13 @@ function AccountStep({
   errors: Record<string, string>;
   onChange: <Key extends DraftKey>(key: Key, value: WorkerOnboardingDraft[Key]) => void;
   onImagePreview: (key: "profilePhotoPreview" | "coverImagePreview" | "identityDocumentPreview" | "addressProofPreview", file?: File) => void;
-  fullNameRef: React.RefObject<HTMLInputElement>;
-  publicNameRef: React.RefObject<HTMLInputElement>;
-  professionTitleRef: React.RefObject<HTMLInputElement>;
-  emailRef: React.RefObject<HTMLInputElement>;
-  whatsappRef: React.RefObject<HTMLInputElement>;
-  phoneRef: React.RefObject<HTMLInputElement>;
-  continueButtonRef: React.RefObject<HTMLButtonElement>;
+  fullNameRef: React.RefObject<HTMLInputElement | null>;
+  publicNameRef: React.RefObject<HTMLInputElement | null>;
+  professionTitleRef: React.RefObject<HTMLInputElement | null>;
+  emailRef: React.RefObject<HTMLInputElement | null>;
+  whatsappRef: React.RefObject<HTMLInputElement | null>;
+  phoneRef: React.RefObject<HTMLInputElement | null>;
+  continueButtonRef: React.RefObject<HTMLButtonElement | null>;
   handleEnterNav: (e: React.KeyboardEvent) => void;
 }) {
   return (

@@ -11,7 +11,7 @@ export function CategoryWorkers({ category }: { category: CategoryWithContent })
         <SearchX className="mx-auto text-muted" size={34} />
         <h2 className="mt-4 text-2xl font-black text-foreground">Nenhum profissional cadastrado nesta categoria ainda</h2>
         <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted">
-          Voce pode buscar categorias relacionadas ou ampliar os filtros por cidade e bairro.
+          Você pode buscar categorias relacionadas ou ampliar os filtros por cidade e bairro.
         </p>
         <LinkButton href={routes.search} variant="outline" className="mt-6">
           Buscar todos os profissionais

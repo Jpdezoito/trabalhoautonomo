@@ -46,7 +46,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <section className="section-y bg-surface">
           <div className="container-page">
             <SectionHeader
-              eyebrow="Servicos"
+              eyebrow="Serviços"
               title={`O que contratar em ${category.content.title}`}
               description="Veja exemplos de demandas comuns e quando faz sentido chamar um profissional desta categoria."
             />
@@ -59,7 +59,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <SectionHeader
               eyebrow="Profissionais"
               title={`Profissionais de ${category.content.title}`}
-              description="Compare perfis, avaliacoes, portfolio, preco inicial e disponibilidade antes de pedir orcamento."
+              description="Compare perfis, avaliações, portfólio, preço inicial e disponibilidade antes de pedir orçamento."
               action={
                 <LinkButton href={`${routes.search}?categoria=${category.slug}`} variant="outline">
                   <Filter className="mr-2" size={18} />
@@ -76,9 +76,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <div className="rounded-[8px] border border-border bg-[#202522] p-6 text-white shadow-[var(--shadow-lg)] sm:p-8">
               <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
                 <div>
-                  <h2 className="text-3xl font-black tracking-tight">Quer comparar mais opcoes?</h2>
+                  <h2 className="text-3xl font-black tracking-tight">Quer comparar mais opções?</h2>
                   <p className="mt-3 max-w-2xl leading-7 text-[#eee7d9]">
-                    Use a busca com filtros por cidade, bairro, avaliacao, disponibilidade e verificacao para encontrar o melhor profissional.
+                    Use a busca com filtros por cidade, bairro, avaliação, disponibilidade e verificação para encontrar o melhor profissional.
                   </p>
                 </div>
                 <LinkButton href={`${routes.search}?categoria=${category.slug}`} variant="secondary">

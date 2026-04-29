@@ -7,7 +7,7 @@ export function ServiceExplorer({ category }: { category: CategoryWithContent })
     <div className="grid gap-6 lg:grid-cols-2">
       <Card>
         <CardHeader>
-          <CardTitle>Servicos mais comuns</CardTitle>
+          <CardTitle>Serviços mais comuns</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-3">

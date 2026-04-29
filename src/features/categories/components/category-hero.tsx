@@ -15,7 +15,7 @@ export function CategoryHero({ category }: { category: CategoryWithContent }) {
       <div className="relative container-page py-14 sm:py-18 lg:py-20">
         <div className="max-w-4xl">
           <Badge variant="warning" className="bg-white/12 text-accent ring-white/20">
-            Categoria de servico
+            Categoria de serviço
           </Badge>
           <div className="mt-6 flex items-start gap-4">
             <span className="flex size-14 shrink-0 items-center justify-center rounded-[8px] bg-white/12 text-accent ring-1 ring-white/20">

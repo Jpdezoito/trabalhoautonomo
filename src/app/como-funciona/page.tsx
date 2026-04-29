@@ -4,8 +4,8 @@ export default function HowItWorksPage() {
   return (
     <InstitutionalPage
       eyebrow="Como funciona"
-      title="Do encontro do profissional ao contato e avaliacao."
-      description="O fluxo foi desenhado para ajudar clientes a encontrar autonomos com mais contexto e para dar aos profissionais uma apresentacao mais forte do trabalho."
+      title="Do encontro do profissional ao contato e avaliação."
+      description="O fluxo foi desenhado para ajudar clientes a encontrar autônomos com mais contexto e para dar aos profissionais uma apresentação mais forte do trabalho."
       sections={[
         {
           title: "Para clientes",

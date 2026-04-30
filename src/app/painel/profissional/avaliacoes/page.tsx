@@ -8,8 +8,8 @@ export default function WorkerReviewsPage() {
 
   return (
     <DashboardShell
-      title="Avaliacoes"
-      description="Acompanhe notas, comentarios recentes e pontos que influenciam a confianca no perfil."
+      title="Avaliações"
+      description="Acompanhe notas, comentarios recentes e pontos que influenciam a confiança no perfil."
       nav={[...workerNavigation]}
     >
       <WorkerReviewsPanel worker={worker} />

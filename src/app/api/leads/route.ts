@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   const parsed = leadSchema.safeParse(payload);
 
   if (!parsed.success) {
-    return NextResponse.json({ message: "Dados invalidos para registrar lead." }, { status: 422 });
+    return NextResponse.json({ message: "Dados inválidos para registrar lead." }, { status: 422 });
   }
 
   const worker = await findWorkerProfileBySlug(parsed.data.workerSlug).catch(() => null);

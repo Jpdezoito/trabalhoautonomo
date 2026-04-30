@@ -5,14 +5,14 @@ export function QuoteTable() {
   return (
     <div className="overflow-hidden rounded-[8px] border border-[#dbe5e1] bg-white shadow-sm">
       <div className="border-b border-[#dbe5e1] p-5">
-        <h2 className="text-xl font-black text-[#1f2933]">Orcamentos recentes</h2>
+        <h2 className="text-xl font-black text-[#1f2933]">Orçamentos recentes</h2>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="bg-[#f4f7f9] text-[#334e68]">
             <tr>
-              <th className="px-5 py-3">Codigo</th>
-              <th className="px-5 py-3">Servico</th>
+              <th className="px-5 py-3">Código</th>
+              <th className="px-5 py-3">Serviço</th>
               <th className="px-5 py-3">Cliente</th>
               <th className="px-5 py-3">Profissional</th>
               <th className="px-5 py-3">Status</th>
@@ -40,7 +40,7 @@ export function QuoteTable() {
 }
 
 function getStatusVariant(status: string) {
-  if (status === "Aprovado" || status === "Concluido") return "success" as const;
+  if (status === "Aprovado" || status === "Concluído") return "success" as const;
   if (status === "Respondido") return "info" as const;
   return "primary" as const;
 }

@@ -4,7 +4,7 @@ import { AdminPlatformSettingsPanel } from "@/features/settings";
 
 export default function AdminSettingsPage() {
   return (
-    <DashboardShell title="Configuracoes" description="Ajuste regras de publicacao, verificacao, contato, moderacao e operacao do marketplace." nav={[...adminNavigation]}>
+    <DashboardShell title="Configurações" description="Ajuste regras de públicação, verificação, contato, moderação e operação do marketplace." nav={[...adminNavigation]}>
       <AdminPlatformSettingsPanel />
     </DashboardShell>
   );

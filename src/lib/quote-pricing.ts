@@ -23,11 +23,11 @@ export type QuotePricingEstimate = {
 const platformFeePercent = 5;
 
 const serviceBasePrices = [
-  { pattern: /quadro|energia|eletric|tomada|chuveiro|ilumin/i, min: 120, max: 420, label: "servico eletrico residencial" },
+  { pattern: /quadro|energia|eletric|tomada|chuveiro|ilumin/i, min: 120, max: 420, label: "serviço elétrico residencial" },
   { pattern: /banheiro|reforma|piso|revest|gesso|pintura/i, min: 450, max: 2400, label: "reforma ou acabamento" },
   { pattern: /vazamento|encan|hidraul|registro|caixa/i, min: 140, max: 580, label: "reparo hidraulico" },
   { pattern: /frete|carreto|mudanca|transporte|sofa|rack|geladeira/i, min: 120, max: 520, label: "transporte local" },
-  { pattern: /entrega|motoboy|motofrete|documento|pacote/i, min: 25, max: 95, label: "entrega rapida" },
+  { pattern: /entrega|motoboy|motofrete|documento|pacote/i, min: 25, max: 95, label: "entrega rápida" },
   { pattern: /limpeza|diaria|organizacao|faxina/i, min: 160, max: 360, label: "limpeza residencial" },
 ];
 
@@ -43,19 +43,19 @@ export function estimateQuotePrice(input: QuotePricingInput): QuotePricingEstima
   if (matched) {
     factors.push(`base por ${matched.label}`);
   } else {
-    factors.push("base generica por servico local");
+    factors.push("base genérica por serviço local");
   }
 
   if (startingPrice) {
     min = Math.max(min, Math.round(startingPrice * 0.9));
     max = Math.max(max, Math.round(startingPrice * 1.8));
-    factors.push("preco inicial do profissional");
+    factors.push("preço inicial do profissional");
   }
 
   if (/urgente|hoje|agora|emergencia|emergencial/i.test(text)) {
     min = Math.round(min * 1.25);
     max = Math.round(max * 1.35);
-    factors.push("urgencia informada");
+    factors.push("urgência informada");
   }
 
   if (/apartamento|condominio|portaria|predial/i.test(text)) {
@@ -65,11 +65,11 @@ export function estimateQuotePrice(input: QuotePricingInput): QuotePricingEstima
 
   if (/material|peca|comprar|fornecer/i.test(text)) {
     max = Math.round(max * 1.2);
-    factors.push("possivel inclusao de materiais");
+    factors.push("possível inclusão de materiais");
   }
 
   if (input.neighborhood && input.worker?.areas.includes(input.neighborhood)) {
-    factors.push("bairro dentro da area atendida");
+    factors.push("bairro dentro da área atendida");
   }
 
   const feeBasis = Math.round((min + max) / 2);

@@ -69,7 +69,7 @@ export function FilterPanel({ filters }: FilterPanelProps) {
       </Field>
 
       <Field>
-        <Label>Faixa de preco inicial</Label>
+        <Label>Faixa de preço inicial</Label>
         <Select name="preco" defaultValue={getPriceDefaultValue(filters)}>
           {searchFilterOptions.prices.map((price) => (
             <option key={price.label} value={`${price.min}-${price.max}`}>
@@ -86,11 +86,11 @@ export function FilterPanel({ filters }: FilterPanelProps) {
         </label>
         <label className="flex items-center gap-3 text-sm font-bold text-muted-strong">
           <input name="disponivel" value="true" type="checkbox" defaultChecked={filters.availableOnly} />
-          Mostrar so disponiveis
+          Mostrar so disponíveis
         </label>
         <label className="flex items-center gap-3 text-sm font-bold text-muted-strong">
           <input name="portfolio" value="true" type="checkbox" defaultChecked={filters.withPortfolio} />
-          Com portfolio publicado
+          Com portfólio publicado
         </label>
       </div>
 

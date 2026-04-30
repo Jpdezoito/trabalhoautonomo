@@ -5,8 +5,8 @@ import { AdminOverview } from "@/features/admin";
 export default function AdminPage() {
   return (
     <DashboardShell
-      title="Administracao"
-      description="Controle operacional da plataforma, moderacao, verificacoes, usuarios, categorias, orcamentos e configuracoes."
+      title="Administração"
+      description="Controle operacional da plataforma, moderação, verificacoes, usuários, categorias, orçamentos e configurações."
       nav={[...adminNavigation]}
     >
       <AdminOverview />

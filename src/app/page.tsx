@@ -27,58 +27,58 @@ import { workers } from "@/lib/marketplace-data";
 
 const heroStats = [
   { value: "1.200+", label: "profissionais ativos" },
-  { value: "8.400+", label: "orcamentos enviados" },
-  { value: "4,8/5", label: "media de avaliacao" },
+  { value: "8.400+", label: "orçamentos enviados" },
+  { value: "4,8/5", label: "média de avaliação" },
 ];
 
 const howItWorks = [
   {
-    title: "Busque por servico e bairro",
-    text: "Filtre por categoria, cidade e regiao para encontrar profissionais perto de voce.",
+    title: "Busque por serviço e bairro",
+    text: "Filtre por categoria, cidade e região para encontrar profissionais perto de você.",
     icon: Search,
   },
   {
     title: "Compare perfis completos",
-    text: "Veja portfolio, avaliacoes, disponibilidade, especialidades e verificacao.",
+    text: "Veja portfólio, avaliações, disponibilidade, especialidades e verificação.",
     icon: BadgeCheck,
   },
   {
-    title: "Solicite orcamento",
-    text: "Envie os detalhes do servico e fale pelo canal mais conveniente, incluindo WhatsApp.",
+    title: "Solicite orçamento",
+    text: "Envie os detalhes do serviço e fale pelo canal mais conveniente, incluindo WhatsApp.",
     icon: MessageCircle,
   },
   {
-    title: "Avalie a experiencia",
-    text: "Depois do atendimento, publique uma avaliacao para fortalecer a comunidade.",
+    title: "Avalie a experiência",
+    text: "Depois do atendimento, publique uma avaliação para fortalecer a comunidade.",
     icon: Star,
   },
 ];
 
 const trustItems = [
-  "Perfis com status de aprovacao e verificacao",
-  "Avaliacoes moderadas antes da publicacao",
-  "Historico de orcamentos e contatos organizado",
-  "Categorias, servicos e regioes estruturados",
-  "Administracao com logs, moderacao e configuracoes",
+  "Perfis com status de aprovação e verificação",
+  "Avaliações moderadas antes da públicação",
+  "Histórico de orçamentos e contatos organizado",
+  "Categorias, serviços e regiões estruturados",
+  "Administração com logs, moderação e configurações",
 ];
 
 const testimonials = [
   {
     author: "Mariana Almeida",
-    role: "Cliente em Sao Paulo",
-    text: "Encontrei um eletricista no meu bairro, comparei avaliacoes e recebi o orcamento no mesmo dia.",
+    role: "Cliente em São Paulo",
+    text: "Encontrei um eletricista no meu bairro, comparei avaliações e recebi o orçamento no mesmo dia.",
     rating: 5,
   },
   {
     author: "Paulo Cesar",
     role: "Cliente em Pinheiros",
-    text: "O portfolio ajudou muito na escolha. A reforma foi planejada com prazo, custo e contato claro.",
+    text: "O portfólio ajudou muito na escolha. A reforma foi planejada com prazo, custo e contato claro.",
     rating: 5,
   },
   {
     author: "Carlos Mendes",
     role: "Profissional verificado",
-    text: "Meu perfil passou mais confianca e os pedidos chegam com informacoes melhores para responder rapido.",
+    text: "Meu perfil passou mais confiança e os pedidos chegam com informações melhores para responder rápido.",
     rating: 5,
   },
 ];
@@ -88,7 +88,7 @@ const professionalPlans = [
     name: "Free",
     price: "R$ 0",
     description: "Para entrar na plataforma, criar perfil e receber pedidos organicos.",
-    features: ["Perfil publico", "Portfolio basico", "Orcamentos pela plataforma", "Selo de verificacao quando aprovado"],
+    features: ["Perfil público", "Portfólio básico", "Orçamentos pela plataforma", "Selo de verificação quando aprovado"],
     cta: "Comecar gratis",
     href: routes.registerWorker,
     highlighted: false,
@@ -106,7 +106,7 @@ const professionalPlans = [
     name: "Destaque",
     price: "R$ 59/mes",
     description: "Para aparecer no topo do bairro/cidade e acelerar captacao local.",
-    features: ["Topo por relevancia local", "Badge Destaque no bairro", "Mais exposicao em /buscar", "Ideal para dominar uma regiao"],
+    features: ["Topo por relevância local", "Badge Destaque no bairro", "Mais exposição em /buscar", "Ideal para dominar uma região"],
     cta: "Quero destaque",
     href: routes.registerWorker,
     highlighted: false,
@@ -131,13 +131,13 @@ export default function Home() {
           <div className="relative container-page grid gap-10 pb-14 pt-24 sm:pb-16 sm:pt-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:items-center lg:pb-20 lg:pt-28">
             <div className="max-w-4xl">
               <Badge variant="warning" className="bg-white/12 text-accent ring-white/20 backdrop-blur">
-                Marketplace premium para servicos locais
+                Marketplace premium para serviços locais
               </Badge>
               <h1 className="mt-6 text-balance text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl lg:text-6xl 2xl:text-7xl">
-                Encontre profissionais confiaveis para resolver servicos com rapidez.
+                Encontre profissionais confiaveis para resolver serviços com rapidez.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#eee7d9]">
-                Busque autonomos por servico, cidade e bairro. Compare perfis, veja portfolios, solicite orcamentos e fale direto com profissionais avaliados.
+                Busque autônomos por serviço, cidade e bairro. Compare perfis, veja portfólios, solicite orçamentos e fale direto com profissionais avaliados.
               </p>
               <div className="mt-8 max-w-5xl">
                 <SearchPanel />
@@ -171,7 +171,7 @@ export default function Home() {
                   <p className="mt-4 text-sm leading-6 text-muted">{workers[1].headline}</p>
                   <div className="mt-5 grid grid-cols-3 gap-3 text-center">
                     <Metric value="4,8" label="nota" />
-                    <Metric value="148" label="servicos" />
+                    <Metric value="148" label="serviços" />
                     <Metric value="Hoje" label="resposta" />
                   </div>
                 </CardContent>
@@ -183,8 +183,8 @@ export default function Home() {
         <section className="container-page py-8">
           <div className="grid gap-4 md:grid-cols-3">
             <StatCard label="Profissionais ativos" value="1.200+" detail="Base organizada por categoria, bairro e disponibilidade." icon={<Users size={22} />} />
-            <StatCard label="Perfis moderados" value="98%" detail="Fluxo de verificacao, documentos e revisao administrativa." icon={<ShieldCheck size={22} />} />
-            <StatCard label="Orcamentos gerados" value="8.400+" detail="Pedidos rastreados entre cliente e profissional." icon={<ClipboardCheck size={22} />} />
+            <StatCard label="Perfis moderados" value="98%" detail="Fluxo de verificação, documentos e revisão administrativa." icon={<ShieldCheck size={22} />} />
+            <StatCard label="Orçamentos gerados" value="8.400+" detail="Pedidos rastreados entre cliente e profissional." icon={<ClipboardCheck size={22} />} />
           </div>
         </section>
 
@@ -192,8 +192,8 @@ export default function Home() {
           <div className="container-page">
             <SectionHeader
               eyebrow="Categorias"
-              title="Servicos mais procurados"
-              description="Escolha a especialidade certa para cada tipo de reparo, reforma, instalacao ou atendimento tecnico."
+              title="Serviços mais procurados"
+              description="Escolha a especialidade certa para cada tipo de reparo, reforma, instalacao ou atendimento técnico."
               action={
                 <LinkButton href={routes.search} variant="outline">
                   Ver todos <ArrowRight className="ml-2" size={18} />
@@ -209,7 +209,7 @@ export default function Home() {
             <SectionHeader
               eyebrow="Destaques"
               title="Profissionais prontos para atender"
-              description="Perfis com portfolio, avaliacoes, servicos cadastrados e opcoes diretas de contato."
+              description="Perfis com portfólio, avaliações, serviços cadastrados e opções diretas de contato."
             />
             <div className="grid gap-6 lg:grid-cols-3">
               {workers.map((worker) => (
@@ -223,8 +223,8 @@ export default function Home() {
           <div className="container-page">
             <SectionHeader
               eyebrow="Como funciona"
-              title="Do problema resolvido ao servico avaliado"
-              description="Um fluxo simples para contratar com mais informacao, controle e seguranca."
+              title="Do problema resolvido ao serviço avaliado"
+              description="Um fluxo simples para contratar com mais informacao, controle e segurança."
               align="center"
             />
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -252,20 +252,20 @@ export default function Home() {
           <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <Badge variant="warning" className="bg-white/10 text-accent ring-white/20">
-                Confianca operacional
+                Confiança operacional
               </Badge>
               <h2 className="mt-5 text-3xl font-black tracking-tight sm:text-5xl">
-                Uma plataforma preparada para crescer com moderacao e qualidade.
+                Uma plataforma preparada para crescer com moderação e qualidade.
               </h2>
               <p className="mt-5 text-lg leading-8 text-[#d8d0c2]">
-                A experiencia publica e conectada a uma estrutura de administracao com verificacao de perfis, revisao de avaliacoes, status de orcamentos, notificacoes e configuracoes.
+                A experiência pública e conectada a uma estrutura de administração com verificação de perfis, revisão de avaliações, status de orçamentos, notificações e configurações.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <LinkButton href={routes.search} variant="secondary">
                   Encontrar profissional
                 </LinkButton>
                 <LinkButton href={routes.registerWorker} variant="outline" className="border-white/25 bg-white/8 text-white hover:bg-white/14">
-                  Cadastrar servico
+                  Cadastrar serviço
                 </LinkButton>
               </div>
             </div>
@@ -350,10 +350,10 @@ export default function Home() {
               <div className="p-6 sm:p-8 lg:p-10">
                 <Sparkles className="text-primary" size={28} />
                 <h2 className="mt-5 text-3xl font-black tracking-tight text-foreground">
-                  Precisa resolver um servico?
+                  Precisa resolver um serviço?
                 </h2>
                 <p className="mt-3 leading-7 text-muted">
-                  Encontre profissionais por especialidade e regiao, veja provas de trabalho e solicite orcamentos com detalhes.
+                  Encontre profissionais por especialidade e região, veja provas de trabalho e solicite orçamentos com detalhes.
                 </p>
                 <LinkButton href={routes.search} className="mt-6">
                   Buscar profissionais <ArrowRight className="ml-2" size={18} />
@@ -362,10 +362,10 @@ export default function Home() {
               <div className="border-t border-border bg-primary-soft p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
                 <HeartHandshake className="text-primary" size={30} />
                 <h2 className="mt-5 text-3xl font-black tracking-tight text-foreground">
-                  Trabalha com servicos locais?
+                  Trabalha com serviços locais?
                 </h2>
                 <p className="mt-3 leading-7 text-muted">
-                  Crie um perfil profissional com portfolio, areas atendidas, verificacao e canal direto para receber pedidos melhores.
+                  Crie um perfil profissional com portfólio, áreas atendidas, verificação e canal direto para receber pedidos melhores.
                 </p>
                 <LinkButton href={routes.registerWorker} variant="secondary" className="mt-6">
                   Cadastrar como profissional <ArrowRight className="ml-2" size={18} />

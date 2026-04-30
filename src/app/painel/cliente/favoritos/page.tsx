@@ -12,7 +12,7 @@ export default async function ClientFavoritesPage() {
   return (
     <DashboardShell
       title="Favoritos"
-      description="Acesse rapidamente os profissionais salvos para comparar, pedir orcamento ou chamar novamente."
+      description="Acesse rapidamente os profissionais salvos para comparar, pedir orçamento ou chamar novamente."
       nav={[...clientNavigation]}
     >
       <ClientFavoritesPanel initialWorkers={favoriteWorkers} />

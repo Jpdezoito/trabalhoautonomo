@@ -16,7 +16,7 @@ type SearchResultCardProps = {
 
 export function SearchResultCard({ result }: SearchResultCardProps) {
   const { worker, priceAmount } = result;
-  const message = `Ola, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de falar sobre um servico.`;
+  const message = `Olá, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de falar sobre um serviço.`;
 
   return (
     <Card className="overflow-hidden">
@@ -36,7 +36,7 @@ export function SearchResultCard({ result }: SearchResultCardProps) {
               <div className="mt-3 flex flex-wrap gap-2">
                 <TrustBadge worker={worker} />
                 <PlanBadge plan={worker.plan} />
-                {worker.available ? <Badge variant="info">Disponivel agora</Badge> : null}
+                {worker.available ? <Badge variant="info">Disponível agora</Badge> : null}
               </div>
             </div>
             <FavoriteButton workerSlug={worker.slug} workerName={worker.name} compact />
@@ -72,7 +72,7 @@ export function SearchResultCard({ result }: SearchResultCardProps) {
               Ver perfil
             </LinkButton>
             <LinkButton href={`${routes.workerProfile(worker.slug)}#orcamento`} variant="outline" className="flex-1">
-              Pedir orcamento
+              Pedir orçamento
             </LinkButton>
             <LeadWhatsappButton worker={worker} message={message} source="search_results" className="flex-1" />
           </div>

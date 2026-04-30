@@ -28,18 +28,13 @@ export function AutocompleteInput({
   onEnterNext
 }: AutocompleteInputProps) {
   const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState(value);
   const [highlighted, setHighlighted] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
   const innerInputRef = useRef<HTMLInputElement>(null);
   // Permite passar ref externa
   const mergedInputRef = inputRef || innerInputRef;
 
-  const filtered = options.filter(opt => opt.toLowerCase().includes(inputValue.toLowerCase()));
-
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
+  const filtered = options.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -54,13 +49,11 @@ export function AutocompleteInput({
 
   function handleSelect(option: string) {
     onChange(option);
-    setInputValue(option);
     setOpen(false);
     setHighlighted(-1);
   }
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputValue(e.target.value);
     onChange(e.target.value);
     setOpen(true);
     setHighlighted(-1);
@@ -95,7 +88,7 @@ export function AutocompleteInput({
             "h-11 w-full min-w-0 rounded-[8px] border border-border bg-[linear-gradient(180deg,#ffffff_0%,#fbfaf8_100%)] px-3 text-sm text-foreground shadow-[var(--shadow-sm)] transition placeholder:text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-muted pr-10",
             disabled && "opacity-60 cursor-not-allowed"
           )}
-          value={inputValue}
+          value={value}
           onChange={handleInput}
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}

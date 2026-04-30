@@ -2,12 +2,12 @@ import type { TrustVerificationStatus } from "@prisma/client";
 
 export function mapTrustStatusToLabel(status?: TrustVerificationStatus | null) {
   if (status === "VERIFIED") return "Conta verificada";
-  if (status === "IN_REVIEW") return "Verificacao em analise";
+  if (status === "IN_REVIEW") return "Verificação em análise";
   if (status === "PENDING") return "Pendente";
   if (status === "REJECTED") return "Rejeitado";
-  if (status === "NEEDS_REVIEW") return "Revisao necessaria";
+  if (status === "NEEDS_REVIEW") return "Revisão necessaria";
 
-  return "Nao verificado";
+  return "Não verificado";
 }
 
 export function mapTrustStatusToFrontend(status?: TrustVerificationStatus | null) {

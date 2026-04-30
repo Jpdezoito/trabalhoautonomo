@@ -66,7 +66,7 @@ export function WorkerSettingsPanel() {
           fields={
             <>
               <Field>
-                <Label>Nome publico</Label>
+                <Label>Nome público</Label>
                 <Input defaultValue="Carlos Mendes" />
               </Field>
               <Field>
@@ -127,12 +127,12 @@ export function AdminPlatformSettingsPanel() {
                 <Input type="email" defaultValue="suporte@autonomopro.com.br" />
               </Field>
               <Field>
-                <Label>Tempo maximo recomendado para resposta</Label>
+                <Label>Tempo máximo recomendado para resposta</Label>
                 <Input defaultValue="24 horas" />
               </Field>
               <Field>
                 <Label>Mensagem institucional curta</Label>
-                <Textarea defaultValue="Marketplace premium para servicos autonomos locais, com verificacao, orcamentos e moderacao." />
+                <Textarea defaultValue="Marketplace premium para serviços autônomos locais, com verificação, orçamentos e moderação." />
               </Field>
               <Button type="button" className="w-fit">Salvar plataforma</Button>
             </form>
@@ -145,12 +145,12 @@ export function AdminPlatformSettingsPanel() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
-              <ToggleRow title="Moderar novos perfis" description="Exigir revisao antes de publicar perfis profissionais." defaultChecked />
+              <ToggleRow title="Moderar novos perfis" description="Exigir revisão antes de publicar perfis profissionais." defaultChecked />
               <ToggleRow title="Exibir WhatsApp" description="Mostrar botao de contato direto em perfis aprovados." defaultChecked />
-              <ToggleRow title="Publicar avaliacoes apos revisao" description="Manter moderacao antes de expor feedbacks ao publico." defaultChecked />
-              <ToggleRow title="Verificacao facial para clientes" description="Permitir que clientes habilitem verificacao facial como camada adicional de seguranca." defaultChecked={identityFeatureFlags.clientEnrollmentEnabled} />
-              <ToggleRow title="Confianca e protecao para clientes" description="Permitir verificacao de identidade opcional para clientes com badge de confianca quando aprovado." defaultChecked />
-              <ToggleRow title="Permitir favoritos" description="Ativar salvamento rapido de profissionais por clientes." defaultChecked />
+              <ToggleRow title="Publicar avaliações após revisão" description="Manter moderação antes de expor feedbacks ao público." defaultChecked />
+              <ToggleRow title="Verificação facial para clientes" description="Permitir que clientes habilitem verificação facial como camada adicional de segurança." defaultChecked={identityFeatureFlags.clientEnrollmentEnabled} />
+              <ToggleRow title="Confiança e protecao para clientes" description="Permitir verificação de identidade opcional para clientes com badge de confiança quando aprovado." defaultChecked />
+              <ToggleRow title="Permitir favoritos" description="Ativar salvamento rápido de profissionais por clientes." defaultChecked />
             </div>
           </CardContent>
         </Card>
@@ -160,11 +160,11 @@ export function AdminPlatformSettingsPanel() {
         <NotificationSettingsCard audience="admin" />
         <Card>
           <CardHeader>
-            <CardTitle>Estado publico</CardTitle>
+            <CardTitle>Estado público</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
-              <StatusLine icon={<ShieldCheck size={18} />} label="Moderacao" value="Ativa" />
+              <StatusLine icon={<ShieldCheck size={18} />} label="Moderação" value="Ativa" />
               <StatusLine icon={<Bell size={18} />} label="Alertas" value="Painel, e-mail e fila operacional" />
               <StatusLine icon={<Eye size={18} />} label="Marketplace" value="Publicado e indexavel" />
             </div>
@@ -256,7 +256,7 @@ function ContactSettingsCard() {
           <FieldGroup>
             <Field>
               <Label>Cidade base</Label>
-              <Select defaultValue="Sao Paulo">
+              <Select defaultValue="São Paulo">
                 {cities.map((city) => (
                   <option key={city}>{city}</option>
                 ))}
@@ -264,7 +264,7 @@ function ContactSettingsCard() {
             </Field>
             <Field>
               <Label>Bairro principal</Label>
-              <Select defaultValue="Tatuape">
+              <Select defaultValue="Tatuapé">
                 {neighborhoods.map((neighborhood) => (
                   <option key={neighborhood}>{neighborhood}</option>
                 ))}
@@ -272,8 +272,8 @@ function ContactSettingsCard() {
             </Field>
           </FieldGroup>
           <Field>
-            <Label>Observacoes de contato</Label>
-            <Textarea defaultValue="Prefiro retorno por WhatsApp e confirmacao por e-mail quando houver orcamento detalhado." />
+            <Label>Observações de contato</Label>
+            <Textarea defaultValue="Prefiro retorno por WhatsApp e confirmação por e-mail quando houver orçamento detalhado." />
           </Field>
           <Button type="button" variant="outline" className="w-fit">
             <Phone className="mr-2" size={18} />
@@ -291,13 +291,13 @@ function NotificationSettingsCard({ audience }: { audience: "client" | "worker" 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Preferencias de notificacao</CardTitle>
+        <CardTitle>Preferências de notificacao</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
-          <ToggleRow title="Alertas por e-mail" description={`Receber notificacoes ${audienceLabel} por e-mail.`} defaultChecked />
+          <ToggleRow title="Alertas por e-mail" description={`Receber notificações ${audienceLabel} por e-mail.`} defaultChecked />
           <ToggleRow title="Alertas na plataforma" description="Exibir avisos no painel e no menu de perfil." defaultChecked />
-          <ToggleRow title="Atualizacoes operacionais" description="Receber avisos sobre mudancas de status e retornos importantes." defaultChecked />
+          <ToggleRow title="Atualizações operacionais" description="Receber avisos sobre mudanças de status e retornos importantes." defaultChecked />
           <ToggleRow title="Resumo semanal" description="Consolidar atividade e novidades em um unico envio." />
         </div>
       </CardContent>
@@ -313,10 +313,10 @@ function WorkerVisibilitySettingsCard() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
-          <ToggleRow title="Perfil publico ativo" description="Permitir que o perfil apareca na busca publica." defaultChecked />
+          <ToggleRow title="Perfil público ativo" description="Permitir que o perfil apareca na busca pública." defaultChecked />
           <ToggleRow title="Exibir WhatsApp" description="Mostrar botao de contato direto para clientes." defaultChecked />
-          <ToggleRow title="Receber novos orcamentos" description="Manter a agenda aberta para novos pedidos." defaultChecked />
-          <ToggleRow title="Exibir preco inicial" description="Publicar referencia de valor no perfil." defaultChecked />
+          <ToggleRow title="Receber novos orçamentos" description="Manter a agenda aberta para novos pedidos." defaultChecked />
+          <ToggleRow title="Exibir preço inicial" description="Publicar referencia de valor no perfil." defaultChecked />
         </div>
       </CardContent>
     </Card>
@@ -331,10 +331,10 @@ function PrivacySettingsCard({ audience }: { audience: "client" | "worker" }) {
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
-          <ToggleRow title="Exibir cidade e bairro" description="Mostrar localizacao principal no perfil e em resultados." defaultChecked />
+          <ToggleRow title="Exibir cidade e bairro" description="Mostrar localização principal no perfil e em resultados." defaultChecked />
           <ToggleRow
             title={audience === "worker" ? "Exibir horario de resposta" : "Compartilhar local preferido no pedido"}
-            description={audience === "worker" ? "Publicar previsao media de retorno para clientes." : "Preencher automaticamente cidade e bairro em novos pedidos."}
+            description={audience === "worker" ? "Publicar previsao média de retorno para clientes." : "Preencher automaticamente cidade e bairro em novos pedidos."}
             defaultChecked
           />
           <ToggleRow title="Usar e-mail em contatos internos" description="Permitir comunicacoes operacionais importantes." defaultChecked />

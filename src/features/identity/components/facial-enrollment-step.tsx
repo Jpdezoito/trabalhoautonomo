@@ -19,8 +19,8 @@ export function FacialEnrollmentStep({
       audience={audience}
       mode="draft"
       enabled={enabled}
-      title="Verificacao facial"
-      description="Registre sua captura facial com consentimento explicito para reforcar a verificacao de identidade e preparar a seguranca da conta."
+      title="Verificação facial"
+      description="Registre sua captura facial com consentimento explicito para reforcar a verificação de identidade e preparar a segurança da conta."
       initialValue={value}
       onDraftChange={onChange}
     />

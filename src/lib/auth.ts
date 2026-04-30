@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
             throw new Error("Banco de dados indisponivel no ambiente local. Inicie o PostgreSQL e rode db push + seed.");
           }
 
-          throw new Error("Nao foi possivel validar o acesso no momento.");
+          throw new Error("Não foi possível validar o acesso no momento.");
         }
 
         if (!user?.passwordHash) {

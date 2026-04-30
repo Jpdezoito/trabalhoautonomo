@@ -57,6 +57,6 @@ export function isExpired(date?: Date | null) {
 
 export function createGenericStartMessage(method: "EMAIL_FACE" | "PHONE_FACE") {
   return method === "EMAIL_FACE"
-    ? "Se a conta for elegivel, enviaremos um codigo para o e-mail informado e depois solicitaremos a verificacao facial."
-    : "Se a conta for elegivel, enviaremos um codigo para o telefone informado e depois solicitaremos a verificacao facial.";
+    ? "Se a conta for elegivel, enviaremos um código para o e-mail informado e depois solicitaremos a verificação facial."
+    : "Se a conta for elegivel, enviaremos um código para o telefone informado e depois solicitaremos a verificação facial.";
 }

@@ -8,14 +8,14 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id || (session.user.role !== "ADMIN" && session.user.role !== "SUPER_ADMIN")) {
-    return NextResponse.json({ error: "Permissao administrativa necessaria." }, { status: 403 });
+    return NextResponse.json({ error: "Permissão administrativa necessaria." }, { status: 403 });
   }
 
   const payload = await request.json();
   const parsed = trustVerificationReviewSchema.safeParse(payload);
 
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.issues[0]?.message || "Dados invalidos." }, { status: 400 });
+    return NextResponse.json({ error: parsed.error.issues[0]?.message || "Dados inválidos." }, { status: 400 });
   }
 
   try {
@@ -29,6 +29,6 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
 
     return NextResponse.json({ overview });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Nao foi possivel revisar a solicitacao." }, { status: 400 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Não foi possível revisar a solicitação." }, { status: 400 });
   }
 }

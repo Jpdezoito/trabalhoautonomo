@@ -19,11 +19,11 @@ export default async function RegisterPage() {
         <div className="text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#0f6b5f]">Cadastro</p>
           <h1 className="mt-2 text-4xl font-black text-[#1f2933]">Escolha seu tipo de conta</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-[#52616b]">Cada fluxo coleta dados diferentes para manter a experiencia organizada para clientes e profissionais.</p>
+          <p className="mx-auto mt-3 max-w-2xl text-[#52616b]">Cada fluxo coleta dados diferentes para manter a experiência organizada para clientes e profissionais.</p>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <AccountCard icon={<UserRound size={34} />} title="Cliente" text="Solicite orcamentos, favorite profissionais, acompanhe conversas e publique avaliacoes." href={routes.registerClient} />
-          <AccountCard icon={<BriefcaseBusiness size={34} />} title="Trabalhador" text="Crie um perfil publico, cadastre servicos, areas atendidas, portfolio, documentos e WhatsApp." href={routes.registerWorker} />
+          <AccountCard icon={<UserRound size={34} />} title="Cliente" text="Solicite orçamentos, favorite profissionais, acompanhe conversas e publique avaliações." href={routes.registerClient} />
+          <AccountCard icon={<BriefcaseBusiness size={34} />} title="Trabalhador" text="Crie um perfil público, cadastre serviços, áreas atendidas, portfólio, documentos e WhatsApp." href={routes.registerWorker} />
         </div>
       </main>
     </div>

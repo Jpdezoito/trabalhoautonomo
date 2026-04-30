@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AutonomoPro | Marketplace de servicos locais",
-  description: "Encontre profissionais autonomos verificados, solicite orcamentos e gerencie servicos locais.",
+  title: "AutonomoPro | Marketplace de serviços locais",
+  description: "Encontre profissionais autônomos verificados, solicite orçamentos e gerencie serviços locais.",
 };
 
 export default function RootLayout({

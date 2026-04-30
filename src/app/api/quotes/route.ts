@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   if (!parsed.success) {
     return NextResponse.json(
       {
-        message: "Dados invalidos para solicitar orcamento.",
+        message: "Dados inválidos para solicitar orçamento.",
         errors: parsed.error.flatten().fieldErrors,
       },
       { status: 422 },
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   const worker = await findWorkerProfileBySlug(workerSlug);
 
   if (!worker) {
-    return NextResponse.json({ message: "Profissional nao encontrado." }, { status: 404 });
+    return NextResponse.json({ message: "Profissional não encontrado." }, { status: 404 });
   }
 
   const clientProfile = await getOrCreateClientProfile({
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
 
   return NextResponse.json(
     {
-      message: "Pedido de orcamento recebido.",
+      message: "Pedido de orçamento recebido.",
       id: quote.id,
       code: quote.code,
       status: quote.status,

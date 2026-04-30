@@ -13,23 +13,23 @@ export function ReviewSummary({ worker }: { worker: Worker }) {
     <Card>
       <CardHeader>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <CardTitle>Avaliacoes</CardTitle>
+          <CardTitle>Avaliações</CardTitle>
           <Badge variant="warning">
             <Star className="fill-current" size={14} />
-            {formatRating(worker.rating)} media
+            {formatRating(worker.rating)} média
           </Badge>
         </div>
       </CardHeader>
       <CardContent>
         <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
           <div className="rounded-[8px] border border-border bg-surface-muted p-5">
-            <p className="text-sm font-bold text-muted">Nota media</p>
+            <p className="text-sm font-bold text-muted">Nota média</p>
             <div className="mt-2 flex items-end gap-2">
               <span className="text-5xl font-black tracking-tight text-foreground">{formatRating(worker.rating)}</span>
               <span className="pb-1 text-sm font-bold text-muted">/ 5</span>
             </div>
-            <p className="mt-3 text-sm font-semibold text-muted">{worker.reviewsCount} avaliacoes registradas</p>
-            <p className="mt-2 text-xs leading-5 text-muted">Somente avaliacoes aprovadas pela moderacao entram no resumo publico.</p>
+            <p className="mt-3 text-sm font-semibold text-muted">{worker.reviewsCount} avaliações registradas</p>
+            <p className="mt-2 text-xs leading-5 text-muted">Somente avaliações aprovadas pela moderação entram no resumo público.</p>
           </div>
 
           <div className="grid gap-2">

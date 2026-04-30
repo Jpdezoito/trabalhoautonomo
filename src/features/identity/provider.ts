@@ -46,7 +46,7 @@ export async function verifyLiveCaptureForRecovery(input: {
   return {
     success,
     confidenceScore: Number(structuralSimilarity.toFixed(2)),
-    reason: success ? undefined : "Nao foi possivel confirmar a verificacao facial. Tente novamente com melhor iluminacao.",
+    reason: success ? undefined : "Não foi possível confirmar a verificação facial. Tente novamente com melhor iluminação.",
   };
 }
 

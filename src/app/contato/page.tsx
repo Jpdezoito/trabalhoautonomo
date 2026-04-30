@@ -5,7 +5,7 @@ export default function ContactPage() {
     <InstitutionalPage
       eyebrow="Contato"
       title="Fale com a equipe da plataforma."
-      description="Se voce precisa de ajuda com conta, moderacao, perfis, orcamentos ou assuntos administrativos, use os canais institucionais."
+      description="Se você precisa de ajuda com conta, moderação, perfis, orçamentos ou assuntos administrativos, use os canais institucionais."
       sections={[
         {
           title: "Atendimento",
@@ -17,8 +17,8 @@ export default function ContactPage() {
         {
           title: "Assuntos mais comuns",
           body: [
-            "Ajuda com acesso, configuracao de conta, verificacao de profissional, analise de conteudo, revisao de avaliacao e suporte em fluxos de orcamento.",
-            "Para assuntos ligados a um servico especifico entre cliente e profissional, o ideal e manter o historico dentro da plataforma sempre que possivel.",
+            "Ajuda com acesso, configuração de conta, verificação de profissional, análise de conteúdo, revisão de avaliação e suporte em fluxos de orçamento.",
+            "Para assuntos ligados a um serviço específico entre cliente e profissional, o ideal é manter o Histórico dentro da plataforma sempre que possível.",
           ],
         },
       ]}

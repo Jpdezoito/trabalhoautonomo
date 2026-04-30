@@ -66,7 +66,7 @@ export async function getOrCreateClientProfile(input: {
   });
 
   if (!createdUser.clientProfile) {
-    throw new Error("Nao foi possivel criar o perfil de cliente.");
+    throw new Error("Não foi possível criar o perfil de cliente.");
   }
 
   return createdUser.clientProfile;
@@ -175,8 +175,8 @@ export function mapWorkerProfileToMarketplaceWorker(
     role: workerProfile.headline,
     headline: workerProfile.headline,
     bio: workerProfile.bio,
-    city: workerProfile.city?.name ?? "Cidade nao informada",
-    neighborhood: workerProfile.neighborhood?.name ?? "Bairro nao informado",
+    city: workerProfile.city?.name ?? "Cidade não informada",
+    neighborhood: workerProfile.neighborhood?.name ?? "Bairro não informado",
     rating: Number(workerProfile.averageRating),
     reviewsCount: workerProfile.reviewsCount,
     jobsDone: workerProfile.jobsCompleted,
@@ -233,19 +233,19 @@ export function mapWorkerProfileToMarketplaceWorker(
         status: workerProfile.phoneVerifiedAt ? "verificado" : workerProfile.user.phone ? "pendente" : "nao_informado",
       },
       {
-        label: "Endereco verificado",
+        label: "Endereço verificado",
         status: workerProfile.addressProofStatus === "APPROVED" ? "verificado" : workerProfile.addressProofStatus === "PENDING" ? "pendente" : "nao_informado",
       },
       {
-        label: "Verificacao facial concluida",
+        label: "Verificação facial concluida",
         status: workerProfile.verificationStatus === "APPROVED" ? "verificado" : workerProfile.verificationStatus === "PENDING" ? "pendente" : "nao_informado",
       },
       {
-        label: "Portfolio verificado",
+        label: "Portfólio verificado",
         status: workerProfile.portfolioProofStatus === "APPROVED" ? "verificado" : workerProfile.minimumPortfolioMet ? "pendente" : "nao_informado",
       },
       {
-        label: "Experiencia comprovada",
+        label: "Experiência comprovada",
         status: workerProfile.yearsExperience > 0 || workerProfile.experienceSummary ? "pendente" : "nao_informado",
       },
       {
@@ -253,7 +253,7 @@ export function mapWorkerProfileToMarketplaceWorker(
         status: workerProfile.qualifications.length ? "pendente" : "nao_informado",
       },
       {
-        label: "Formacao informada",
+        label: "Formação informada",
         status: workerProfile.educationLevel || workerProfile.collegeName ? "pendente" : "nao_informado",
       },
     ],
@@ -277,7 +277,7 @@ export function mapWorkerProfileToMarketplaceWorker(
       title: item.title,
       description: item.description ?? "",
       image: item.imageUrl,
-      city: workerProfile.city?.name ?? "Sao Paulo",
+      city: workerProfile.city?.name ?? "São Paulo",
       verified: item.isVerifiedProof,
       workerVisible: item.workerVisible,
       evidenceLabel: item.evidenceType ? item.evidenceType.toLowerCase().replaceAll("_", " ") : "resultado final",

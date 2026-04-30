@@ -6,7 +6,7 @@ export const trustVerificationRequestSchema = z.object({
   addressReference: z.string().optional(),
   activityReference: z.string().optional(),
   consentIdentity: z.boolean().refine((value) => value, {
-    message: "Aceite o consentimento para verificacao de identidade.",
+    message: "Aceite o consentimento para verificação de identidade.",
   }),
   consentBackground: z.boolean().optional(),
   requestBackgroundCheck: z.boolean().optional(),

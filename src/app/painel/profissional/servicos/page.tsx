@@ -8,8 +8,8 @@ export default function WorkerServicesPage() {
 
   return (
     <DashboardShell
-      title="Servicos"
-      description="Gerencie categorias, especialidades, preco inicial e areas atendidas pelo seu perfil."
+      title="Serviços"
+      description="Gerencie categorias, especialidades, preço inicial e áreas atendidas pelo seu perfil."
       nav={[...workerNavigation]}
     >
       <WorkerServicesPanel worker={worker} />

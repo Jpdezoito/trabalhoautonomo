@@ -25,17 +25,17 @@ const baseSteps: ClientOnboardingStep[] = [
   {
     id: "profile",
     title: "Perfil",
-    description: "Nome, foto opcional e contexto rapido.",
+    description: "Nome, foto opcional e contexto rápido.",
   },
   {
     id: "location",
-    title: "Localizacao",
+    title: "Localização",
     description: "Cidade e bairro preferidos.",
   },
   {
     id: "interests",
     title: "Interesses",
-    description: "Categorias e servicos que voce costuma procurar.",
+    description: "Categorias e serviços que você costuma procurar.",
   },
   {
     id: "contact",
@@ -61,7 +61,7 @@ function ClientOnboardingFlow() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   // draftStatus inicial fixo para evitar mismatch
-  const [draftStatus, setDraftStatus] = useState("Rascunho nao salvo");
+  const [draftStatus, setDraftStatus] = useState("Rascunho não salvo");
   const steps = useMemo<ClientOnboardingStep[]>(
     () =>
       identityFeatureFlags.clientEnrollmentEnabled
@@ -69,12 +69,12 @@ function ClientOnboardingFlow() {
             ...baseSteps,
             {
               id: "verification",
-              title: "Verificacao",
-              description: "Verificacao facial opcional para seguranca da conta.",
+              title: "Verificação",
+              description: "Verificação facial opcional para segurança da conta.",
             },
             {
               id: "review",
-              title: "Revisao",
+              title: "Revisão",
               description: "Confira antes de finalizar.",
             },
           ]
@@ -82,7 +82,7 @@ function ClientOnboardingFlow() {
             ...baseSteps,
             {
               id: "review",
-              title: "Revisao",
+              title: "Revisão",
               description: "Confira antes de finalizar.",
             },
           ],
@@ -157,7 +157,7 @@ function ClientOnboardingFlow() {
       return;
     }
 
-    setDraftStatus("Perfil de cliente concluido");
+    setDraftStatus("Perfil de cliente concluído");
   }
 
   function handleImagePreview(file?: File) {
@@ -330,7 +330,7 @@ function ProfileStep({
           <Textarea
             value={draft.profileNote}
             onChange={(event) => onChange("profileNote", event.target.value)}
-            placeholder="Ex.: Costumo procurar profissionais para manutencao do apartamento e pequenos reparos."
+            placeholder="Ex.: Costumo procurar profissionais para manutenção do apartamento e pequenos reparos."
           />
           <FieldHint>{draft.profileNote.length}/240 caracteres</FieldHint>
           <InlineError message={errors.profileNote} />
@@ -477,15 +477,15 @@ function ReviewStep({ draft, progress, errors }: { draft: ClientOnboardingDraft;
         </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <SummaryItem icon={<UserRound size={18} />} label="Nome" value={draft.fullName || "Nao informado"} />
-        <SummaryItem icon={<MapPin size={18} />} label="Localizacao" value={`${draft.neighborhood || "Bairro nao informado"}, ${draft.city || "cidade nao informada"}`} />
+        <SummaryItem icon={<UserRound size={18} />} label="Nome" value={draft.fullName || "Não informado"} />
+        <SummaryItem icon={<MapPin size={18} />} label="Localização" value={`${draft.neighborhood || "Bairro não informado"}, ${draft.city || "cidade não informada"}`} />
         <SummaryItem icon={<Heart size={18} />} label="Categorias favoritas" value={`${draft.favoriteCategories.length} selecionada(s)`} />
-        <SummaryItem icon={<Check size={18} />} label="Verificacao facial" value={draft.facialEnrollment.status ? draft.facialEnrollment.status.replace("_", " ") : "Opcional"} />
+        <SummaryItem icon={<Check size={18} />} label="Verificação facial" value={draft.facialEnrollment.status ? draft.facialEnrollment.status.replace("_", " ") : "Opcional"} />
         <SummaryItem icon={<Check size={18} />} label="Interesses salvos" value={draft.serviceInterests.join(", ") || "Nenhum interesse informado"} />
       </div>
       {Object.values(errors).length ? (
         <div className="rounded-[8px] border border-danger/30 bg-danger-soft p-4 text-sm font-semibold text-danger">
-          Revise os campos obrigatorios antes de finalizar.
+          Revise os campos obrigatórios antes de finalizar.
         </div>
       ) : null}
     </div>
@@ -528,12 +528,12 @@ function InterestEditor({
 
   return (
     <Field>
-      <Label>Servicos de interesse</Label>
+      <Label>Serviços de interesse</Label>
       <div className="flex flex-col gap-3 sm:flex-row">
         <Input
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          placeholder="Ex.: pintura, reparo eletrico, montagem de moveis"
+          placeholder="Ex.: pintura, reparo elétrico, montagem de móveis"
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               event.preventDefault();
@@ -595,7 +595,7 @@ function getInitialDraftState() {
   if (typeof window === "undefined") {
     return {
       draft: defaultClientOnboardingDraft,
-      status: "Rascunho nao salvo",
+      status: "Rascunho não salvo",
     };
   }
 
@@ -604,7 +604,7 @@ function getInitialDraftState() {
   if (!storedDraft) {
     return {
       draft: defaultClientOnboardingDraft,
-      status: "Rascunho nao salvo",
+      status: "Rascunho não salvo",
     };
   }
 
@@ -616,7 +616,7 @@ function getInitialDraftState() {
   } catch {
     return {
       draft: defaultClientOnboardingDraft,
-      status: "Nao foi possivel recuperar o rascunho",
+      status: "Não foi possível recuperar o rascunho",
     };
   }
 }

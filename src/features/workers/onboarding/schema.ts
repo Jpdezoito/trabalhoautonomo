@@ -23,17 +23,17 @@ export const workerOnboardingDraftSchema = z.object({
   fullName: z.string().min(3, "Informe seu nome completo."),
   profilePhotoPreview: z.string().optional(),
   coverImagePreview: z.string().optional(),
-  publicName: z.string().min(2, "Informe o nome que sera exibido no perfil."),
+  publicName: z.string().min(2, "Informe o nome que será exibido no perfil."),
   professionTitle: z.string().min(3, "Informe seu titulo profissional."),
   categorySlug: z.string().min(1, "Escolha uma categoria principal."),
   additionalCategorySlugs: z.array(z.string().min(1)),
-  services: z.array(z.string().min(2)).min(1, "Adicione pelo menos um servico."),
-  startingPrice: z.string().min(2, "Informe um preco inicial ou criterio de orcamento."),
+  services: z.array(z.string().min(2)).min(1, "Adicione pelo menos um serviço."),
+  startingPrice: z.string().min(2, "Informe um preço inicial ou criterio de orçamento."),
   city: z.string().min(2, "Informe sua cidade."),
   neighborhood: z.string().min(2, "Informe seu bairro base."),
-  serviceAreas: z.array(z.string().min(2)).min(1, "Adicione pelo menos uma area atendida."),
-  workAreaSummary: z.string().min(10, "Explique como e onde voce atende."),
-  description: z.string().min(40, "Descreva sua experiencia com pelo menos 40 caracteres."),
+  serviceAreas: z.array(z.string().min(2)).min(1, "Adicione pelo menos uma área atendida."),
+  workAreaSummary: z.string().min(10, "Explique como e onde você atende."),
+  description: z.string().min(40, "Descreva sua experiência com pelo menos 40 caracteres."),
   whatsapp: z.string().min(10, "Informe um WhatsApp valido."),
   phone: z.string().min(10, "Informe um telefone valido."),
   email: z.string().email("Informe um e-mail valido."),
@@ -110,7 +110,7 @@ export const stepSchemas = {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ["addressProofPreview"],
-          message: "Envie o comprovante de endereco.",
+          message: "Envie o comprovante de endereço.",
         });
       }
 
@@ -126,7 +126,7 @@ export const stepSchemas = {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ["verificationConsentAccepted"],
-          message: "Aceite o consentimento de verificacao.",
+          message: "Aceite o consentimento de verificação.",
         });
       }
 
@@ -134,7 +134,7 @@ export const stepSchemas = {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ["facialEnrollment"],
-          message: "Aceite o consentimento para registrar a verificacao facial.",
+          message: "Aceite o consentimento para registrar a verificação facial.",
         });
       }
 
@@ -142,7 +142,7 @@ export const stepSchemas = {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ["facialEnrollment"],
-          message: "Capture ou envie uma imagem para concluir a verificacao facial.",
+          message: "Capture ou envie uma imagem para concluir a verificação facial.",
         });
       }
     }),
@@ -161,7 +161,7 @@ export const stepSchemas = {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["portfolio"],
-        message: "Inclua pelo menos uma imagem com voce no local ou junto ao trabalho, quando aplicavel.",
+        message: "Inclua pelo menos uma imagem com você no local ou junto ao trabalho, quando aplicável.",
       });
     }
   }),
@@ -190,7 +190,7 @@ export const stepSchemas = {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["addressProofPreview"],
-        message: "Envie o comprovante de endereco.",
+        message: "Envie o comprovante de endereço.",
       });
     }
 
@@ -198,7 +198,7 @@ export const stepSchemas = {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["verificationConsentAccepted"],
-        message: "Aceite os termos e consentimentos obrigatorios.",
+        message: "Aceite os termos e consentimentos obrigatórios.",
       });
     }
 
@@ -206,7 +206,7 @@ export const stepSchemas = {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["facialEnrollment"],
-        message: "Conclua a verificacao facial.",
+        message: "Conclua a verificação facial.",
       });
     }
 

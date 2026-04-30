@@ -12,7 +12,7 @@ export function AdminUsersTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Usuarios da plataforma</CardTitle>
+        <CardTitle>Usuários da plataforma</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -40,7 +40,7 @@ export function AdminWorkersTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Profissionais e verificacao de identidade</CardTitle>
+        <CardTitle>Profissionais e verificação de identidade</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -56,9 +56,9 @@ export function AdminWorkersTable() {
                     <p className="mt-1 text-sm text-muted">{worker.role} - {worker.neighborhood}, {worker.city}</p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant={worker.available ? "success" : "warning"}>{worker.available ? "Disponivel" : "Pausado"}</Badge>
+                    <Badge variant={worker.available ? "success" : "warning"}>{worker.available ? "Disponível" : "Pausado"}</Badge>
                     <Badge variant={trustStatus === "verificado" ? "success" : trustStatus === "rejeitado" ? "danger" : "warning"}>
-                      {trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em analise"}
+                      {trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em análise"}
                     </Badge>
                     <LinkButton href={`/admin/preview/profissional/${worker.slug}`} variant="outline" size="sm">
                       Preview
@@ -70,7 +70,7 @@ export function AdminWorkersTable() {
                       aria-expanded={isOpen}
                       onClick={() => setOpenWorkerSlug(isOpen ? null : worker.slug)}
                     >
-                      {isOpen ? "Ocultar revisao" : "Revisar"}
+                      {isOpen ? "Ocultar revisão" : "Revisar"}
                     </Button>
                   </div>
                 </div>
@@ -79,10 +79,10 @@ export function AdminWorkersTable() {
                   <div className="grid gap-4 rounded-[8px] border border-border bg-surface-muted p-4 lg:grid-cols-[1fr_auto]">
                     <div className="grid gap-3 sm:grid-cols-2">
                       <VerificationDetail label="Profissional" value={worker.name} />
-                      <VerificationDetail label="Servico" value={worker.role} />
-                      <VerificationDetail label="Regiao" value={`${worker.neighborhood}, ${worker.city}`} />
-                      <VerificationDetail label="Disponibilidade" value={worker.available ? "Disponivel" : "Pausado"} />
-                      <VerificationDetail label="Status da conta" value={trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em analise"} />
+                      <VerificationDetail label="Serviço" value={worker.role} />
+                      <VerificationDetail label="Região" value={`${worker.neighborhood}, ${worker.city}`} />
+                      <VerificationDetail label="Disponibilidade" value={worker.available ? "Disponível" : "Pausado"} />
+                      <VerificationDetail label="Status da conta" value={trustStatus === "verificado" ? "Conta verificada" : trustStatus === "rejeitado" ? "Rejeitado" : "Em análise"} />
                       <VerificationDetail label="Origem" value="Perfil de teste do marketplace" />
                     </div>
                     <div className="flex flex-wrap items-start gap-2 lg:justify-end">
@@ -169,7 +169,7 @@ export function AdminModerationTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Fila de moderacao</CardTitle>
+        <CardTitle>Fila de moderação</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -193,7 +193,7 @@ export function AdminModerationTable() {
                       aria-expanded={isOpen}
                       onClick={() => setOpenCaseId(isOpen ? null : item.id)}
                     >
-                      {isOpen ? "Ocultar analise" : "Analisar"}
+                      {isOpen ? "Ocultar análise" : "Analisar"}
                     </Button>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export function AdminModerationTable() {
                       <VerificationDetail label="Fila" value={item.queue} />
                       <VerificationDetail label="Motivo" value={item.reason} />
                       <VerificationDetail label="Status" value={getModerationLabel(decision)} />
-                      <VerificationDetail label="Origem" value="Dados de teste da moderacao" />
+                      <VerificationDetail label="Origem" value="Dados de teste da moderação" />
                     </div>
                     <div className="flex flex-wrap items-start gap-2 lg:justify-end">
                       <Button type="button" variant="outline" size="sm" onClick={() => updateCaseStatus(item.id, "approved")}>
@@ -243,7 +243,7 @@ function getModerationLabel(decision: ModerationDecision) {
   if (decision === "approved") return "Liberado";
   if (decision === "rejected") return "Rejeitado";
   if (decision === "needs_changes") return "Ajuste solicitado";
-  if (decision === "in_review") return "Em analise";
+  if (decision === "in_review") return "Em análise";
 
   return "Aberto";
 }
@@ -262,7 +262,7 @@ export function AdminVerificationTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Verificacao de identidade dos perfis</CardTitle>
+        <CardTitle>Verificação de identidade dos perfis</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -277,12 +277,12 @@ export function AdminVerificationTable() {
                     <p className="mt-1 text-sm text-muted">{item.category} - {item.city}</p>
                     <p className="mt-1 text-xs font-bold uppercase tracking-normal text-primary">Captura facial enviada em {item.submittedAt}</p>
                     <p className="mt-1 text-sm text-muted">
-                      Origem: {item.captureSource === "webcam" ? "Verificacao facial por webcam" : "Upload seguro"} | Tentativas: {item.retryCount}
+                      Origem: {item.captureSource === "webcam" ? "Verificação facial por webcam" : "Upload seguro"} | Tentativas: {item.retryCount}
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant={item.status === "approved" ? "success" : item.status === "pending" ? "warning" : "info"}>
-                      {item.status === "approved" ? "Aprovado" : item.status === "pending" ? "Em analise" : "Rejeitado"}
+                      {item.status === "approved" ? "Aprovado" : item.status === "pending" ? "Em análise" : "Rejeitado"}
                     </Badge>
                     <Button
                       type="button"
@@ -291,7 +291,7 @@ export function AdminVerificationTable() {
                       aria-expanded={isOpen}
                       onClick={() => setOpenVerificationId(isOpen ? null : item.id)}
                     >
-                      {isOpen ? "Ocultar verificacao" : "Ver verificacao"}
+                      {isOpen ? "Ocultar verificação" : "Ver verificação"}
                     </Button>
                   </div>
                 </div>
@@ -306,7 +306,7 @@ export function AdminVerificationTable() {
                       <VerificationDetail label="Origem" value={item.captureSource === "webcam" ? "Webcam" : "Upload seguro"} />
                       <VerificationDetail label="Tentativas" value={String(item.retryCount)} />
                       <VerificationDetail label="Ambiente" value="Dados de teste" />
-                      <VerificationDetail label="Captura facial" value="Registro simulado para validacao do fluxo administrativo." />
+                      <VerificationDetail label="Captura facial" value="Registro simulado para validação do fluxo administrativo." />
                     </div>
                     <div className="flex flex-wrap items-start gap-2 lg:justify-end">
                       <LinkButton href={routes.workerProfile(item.workerSlug)} variant="outline" size="sm">

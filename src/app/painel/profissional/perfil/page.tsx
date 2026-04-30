@@ -8,8 +8,8 @@ export default function WorkerProfileSettingsPage() {
 
   return (
     <DashboardShell
-      title="Perfil publico"
-      description="Atualize os dados que aparecem para clientes na busca e na pagina publica do profissional."
+      title="Perfil público"
+      description="Atualize os dados que aparecem para clientes na busca e na pagina pública do profissional."
       nav={[...workerNavigation]}
     >
       <WorkerProfileSettingsPanel worker={worker} />

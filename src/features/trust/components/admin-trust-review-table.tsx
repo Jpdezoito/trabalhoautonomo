@@ -22,7 +22,7 @@ export function AdminTrustReviewTable({ items }: { items: TrustReviewItem[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Confianca e protecao</CardTitle>
+        <CardTitle>Confiança e protecao</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -62,12 +62,12 @@ function AdminTrustReviewRow({ item }: { item: TrustReviewItem }) {
       const payload = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(payload.error || "Nao foi possivel revisar a solicitacao.");
+        throw new Error(payload.error || "Não foi possível revisar a solicitação.");
       }
 
-      setMessage("Revisao salva.");
+      setMessage("Revisão salva.");
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Falha ao salvar revisao.");
+      setError(requestError instanceof Error ? requestError.message : "Falha ao salvar revisão.");
     } finally {
       setBusy(false);
     }
@@ -92,23 +92,23 @@ function AdminTrustReviewRow({ item }: { item: TrustReviewItem }) {
           <Label>Status</Label>
           <select value={status} onChange={(event) => setStatus(event.target.value)} className="h-11 rounded-[8px] border border-border bg-surface px-3 text-sm">
             <option value="PENDING">Pendente</option>
-            <option value="IN_REVIEW">Em analise</option>
+            <option value="IN_REVIEW">Em análise</option>
             <option value="VERIFIED">Verificado</option>
             <option value="REJECTED">Rejeitado</option>
-            <option value="NEEDS_REVIEW">Revisao necessaria</option>
+            <option value="NEEDS_REVIEW">Revisão necessaria</option>
           </select>
         </Field>
         <Field>
-          <Label>Notas de revisao</Label>
-          <Textarea value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Detalhe o motivo, pedido de ajuste ou aprovacao." />
-          <FieldHint>Essas notas sao internas e nao aparecem no perfil publico.</FieldHint>
+          <Label>Notas de revisão</Label>
+          <Textarea value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Detalhe o motivo, pedido de ajuste ou aprovação." />
+          <FieldHint>Essas notas são internas e não aparecem no perfil público.</FieldHint>
         </Field>
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
         <Button type="button" variant="outline" size="sm" onClick={submitReview} disabled={busy}>
           {busy ? <LoaderCircle className="mr-2 animate-spin" size={16} /> : null}
-          Salvar revisao
+          Salvar revisão
         </Button>
         {message ? <span className="text-sm font-semibold text-success">{message}</span> : null}
         {error ? <span className="text-sm font-semibold text-danger">{error}</span> : null}
@@ -120,8 +120,8 @@ function AdminTrustReviewRow({ item }: { item: TrustReviewItem }) {
 function formatStatus(status: string) {
   if (status === "VERIFIED") return "Conta verificada";
   if (status === "REJECTED") return "Rejeitado";
-  if (status === "IN_REVIEW") return "Em analise";
-  if (status === "NEEDS_REVIEW") return "Revisao necessaria";
+  if (status === "IN_REVIEW") return "Em análise";
+  if (status === "NEEDS_REVIEW") return "Revisão necessaria";
 
   return "Pendente";
 }

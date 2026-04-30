@@ -18,8 +18,8 @@ export default function AdminReviewsPage() {
 
   return (
     <DashboardShell
-      title="Moderacao de avaliacoes"
-      description="Revise feedbacks enviados por clientes, publique conteudos adequados e oculte avaliacoes que precisam de analise."
+      title="Moderação de avaliações"
+      description="Revise feedbacks enviados por clientes, publique conteúdos adequados e oculte avaliações que precisam de análise."
       nav={[...adminNavigation]}
     >
       <ReviewModerationTable reviews={reviews} />

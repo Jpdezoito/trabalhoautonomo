@@ -12,13 +12,13 @@ export function WorkerProfileSettingsPanel({ worker }: { worker: Worker }) {
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
       <Card>
         <CardHeader>
-          <CardTitle>Dados publicos</CardTitle>
+          <CardTitle>Dados públicos</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="grid gap-4">
             <FieldGroup>
               <Field>
-                <Label>Nome publico</Label>
+                <Label>Nome público</Label>
                 <Input defaultValue={worker.name} />
               </Field>
               <Field>
@@ -31,7 +31,7 @@ export function WorkerProfileSettingsPanel({ worker }: { worker: Worker }) {
               <Input defaultValue={worker.headline} />
             </Field>
             <Field>
-              <Label>Descricao completa</Label>
+              <Label>Descrição completa</Label>
               <Textarea defaultValue={worker.bio} className="min-h-40" />
             </Field>
             <FieldGroup>
@@ -66,7 +66,7 @@ export function WorkerServicesPanel({ worker }: { worker: Worker }) {
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
       <Card>
         <CardHeader>
-          <CardTitle>Servicos e precos</CardTitle>
+          <CardTitle>Serviços e preços</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="grid gap-4">
@@ -82,19 +82,19 @@ export function WorkerServicesPanel({ worker }: { worker: Worker }) {
                 </Select>
               </Field>
               <Field>
-                <Label>Preco inicial</Label>
+                <Label>Preço inicial</Label>
                 <Input defaultValue={worker.startingPrice} />
               </Field>
             </FieldGroup>
             <Field>
-              <Label>Servicos oferecidos</Label>
+              <Label>Serviços oferecidos</Label>
               <Textarea defaultValue={worker.services.join("\n")} className="min-h-36" />
             </Field>
             <Field>
-              <Label>Areas atendidas</Label>
+              <Label>Áreas atendidas</Label>
               <Textarea defaultValue={worker.areas.join("\n")} />
             </Field>
-            <Button type="button">Atualizar servicos</Button>
+            <Button type="button">Atualizar serviços</Button>
           </form>
         </CardContent>
       </Card>
@@ -109,7 +109,7 @@ export function WorkerServicesPanel({ worker }: { worker: Worker }) {
             ))}
           </div>
           <div className="mt-5 grid gap-3">
-            <MetricLine icon={<WalletCards size={18} />} label="Preco inicial" value={worker.startingPrice} />
+            <MetricLine icon={<WalletCards size={18} />} label="Preço inicial" value={worker.startingPrice} />
             <MetricLine icon={<MapPin size={18} />} label="Cobertura" value={`${worker.areas.length} bairros cadastrados`} />
           </div>
         </CardContent>
@@ -145,8 +145,8 @@ export function WorkerAvailabilityPanel({ worker }: { worker: Worker }) {
               <Textarea defaultValue="Segunda a sexta, das 8h as 18h. Sabados sob agendamento." />
             </Field>
             <Field>
-              <Label>Observacoes para clientes</Label>
-              <Textarea defaultValue="Informe fotos, medidas e urgencia para facilitar o orcamento." />
+              <Label>Observações para clientes</Label>
+              <Textarea defaultValue="Informe fotos, medidas e urgência para facilitar o orçamento." />
             </Field>
             <Button type="button">Salvar disponibilidade</Button>
           </form>
@@ -159,8 +159,8 @@ export function WorkerAvailabilityPanel({ worker }: { worker: Worker }) {
         <CardContent>
           <div className="grid gap-3">
             <MetricLine icon={<CalendarClock size={18} />} label="Status" value={worker.available ? "Recebendo pedidos" : "Agenda pausada"} />
-            <MetricLine icon={<Bell size={18} />} label="Alertas" value="Notificar novos orcamentos" />
-            <MetricLine icon={<Eye size={18} />} label="Visibilidade" value="Perfil publico ativo" />
+            <MetricLine icon={<Bell size={18} />} label="Alertas" value="Notificar novos orçamentos" />
+            <MetricLine icon={<Eye size={18} />} label="Visibilidade" value="Perfil público ativo" />
           </div>
         </CardContent>
       </Card>
@@ -173,18 +173,18 @@ export function WorkerReviewsPanel({ worker }: { worker: Worker }) {
     <div className="grid gap-6 xl:grid-cols-[320px_1fr]">
       <Card>
         <CardContent>
-          <p className="text-sm font-bold text-muted">Nota media</p>
+          <p className="text-sm font-bold text-muted">Nota média</p>
           <p className="mt-2 text-5xl font-black text-foreground">{formatRating(worker.rating)}</p>
-          <p className="mt-2 text-sm text-muted">{worker.reviewsCount} avaliacoes publicas</p>
+          <p className="mt-2 text-sm text-muted">{worker.reviewsCount} avaliações públicas</p>
           <div className="mt-5 rounded-[8px] bg-warning-soft p-4 text-warning">
             <Star className="fill-current" size={22} />
-            <p className="mt-2 text-sm font-bold">Responder rapido e manter portfolio atualizado ajuda a melhorar a confianca.</p>
+            <p className="mt-2 text-sm font-bold">Responder rápido e manter portfólio atualizado ajuda a melhorar a confiança.</p>
           </div>
         </CardContent>
       </Card>
       <Card>
         <CardHeader>
-          <CardTitle>Avaliacoes recentes</CardTitle>
+          <CardTitle>Avaliações recentes</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
@@ -209,19 +209,19 @@ export function WorkerReviewsPanel({ worker }: { worker: Worker }) {
 
 export function WorkerNotificationsPanel({ worker }: { worker: Worker }) {
   const notifications = [
-    ["Novo orcamento", "Um cliente pediu retorno para servico na sua regiao."],
-    ["Perfil publico", `${worker.name}, seu perfil recebeu novas visualizacoes esta semana.`],
-    ["Portfolio", "Fotos com descricao clara aumentam a chance de contato."],
+    ["Novo orçamento", "Um cliente pediu retorno para serviço na sua região."],
+    ["Perfil público", `${worker.name}, seu perfil recebeu novas visualizações esta semana.`],
+    ["Portfólio", "Fotos com descrição clara aumentam a chance de contato."],
     [
-      "Verificacao de identidade",
-      worker.verified ? "Sua conta verificada esta ativa na plataforma." : "Envie nova verificacao para analise de identidade.",
+      "Verificação de identidade",
+      worker.verified ? "Sua conta verificada está ativa na plataforma." : "Envie nova verificação para análise de identidade.",
     ],
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Central de notificacoes</CardTitle>
+        <CardTitle>Central de notificações</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -231,7 +231,7 @@ export function WorkerNotificationsPanel({ worker }: { worker: Worker }) {
                 <p className="font-black text-foreground">{title}</p>
                 <p className="mt-1 text-sm leading-6 text-muted">{text}</p>
               </div>
-              <Badge variant="info">Nao lida</Badge>
+              <Badge variant="info">Não lida</Badge>
             </div>
           ))}
         </div>
@@ -263,14 +263,14 @@ export function WorkerAccountSettingsPanel() {
       </Card>
       <Card>
         <CardHeader>
-          <CardTitle>Seguranca e privacidade</CardTitle>
+          <CardTitle>Segurança e privacidade</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-3">
           <MetricLine icon={<ShieldCheck size={18} />} label="Senha" value="Atualizada recentemente" />
-          <MetricLine icon={<Eye size={18} />} label="Perfil" value="Visivel na busca publica" />
-          <MetricLine icon={<Bell size={18} />} label="Notificacoes" value="E-mail e plataforma ativos" />
-          <MetricLine icon={<ShieldCheck size={18} />} label="Status da verificacao" value="Verificacao de identidade disponivel" />
+          <MetricLine icon={<Eye size={18} />} label="Perfil" value="Visível na busca pública" />
+          <MetricLine icon={<Bell size={18} />} label="Notificações" value="E-mail e plataforma ativos" />
+          <MetricLine icon={<ShieldCheck size={18} />} label="Status da verificação" value="Verificação de identidade disponível" />
         </div>
       </CardContent>
       </Card>
@@ -282,16 +282,16 @@ function ProfileAside({ worker }: { worker: Worker }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Resumo publico</CardTitle>
+        <CardTitle>Resumo público</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
           <MetricLine icon={<Eye size={18} />} label="Status" value="Publicado" />
-          <MetricLine icon={<Star size={18} />} label="Avaliacao" value={`${formatRating(worker.rating)} de 5`} />
+          <MetricLine icon={<Star size={18} />} label="Avaliação" value={`${formatRating(worker.rating)} de 5`} />
           <MetricLine
             icon={<ShieldCheck size={18} />}
-            label="Status da verificacao"
-            value={worker.verified ? "Aprovado" : "Em analise"}
+            label="Status da verificação"
+            value={worker.verified ? "Aprovado" : "Em análise"}
           />
         </div>
       </CardContent>

@@ -18,10 +18,10 @@ export default async function ClientRegisterPage() {
         <div className="mb-8 max-w-4xl">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-primary">Cadastro de cliente</p>
           <h1 className="mt-2 text-4xl font-black tracking-tight text-foreground sm:text-5xl">
-            Configure seu perfil para encontrar profissionais mais rapido.
+            Configure seu perfil para encontrar profissionais mais rápido.
           </h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-            Informe sua localizacao, interesses e contatos. O fluxo e simples, e seu rascunho fica salvo neste navegador.
+            Informe sua localização, interesses e contatos. O fluxo e simples, e seu rascunho fica salvo neste navegador.
           </p>
         </div>
         <ClientOnboardingFlow />

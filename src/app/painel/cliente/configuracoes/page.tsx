@@ -5,8 +5,8 @@ import { ClientSettingsPanel } from "@/features/settings";
 export default function ClientSettingsPage() {
   return (
     <DashboardShell
-      title="Configuracoes"
-      description="Gerencie conta, senha, contato, notificacoes e privacidade do seu perfil de cliente."
+      title="Configurações"
+      description="Gerencie conta, senha, contato, notificações e privacidade do seu perfil de cliente."
       nav={[...clientNavigation]}
     >
       <ClientSettingsPanel />

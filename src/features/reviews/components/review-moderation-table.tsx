@@ -63,8 +63,8 @@ export function ReviewModerationTable({ reviews }: { reviews: ModerationReview[]
                   {review.author || "Cliente sem nome"} avaliou {review.workerName} em {review.date}
                 </p>
                 <div className="mt-2 grid gap-1 text-xs font-semibold text-muted">
-                  <span>E-mail: {review.email || "Nao informado"}</span>
-                  <span>Exibir nome publicamente: {review.showName ? "Sim" : "Nao"}</span>
+                  <span>E-mail: {review.email || "Não informado"}</span>
+                  <span>Exibir nome publicamente: {review.showName ? "Sim" : "Não"}</span>
                 </div>
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">{review.comment}</p>
               </div>

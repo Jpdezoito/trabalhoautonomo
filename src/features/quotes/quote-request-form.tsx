@@ -101,7 +101,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
   const [protocol, setProtocol] = useState("");
   const [confirmedEstimate, setConfirmedEstimate] = useState<QuotePricingEstimate | null>(null);
 
-  const message = `Ola, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de solicitar um orcamento.`;
+  const message = `Ola, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de solicitar um orçamento.`;
   const estimate = estimateQuotePrice({
     serviceType: form.serviceType,
     description: form.description,
@@ -138,7 +138,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data?.message ?? "Nao foi possivel enviar o pedido.");
+        throw new Error(data?.message ?? "Não foi possível enviar o pedido.");
       }
 
       setProtocol(data.code ?? "ORC-DEMO");
@@ -168,7 +168,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
   return (
     <form className="mt-5 grid min-w-0 gap-4">
       <Field>
-        <Label>Servico desejado</Label>
+        <Label>Serviço desejado</Label>
         <Input
           value={form.serviceType}
           onChange={(event) => updateField("serviceType", event.target.value)}
@@ -274,11 +274,11 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
       </Field>
 
       <Field>
-        <Label>Descricao</Label>
+        <Label>Descrição</Label>
         <Textarea
           value={form.description}
           onChange={(event) => updateField("description", event.target.value)}
-          placeholder="Inclua medidas, urgencia, fotos disponiveis e melhor horario para contato."
+          placeholder="Inclua medidas, urgência, fotos disponíveis e melhor horario para contato."
           ref={descriptionRef}
           onKeyDown={e => handleEnterNav(e)}
         />
@@ -286,7 +286,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
       </Field>
 
       <Field>
-        <Label>Observacoes extras</Label>
+        <Label>Observações extras</Label>
         <Textarea
           value={form.extraNotes}
           onChange={(event) => updateField("extraNotes", event.target.value)}
@@ -300,7 +300,7 @@ export function QuoteRequestForm({ worker }: QuoteRequestFormProps) {
       <QuoteEstimateSummary estimate={estimate} />
 
       {status === "error" && !Object.keys(errors).length ? (
-        <p className="rounded-[8px] bg-danger-soft p-3 text-sm font-bold text-danger">Nao foi possivel enviar o pedido agora. Tente novamente.</p>
+        <p className="rounded-[8px] bg-danger-soft p-3 text-sm font-bold text-danger">Não foi possível enviar o pedido agora. Tente novamente.</p>
       ) : null}
 
       <Button type="button" className="w-full" onClick={() => void submitQuote()} disabled={status === "submitting"}>
@@ -318,10 +318,10 @@ function QuoteEstimateSummary({ estimate }: { estimate: QuotePricingEstimate }) 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="text-sm font-black text-foreground">Estimativa AutonomoPro</p>
-          <p className="mt-1 text-xs font-semibold text-muted">Faixa sugerida antes da validacao final de escopo e materiais.</p>
+          <p className="mt-1 text-xs font-semibold text-muted">Faixa sugerida antes da validação final de escopo e materiais.</p>
         </div>
         <Badge variant={estimate.confidence === "alta" ? "success" : estimate.confidence === "media" ? "info" : "warning"}>
-          Confianca {estimate.confidence}
+          Confiança {estimate.confidence}
         </Badge>
       </div>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">

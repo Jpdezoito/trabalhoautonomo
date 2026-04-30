@@ -18,7 +18,7 @@ export default function WorkerQuotesPage() {
     serviceType: quote.service,
     city: quote.location.split(", ")[1] ?? worker.city,
     neighborhood: quote.location.split(", ")[0] ?? worker.neighborhood,
-    description: `Pedido de orcamento para ${quote.service.toLowerCase()} com necessidade de retorno do profissional.`,
+    description: `Pedido de orçamento para ${quote.service.toLowerCase()} com necessidade de retorno do profissional.`,
     extraNotes: "Cliente prefere contato pelo WhatsApp.",
     preferredDate: "",
     status: mapQuoteStatus(quote.status),
@@ -27,7 +27,7 @@ export default function WorkerQuotesPage() {
 
   return (
     <DashboardShell
-      title="Orcamentos recebidos"
+      title="Orçamentos recebidos"
       description="Veja pedidos enviados por clientes, acompanhe detalhes e atualize o status do atendimento."
       nav={[...workerNavigation]}
     >
@@ -39,6 +39,6 @@ export default function WorkerQuotesPage() {
 function mapQuoteStatus(status: string): QuoteRequestRecord["status"] {
   if (status === "Respondido") return "IN_CONTACT";
   if (status === "Aprovado") return "ACCEPTED";
-  if (status === "Concluido") return "COMPLETED";
+  if (status === "Concluído") return "COMPLETED";
   return "OPEN";
 }

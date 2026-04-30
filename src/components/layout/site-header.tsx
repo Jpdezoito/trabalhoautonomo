@@ -16,22 +16,22 @@ export async function SiteHeader() {
   const desktopNav =
     role === "ADMIN" || role === "SUPER_ADMIN"
       ? [
-          { href: routes.admin, label: "Administracao" },
+          { href: routes.admin, label: "Administração" },
           { href: routes.adminClients, label: "Clientes" },
           { href: routes.adminWorkers, label: "Profissionais" },
-          { href: routes.adminModeration, label: "Moderacao" },
+          { href: routes.adminModeration, label: "Moderação" },
           { href: routes.adminVerification, label: "Verificacoes" },
         ]
       : role === "WORKER"
         ? [
             { href: routes.workerDashboard, label: "Meu painel" },
-            { href: routes.workerQuotes, label: "Orcamentos" },
-            { href: routes.workerPortfolio, label: "Portfolio" },
+            { href: routes.workerQuotes, label: "Orçamentos" },
+            { href: routes.workerPortfolio, label: "Portfólio" },
           ]
         : role === "CLIENT"
           ? [
               { href: routes.clientDashboard, label: "Meu painel" },
-              { href: routes.clientQuotes, label: "Orcamentos" },
+              { href: routes.clientQuotes, label: "Orçamentos" },
               { href: routes.clientFavorites, label: "Favoritos" },
           ]
           : publicNavigation;

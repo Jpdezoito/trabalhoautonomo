@@ -18,8 +18,8 @@ export default function WorkerPortfolioPage() {
 
   return (
     <DashboardShell
-      title="Portfolio profissional"
-      description="Gerencie imagens, titulos, descricoes, ordem e destaque dos trabalhos exibidos no seu perfil publico."
+      title="Portfólio profissional"
+      description="Gerencie imagens, titulos, descricoes, ordem e destaque dos trabalhos exibidos no seu perfil público."
       nav={[...workerNavigation]}
     >
       <PortfolioManager initialItems={initialItems} />

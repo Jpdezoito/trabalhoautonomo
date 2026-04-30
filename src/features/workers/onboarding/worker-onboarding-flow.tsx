@@ -45,12 +45,12 @@ import { cn } from "@/lib/utils";
 const storageKey = "autonomopro.worker-onboarding-draft";
 
 const steps: OnboardingStep[] = [
-  { id: "account", title: "Conta", description: "Dados da conta, nome publico e contato." },
-  { id: "services", title: "Atuacao", description: "Categorias, servicos e area de trabalho." },
-  { id: "verification", title: "Identidade", description: "Documento, endereco, captura facial e consentimentos." },
-  { id: "activity", title: "Prova de atividade", description: "Portfolio real e evidencias de trabalho." },
-  { id: "qualifications", title: "Qualificacoes", description: "Experiencia, formacao e certificados opcionais." },
-  { id: "review", title: "Revisao", description: "Confira os requisitos e envie para analise." },
+  { id: "account", title: "Conta", description: "Dados da conta, nome público e contato." },
+  { id: "services", title: "Atuação", description: "Categorias, serviços e área de trabalho." },
+  { id: "verification", title: "Identidade", description: "Documento, endereço, captura facial e consentimentos." },
+  { id: "activity", title: "Prova de atividade", description: "Portfólio real e evidências de trabalho." },
+  { id: "qualifications", title: "Qualificações", description: "Experiência, formação e certificados opcionais." },
+  { id: "review", title: "Revisão", description: "Confira os requisitos e envie para análise." },
 ];
 
 type DraftKey = keyof WorkerOnboardingDraft;
@@ -154,7 +154,7 @@ export function WorkerOnboardingFlow() {
       return;
     }
 
-    setDraftStatus("Perfil enviado para analise");
+    setDraftStatus("Perfil enviado para análise");
   }
 
   function handleImagePreview(key: "profilePhotoPreview" | "coverImagePreview" | "identityDocumentPreview" | "addressProofPreview", file?: File) {
@@ -315,7 +315,7 @@ export function WorkerOnboardingFlow() {
               {activeStep.id === "review" ? (
                 <Button type="button" onClick={submitForReview}>
                   <Send className="mr-2" size={18} />
-                  Enviar para analise
+                  Enviar para análise
                 </Button>
               ) : (
                 <Button type="button" onClick={goNext} ref={activeStep.id === "account" ? continueButtonRef : undefined}>
@@ -390,7 +390,7 @@ function AccountStep({
           <InlineError message={errors.fullName} />
         </Field>
         <Field>
-          <Label>Nome publico</Label>
+          <Label>Nome público</Label>
           <Input
             ref={publicNameRef}
             value={draft.publicName}
@@ -483,7 +483,7 @@ function ServicesStep({
           <InlineError message={errors.categorySlug} />
         </Field>
         <Field>
-          <Label>Preco inicial</Label>
+          <Label>Preço inicial</Label>
           <Input value={draft.startingPrice} onChange={(event) => onChange("startingPrice", event.target.value)} placeholder="Ex.: Atendimento a partir de R$ 90" />
           <InlineError message={errors.startingPrice} />
         </Field>
@@ -496,7 +496,7 @@ function ServicesStep({
         onRemove={(value) => onRemoveItem("additionalCategorySlugs", value)}
       />
       <TagEditor
-        label="Lista de servicos"
+        label="Lista de serviços"
         placeholder="Ex.: Instalacao de tomadas"
         values={draft.services}
         error={errors.services}
@@ -530,7 +530,7 @@ function ServicesStep({
         </Field>
       </FieldGroup>
       <TagEditor
-        label="Area de atendimento"
+        label="Área de atendimento"
         placeholder="Ex.: Mooca"
         values={draft.serviceAreas}
         error={errors.serviceAreas}
@@ -539,16 +539,16 @@ function ServicesStep({
         onRemove={(value) => onRemoveItem("serviceAreas", value)}
       />
       <Field>
-        <Label>Como voce atende essa regiao</Label>
+        <Label>Como você atende essa região</Label>
         <Input value={draft.workAreaSummary} onChange={(event) => onChange("workAreaSummary", event.target.value)} placeholder="Ex.: Atendo em campo, por bairro e com deslocamento proprio." />
         <InlineError message={errors.workAreaSummary} />
       </Field>
       <Field>
-        <Label>Descricao profissional</Label>
+        <Label>Descrição profissional</Label>
         <Textarea
           value={draft.description}
           onChange={(event) => onChange("description", event.target.value)}
-          placeholder="Conte sua experiencia, tipos de servico, diferenciais, garantia, ferramentas e forma de atendimento."
+          placeholder="Conte sua experiência, tipos de serviço, diferenciais, garantia, ferramentas e forma de atendimento."
         />
         <FieldHint>{draft.description.length}/40 caracteres minimos</FieldHint>
         <InlineError message={errors.description} />
@@ -592,20 +592,20 @@ function VerificationStep({
       <Field>
         <Label>Referencia do documento de identidade</Label>
         <Input value={draft.identityDocumentReference} onChange={(event) => onChange("identityDocumentReference", event.target.value)} placeholder="Ex.: CPF, CNH, RG ou protocolo interno" />
-        <FieldHint>Esse dado e privado e serve apenas para rastreio interno da verificacao.</FieldHint>
+        <FieldHint>Esse dado é privado e serve apenas para rastreio interno da verificação.</FieldHint>
         <InlineError message={errors.identityDocumentReference} />
       </Field>
 
       <div className="grid gap-4 md:grid-cols-2">
         <UploadPreview
           label="Documento de identidade"
-          helper="Imagem privada para revisao administrativa."
+          helper="Imagem privada para revisão administrativa."
           previewUrl={draft.identityDocumentPreview}
           icon={<FileText size={22} />}
           onChange={(file) => onImagePreview("identityDocumentPreview", file)}
         />
         <UploadPreview
-          label="Comprovante de endereco"
+          label="Comprovante de endereço"
           helper="Conta recente ou comprovante valido no mesmo municipio."
           previewUrl={draft.addressProofPreview}
           icon={<MapPin size={22} />}
@@ -619,14 +619,14 @@ function VerificationStep({
           <input type="checkbox" checked={draft.termsAccepted} onChange={(event) => onChange("termsAccepted", event.target.checked)} className="mt-1" />
           <span>
             <span className="block font-black text-foreground">Aceite dos termos</span>
-            <span className="mt-1 block leading-6 text-muted">Confirmo que li os termos da plataforma e entendo as regras de seguranca, publicacao e moderacao.</span>
+            <span className="mt-1 block leading-6 text-muted">Confirmo que li os termos da plataforma e entendo as regras de segurança, públicação e moderação.</span>
           </span>
         </label>
         <label className="flex items-start gap-3 rounded-[8px] border border-border bg-surface p-4 text-sm">
           <input type="checkbox" checked={draft.verificationConsentAccepted} onChange={(event) => onChange("verificationConsentAccepted", event.target.checked)} className="mt-1" />
           <span>
-            <span className="block font-black text-foreground">Consentimento para verificacao</span>
-            <span className="mt-1 block leading-6 text-muted">Autorizo a plataforma a analisar documento, endereco, captura facial e provas de atividade para confianca e protecao.</span>
+            <span className="block font-black text-foreground">Consentimento para verificação</span>
+            <span className="mt-1 block leading-6 text-muted">Autorizo a plataforma a analisar documento, endereço, captura facial e provas de atividade para confiança e protecao.</span>
           </span>
         </label>
       </div>
@@ -686,10 +686,10 @@ function ActivityStep({
             <div>
               <p className="font-black text-foreground">{rule.title}</p>
               <p className="mt-2 text-sm leading-6 text-muted">
-                Para publicar o perfil, envie no minimo {rule.minimumPortfolioImages} imagens reais de trabalhos executados. As regras mudam conforme a categoria.
+                Para publicar o perfil, envie no mínimo {rule.minimumPortfolioImages} imagens reais de trabalhos executados. As regras mudam conforme a categoria.
               </p>
             </div>
-            <Badge variant="info">Portfolio minimo: {rule.minimumPortfolioImages} imagens</Badge>
+            <Badge variant="info">Portfólio mínimo: {rule.minimumPortfolioImages} imagens</Badge>
           </div>
           <div className="mt-4 grid gap-2">
             {rule.evidenceGuidance.map((item) => (
@@ -704,15 +704,15 @@ function ActivityStep({
 
       <Card variant="muted" className="p-4">
         <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
-          <UploadPreview label="Imagem real do trabalho" helper="Adicione foto privada para analise e portfolio." previewUrl={previewUrl} icon={<ImagePlus size={22} />} onChange={(file) => file && setPreviewUrl(URL.createObjectURL(file))} />
+          <UploadPreview label="Imagem real do trabalho" helper="Adicione foto privada para análise e portfólio." previewUrl={previewUrl} icon={<ImagePlus size={22} />} onChange={(file) => file && setPreviewUrl(URL.createObjectURL(file))} />
           <div className="grid gap-4">
             <Field>
               <Label>Titulo da evidencia</Label>
-              <Input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Ex.: Troca completa de quadro eletrico" />
+              <Input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Ex.: Troca completa de quadro elétrico" />
             </Field>
             <Field>
-              <Label>Descricao</Label>
-              <Textarea value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Explique o que foi executado, local, contexto do servico e resultado." />
+              <Label>Descrição</Label>
+              <Textarea value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Explique o que foi executado, local, contexto do serviço e resultado." />
             </Field>
             <FieldGroup>
               <Field>
@@ -757,7 +757,7 @@ function ActivityStep({
                       {item.workerVisible ? <Badge variant="success">Profissional na imagem</Badge> : null}
                     </div>
                     <h3 className="mt-3 font-black text-foreground">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-muted">{item.description || "Sem descricao informada."}</p>
+                    <p className="mt-2 text-sm leading-6 text-muted">{item.description || "Sem descrição informada."}</p>
                   </div>
                   <button type="button" onClick={() => onRemoveItem(item.id)} className="rounded-[8px] border border-border p-2 text-danger">
                     <Trash2 size={16} />
@@ -771,7 +771,7 @@ function ActivityStep({
         <div className="rounded-[8px] border border-dashed border-border-strong bg-surface p-6 text-center">
           <ImagePlus className="mx-auto text-muted" size={30} />
           <p className="mt-3 font-black text-foreground">Nenhuma prova de atividade adicionada</p>
-          <p className="mt-2 text-sm text-muted">Perfis publicados precisam de no minimo 3 imagens reais do trabalho.</p>
+          <p className="mt-2 text-sm text-muted">Perfis publicados precisam de no mínimo 3 imagens reais do trabalho.</p>
         </div>
       )}
     </div>
@@ -825,16 +825,16 @@ function QualificationsStep({
     <div className="grid gap-6">
       <Card variant="muted">
         <CardContent>
-          <p className="font-black text-foreground">Qualificacoes opcionais</p>
+          <p className="font-black text-foreground">Qualificações opcionais</p>
           <p className="mt-2 text-sm leading-6 text-muted">
-            Formacao, cursos e certificados fortalecem o perfil, mas nao sao obrigatorios para todas as categorias. Use apenas o que realmente se aplica ao seu trabalho.
+            Formação, cursos e certificados fortalecem o perfil, mas não são obrigatórios para todas as categorias. Use apenas o que realmente se aplica ao seu trabalho.
           </p>
         </CardContent>
       </Card>
 
       <FieldGroup>
         <Field>
-          <Label>Anos de experiencia</Label>
+          <Label>Anos de experiência</Label>
           <Input value={draft.experienceYears} onChange={(event) => onChange("experienceYears", event.target.value)} placeholder="Ex.: 8" />
         </Field>
         <Field>
@@ -843,8 +843,8 @@ function QualificationsStep({
         </Field>
       </FieldGroup>
       <Field>
-        <Label>Experiencia comprovada</Label>
-        <Textarea value={draft.experienceSummary} onChange={(event) => onChange("experienceSummary", event.target.value)} placeholder="Ex.: Atuo ha 8 anos com manutencao predial, atendimento residencial e pequenos comerciais." />
+        <Label>Experiência comprovada</Label>
+        <Textarea value={draft.experienceSummary} onChange={(event) => onChange("experienceSummary", event.target.value)} placeholder="Ex.: Atuo ha 8 anos com manutenção predial, atendimento residencial e pequenos comerciais." />
       </Field>
       <FieldGroup>
         <Field>
@@ -852,14 +852,14 @@ function QualificationsStep({
           <Input value={draft.courseSummary} onChange={(event) => onChange("courseSummary", event.target.value)} placeholder="Ex.: NR10, instalacao de ar-condicionado, corte feminino" />
         </Field>
         <Field>
-          <Label>Faculdade ou instituicao</Label>
+          <Label>Faculdade ou instituição</Label>
           <Input value={draft.collegeName} onChange={(event) => onChange("collegeName", event.target.value)} placeholder="Opcional" />
         </Field>
       </FieldGroup>
       <FieldGroup>
         <Field>
           <Label>Registro ou licenca</Label>
-          <Input value={draft.licenseRegistrationNumber} onChange={(event) => onChange("licenseRegistrationNumber", event.target.value)} placeholder="Opcional, quando aplicavel" />
+          <Input value={draft.licenseRegistrationNumber} onChange={(event) => onChange("licenseRegistrationNumber", event.target.value)} placeholder="Opcional, quando aplicável" />
         </Field>
         <Field>
           <Label>MEI</Label>
@@ -879,13 +879,13 @@ function QualificationsStep({
 
       <Card variant="muted" className="p-4">
         <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
-          <UploadPreview label="Imagem do certificado" helper="Opcional, para revisao administrativa." previewUrl={previewUrl} icon={<FileBadge2 size={22} />} onChange={(file) => file && setPreviewUrl(URL.createObjectURL(file))} />
+          <UploadPreview label="Imagem do certificado" helper="Opcional, para revisão administrativa." previewUrl={previewUrl} icon={<FileBadge2 size={22} />} onChange={(file) => file && setPreviewUrl(URL.createObjectURL(file))} />
           <div className="grid gap-4">
             <FieldGroup>
               <Field>
                 <Label>Tipo</Label>
                 <Select value={type} onChange={(event) => setType(event.target.value as WorkerQualificationDraft["type"])}>
-                  <option value="education">Formacao</option>
+                  <option value="education">Formação</option>
                   <option value="course">Curso</option>
                   <option value="certification">Certificacao</option>
                   <option value="license">Licenca</option>
@@ -898,11 +898,11 @@ function QualificationsStep({
             </FieldGroup>
             <Field>
               <Label>Titulo</Label>
-              <Input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Ex.: NR10 basico" />
+              <Input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Ex.: NR10 básico" />
             </Field>
             <FieldGroup>
               <Field>
-                <Label>Instituicao</Label>
+                <Label>Instituição</Label>
                 <Input value={institution} onChange={(event) => setInstitution(event.target.value)} placeholder="Ex.: SENAI" />
               </Field>
               <Field>
@@ -928,7 +928,7 @@ function QualificationsStep({
                   {item.year ? <Badge variant="neutral">{item.year}</Badge> : null}
                 </div>
                 <p className="mt-3 font-black text-foreground">{item.title}</p>
-                <p className="mt-1 text-sm text-muted">{item.institution || "Instituicao nao informada"}</p>
+                <p className="mt-1 text-sm text-muted">{item.institution || "Instituição não informada"}</p>
                 {item.registrationNumber ? <p className="mt-1 text-xs font-bold uppercase tracking-normal text-primary">Registro: {item.registrationNumber}</p> : null}
               </div>
               <button type="button" onClick={() => onRemoveQualification(item.id)} className="rounded-[8px] border border-border p-2 text-danger">
@@ -957,12 +957,12 @@ function ReviewStep({
   const trustSignals = [
     { label: "Identidade verificada", ready: Boolean(draft.identityDocumentPreview) },
     { label: "Telefone verificado", ready: Boolean(draft.phone) },
-    { label: "Endereco verificado", ready: Boolean(draft.addressProofPreview) },
-    { label: "Verificacao facial concluida", ready: draft.facialEnrollment.status === "em_analise" || draft.facialEnrollment.status === "aprovado" },
-    { label: "Portfolio verificado", ready: draft.portfolio.length >= categoryRule.minimumPortfolioImages },
-    { label: "Experiencia comprovada", ready: Boolean(draft.experienceYears || draft.experienceSummary) },
+    { label: "Endereço verificado", ready: Boolean(draft.addressProofPreview) },
+    { label: "Verificação facial concluida", ready: draft.facialEnrollment.status === "em_analise" || draft.facialEnrollment.status === "aprovado" },
+    { label: "Portfólio verificado", ready: draft.portfolio.length >= categoryRule.minimumPortfolioImages },
+    { label: "Experiência comprovada", ready: Boolean(draft.experienceYears || draft.experienceSummary) },
     { label: "Certificados enviados", ready: draft.qualifications.length > 0 },
-    { label: "Formacao informada", ready: Boolean(draft.educationLevel || draft.collegeName) },
+    { label: "Formação informada", ready: Boolean(draft.educationLevel || draft.collegeName) },
   ];
 
   return (
@@ -973,22 +973,22 @@ function ReviewStep({
             <p className="text-sm font-bold text-muted">Completude do perfil</p>
             <p className="mt-1 text-3xl font-black text-foreground">{progress}%</p>
           </div>
-          <Badge variant={progress >= 80 ? "success" : "warning"}>{progress >= 80 ? "Pronto para analise" : "Complete mais dados"}</Badge>
+          <Badge variant={progress >= 80 ? "success" : "warning"}>{progress >= 80 ? "Pronto para análise" : "Complete mais dados"}</Badge>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <SummaryItem icon={<BadgeCheck size={18} />} label="Conta" value={`${draft.fullName || "Nao informado"} - ${draft.publicName || "Nao informado"}`} />
-        <SummaryItem icon={<MapPin size={18} />} label="Base de atendimento" value={`${draft.neighborhood || "Bairro nao informado"}, ${draft.city || "cidade nao informada"}`} />
-        <SummaryItem icon={<Clock size={18} />} label="Disponibilidade" value={draft.availability || "Nao informada"} />
-        <SummaryItem icon={<ShieldCheck size={18} />} label="Verificacao de identidade" value={draft.facialEnrollment.status ? draft.facialEnrollment.status.replace("_", " ") : "Nao iniciada"} />
+        <SummaryItem icon={<BadgeCheck size={18} />} label="Conta" value={`${draft.fullName || "Não informado"} - ${draft.publicName || "Não informado"}`} />
+        <SummaryItem icon={<MapPin size={18} />} label="Base de atendimento" value={`${draft.neighborhood || "Bairro não informado"}, ${draft.city || "cidade não informada"}`} />
+        <SummaryItem icon={<Clock size={18} />} label="Disponibilidade" value={draft.availability || "Não informada"} />
+        <SummaryItem icon={<ShieldCheck size={18} />} label="Verificação de identidade" value={draft.facialEnrollment.status ? draft.facialEnrollment.status.replace("_", " ") : "Não iniciada"} />
         <SummaryItem icon={<ImagePlus size={18} />} label="Provas de atividade" value={`${draft.portfolio.length} imagem(ns) enviadas`} />
-        <SummaryItem icon={<FileBadge2 size={18} />} label="Qualificacoes opcionais" value={`${draft.qualifications.length} item(ns) informados`} />
+        <SummaryItem icon={<FileBadge2 size={18} />} label="Qualificações opcionais" value={`${draft.qualifications.length} item(ns) informados`} />
       </div>
 
       <Card>
         <CardHeader>
-          <SectionHeader className="mb-0" title="Sinais publicos de confianca" description="Os badges publicos dependem de revisao e aprovacao. Documentos privados nunca sao expostos no perfil." />
+          <SectionHeader className="mb-0" title="Sinais públicos de confiança" description="Os badges públicos dependem de revisão e aprovação. Documentos privados nunca são expostos no perfil." />
         </CardHeader>
         <CardContent>
           <div className="grid gap-3 md:grid-cols-2">
@@ -1001,7 +1001,7 @@ function ReviewStep({
 
       {Object.values(errors).length ? (
         <div className="rounded-[8px] border border-danger/30 bg-danger-soft p-4 text-sm font-semibold text-danger">
-          Revise os campos obrigatorios antes de enviar para analise.
+          Revise os campos obrigatórios antes de enviar para análise.
         </div>
       ) : null}
     </div>
@@ -1118,7 +1118,7 @@ function TrustRequirement({ label, ready }: { label: string; ready: boolean }) {
   return (
     <div className="flex items-center justify-between gap-3 rounded-[8px] border border-border bg-surface p-3">
       <span className="text-sm font-bold text-foreground">{label}</span>
-      <Badge variant={ready ? "success" : "warning"}>{ready ? "Pronto para revisao" : "Pendente"}</Badge>
+      <Badge variant={ready ? "success" : "warning"}>{ready ? "Pronto para revisão" : "Pendente"}</Badge>
     </div>
   );
 }
@@ -1144,7 +1144,7 @@ function flattenZodErrors(error: z.ZodError) {
 }
 
 function getQualificationLabel(type: WorkerQualificationDraft["type"]) {
-  if (type === "education") return "Formacao";
+  if (type === "education") return "Formação";
   if (type === "certification") return "Certificacao";
   if (type === "license") return "Licenca";
 
@@ -1164,7 +1164,7 @@ function getInitialDraftState() {
   if (typeof window === "undefined") {
     return {
       draft: defaultWorkerOnboardingDraft,
-      status: "Rascunho nao salvo",
+      status: "Rascunho não salvo",
     };
   }
 
@@ -1173,7 +1173,7 @@ function getInitialDraftState() {
   if (!storedDraft) {
     return {
       draft: defaultWorkerOnboardingDraft,
-      status: "Rascunho nao salvo",
+      status: "Rascunho não salvo",
     };
   }
 
@@ -1185,7 +1185,7 @@ function getInitialDraftState() {
   } catch {
     return {
       draft: defaultWorkerOnboardingDraft,
-      status: "Nao foi possivel recuperar o rascunho",
+      status: "Não foi possível recuperar o rascunho",
     };
   }
 }

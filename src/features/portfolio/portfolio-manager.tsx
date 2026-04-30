@@ -47,14 +47,14 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
     const validation = portfolioDraftItemSchema.safeParse(nextItem);
 
     if (!validation.success) {
-      setError(validation.error.issues[0]?.message ?? "Revise os dados do portfolio.");
+      setError(validation.error.issues[0]?.message ?? "Revise os dados do portfólio.");
       return;
     }
 
     setItems((current) => normalizeOrder([...current, nextItem]));
     setDraft({ title: "", description: "", imageUrl: "" });
     setError("");
-    setStatus("Item adicionado ao portfolio");
+    setStatus("Item adicionado ao portfólio");
   }
 
   function removeItem(id: string) {
@@ -94,7 +94,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
 
   function saveDraft() {
     window.localStorage.setItem(storageKey, JSON.stringify(items));
-    setStatus("Portfolio salvo neste navegador");
+    setStatus("Portfólio salvo neste navegador");
   }
 
   async function handleImage(file?: File) {
@@ -105,7 +105,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
     const validation = portfolioImageFileSchema.safeParse(file);
 
     if (!validation.success) {
-      setError(validation.error.issues[0]?.message ?? "Imagem invalida.");
+      setError(validation.error.issues[0]?.message ?? "Imagem inválida.");
       return;
     }
 
@@ -121,7 +121,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
           <CardHeader>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <CardTitle>Adicionar item ao portfolio</CardTitle>
+                <CardTitle>Adicionar item ao portfólio</CardTitle>
                 <p className="mt-2 text-sm leading-6 text-muted">
                   Envie imagens reais dos seus trabalhos. Use titulos claros e descricoes objetivas.
                 </p>
@@ -150,7 +150,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
                   <Input value={draft.title} onChange={(event) => setDraft((current) => ({ ...current, title: event.target.value }))} placeholder="Ex.: Reforma de banheiro completa" />
                 </Field>
                 <Field>
-                  <Label>Descricao</Label>
+                  <Label>Descrição</Label>
                   <Textarea
                     value={draft.description}
                     onChange={(event) => setDraft((current) => ({ ...current, description: event.target.value }))}
@@ -161,7 +161,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
                 {error ? <p className="rounded-[8px] bg-danger-soft p-3 text-sm font-bold text-danger">{error}</p> : null}
                 <Button type="button" onClick={addItem}>
                   <ImagePlus className="mr-2" size={18} />
-                  Adicionar ao portfolio
+                  Adicionar ao portfólio
                 </Button>
               </div>
             </div>
@@ -173,7 +173,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <CardTitle>Itens publicados</CardTitle>
-                <p className="mt-2 text-sm text-muted">Reordene, destaque ou remova trabalhos do seu portfolio.</p>
+                <p className="mt-2 text-sm text-muted">Reordene, destaque ou remova trabalhos do seu portfólio.</p>
               </div>
               <Badge variant={orderedItems.length ? "primary" : "neutral"}>{orderedItems.length} item{orderedItems.length === 1 ? "" : "s"}</Badge>
             </div>
@@ -196,9 +196,9 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
             ) : (
               <div className="rounded-[8px] border border-dashed border-border-strong bg-surface p-8 text-center">
                 <ImagePlus className="mx-auto text-muted" size={36} />
-                <h2 className="mt-4 text-2xl font-black text-foreground">Seu portfolio ainda esta vazio</h2>
+                <h2 className="mt-4 text-2xl font-black text-foreground">Seu portfólio ainda está vazio</h2>
                 <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
-                  Adicione pelo menos um trabalho para aumentar a confianca no seu perfil publico.
+                  Adicione pelo menos um trabalho para aumentar a confiança no seu perfil público.
                 </p>
               </div>
             )}
@@ -225,7 +225,7 @@ export function PortfolioManager({ initialItems }: PortfolioManagerProps) {
           </CardHeader>
           <CardContent>
             <ul className="grid gap-3 text-sm leading-6 text-muted">
-              <li>Use fotos nitidas, sem marca d&apos;agua pesada.</li>
+              <li>Use fotos nitidas, sem marca d&após;agua pesada.</li>
               <li>Mostre antes e depois quando fizer sentido.</li>
               <li>Priorize trabalhos que provem sua especialidade.</li>
               <li>Marque como destaque o projeto mais forte.</li>
@@ -260,7 +260,7 @@ function PortfolioRow({
       </div>
       <div className="min-w-0">
         <h3 className="text-lg font-black text-foreground">{item.title}</h3>
-        <p className="mt-2 line-clamp-3 text-sm leading-6 text-muted">{item.description || "Sem descricao informada."}</p>
+        <p className="mt-2 line-clamp-3 text-sm leading-6 text-muted">{item.description || "Sem descrição informada."}</p>
         <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-primary">Posicao {index + 1}</p>
       </div>
       <div className="flex flex-row gap-2 md:flex-col">
@@ -316,7 +316,7 @@ function fileToDataUrl(file: File) {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result));
-    reader.onerror = () => reject(new Error("Nao foi possivel ler a imagem."));
+    reader.onerror = () => reject(new Error("Não foi possível ler a imagem."));
     reader.readAsDataURL(file);
   });
 }

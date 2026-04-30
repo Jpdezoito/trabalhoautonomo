@@ -6,7 +6,7 @@ export default function ClientProfilePage() {
   return (
     <DashboardShell
       title="Perfil do cliente"
-      description="Atualize seus dados de contato, local preferido e observacoes para facilitar o retorno dos profissionais."
+      description="Atualize seus dados de contato, local preferido e observações para facilitar o retorno dos profissionais."
       nav={[...clientNavigation]}
     >
       <ClientProfilePanel />

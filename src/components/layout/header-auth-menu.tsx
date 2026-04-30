@@ -47,7 +47,7 @@ export function HeaderAuthMenu({ name, role, mode = "next-auth" }: HeaderAuthMen
         <DropdownItem>
           <span className="inline-flex items-center gap-2">
             <Settings size={16} />
-            Configuracoes
+            Configurações
           </span>
         </DropdownItem>
       </Link>
@@ -56,7 +56,7 @@ export function HeaderAuthMenu({ name, role, mode = "next-auth" }: HeaderAuthMen
           <DropdownItem>
             <span className="inline-flex items-center gap-2">
               <ShieldCheck size={16} />
-              Administracao
+              Administração
             </span>
           </DropdownItem>
         </Link>

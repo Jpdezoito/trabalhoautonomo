@@ -3,11 +3,11 @@ import { z } from "zod";
 export const clientOnboardingDraftSchema = z.object({
   profilePhotoPreview: z.string().optional(),
   fullName: z.string().min(2, "Informe seu nome completo."),
-  profileNote: z.string().max(240, "Use no maximo 240 caracteres."),
+  profileNote: z.string().max(240, "Use no máximo 240 caracteres."),
   city: z.string().min(2, "Escolha sua cidade principal."),
   neighborhood: z.string().min(2, "Escolha seu bairro principal."),
   favoriteCategories: z.array(z.string().min(1)).min(1, "Escolha pelo menos uma categoria."),
-  serviceInterests: z.array(z.string().min(2)).min(1, "Adicione pelo menos um interesse de servico."),
+  serviceInterests: z.array(z.string().min(2)).min(1, "Adicione pelo menos um interesse de serviço."),
   whatsapp: z.string().min(10, "Informe um WhatsApp valido."),
   phone: z.string().min(10, "Informe um telefone valido."),
   email: z.string().email("Informe um e-mail valido."),
@@ -48,7 +48,7 @@ export const clientStepSchemas = {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["facialEnrollment"],
-        message: "Aceite o consentimento para registrar a verificacao facial.",
+        message: "Aceite o consentimento para registrar a verificação facial.",
       });
     }
 
@@ -56,7 +56,7 @@ export const clientStepSchemas = {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["facialEnrollment"],
-        message: "Capture ou envie uma imagem para concluir a verificacao facial.",
+        message: "Capture ou envie uma imagem para concluir a verificação facial.",
       });
     }
   }),

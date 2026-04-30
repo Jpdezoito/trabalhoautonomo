@@ -8,7 +8,7 @@ export async function runOptionalBackgroundCheckProvider(input: {
       reference: undefined,
       status: "NEEDS_REVIEW" as const,
       metadata: {
-        reason: "Consentimento ausente para verificacao externa.",
+        reason: "Consentimento ausente para verificação externa.",
       },
     };
   }

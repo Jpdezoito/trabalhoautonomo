@@ -17,10 +17,10 @@ export function mapPrismaFacialStatusToFrontend(status?: FacialEnrollmentStatus 
 export function getFacialStatusLabel(status?: FacialVerificationStatus | "") {
   if (status === "aprovado") return "Aprovado";
   if (status === "rejeitado") return "Rejeitado";
-  if (status === "em_analise") return "Em analise";
+  if (status === "em_analise") return "Em análise";
   if (status === "pendente") return "Pendente";
 
-  return "Nao iniciado";
+  return "Não iniciado";
 }
 
 export function createDefaultFacialEnrollmentDraft(): FacialEnrollmentDraft {

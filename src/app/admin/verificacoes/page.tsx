@@ -22,8 +22,8 @@ export default async function AdminVerificationPage() {
 
   return (
     <DashboardShell
-      title="Verificacao de identidade"
-      description="Gerencie capturas faciais, consentimento, revisoes manuais e o status da verificacao de identidade dos profissionais."
+      title="Verificação de identidade"
+      description="Gerencie capturas faciais, consentimento, revisões manuais e o status da verificação de identidade dos profissionais."
       nav={[...adminNavigation]}
     >
       <div className="grid gap-6">

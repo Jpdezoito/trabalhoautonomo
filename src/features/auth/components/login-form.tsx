@@ -36,7 +36,7 @@ export function LoginForm() {
         callbackUrl: routes.postLogin,
       });
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Nao foi possivel entrar agora.");
+      setError(requestError instanceof Error ? requestError.message : "Não foi possível entrar agora.");
       setSubmitting(false);
       return;
     }
@@ -70,7 +70,7 @@ export function LoginForm() {
       const payload = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(payload.error || "Nao foi possivel iniciar a sessao local.");
+        throw new Error(payload.error || "Não foi possível iniciar a sessão local.");
       }
 
       window.localStorage.setItem("autonomopro.dev-auth", JSON.stringify({
@@ -80,7 +80,7 @@ export function LoginForm() {
       }));
       window.location.assign(routes.admin);
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Falha ao iniciar a sessao local.");
+      setError(requestError instanceof Error ? requestError.message : "Falha ao iniciar a sessão local.");
       setDevSubmitting(false);
     }
   }
@@ -145,7 +145,7 @@ export function LoginForm() {
         </Link>
       </p>
       <p className="mt-5 text-center text-sm text-[#52616b]">
-        Ainda nao tem conta?{" "}
+        Ainda não tem conta?{" "}
         <Link href={routes.register} className="font-bold text-[#0f6b5f]">
           Cadastre-se
         </Link>
@@ -156,15 +156,15 @@ export function LoginForm() {
 
 function mapLoginError(error?: string | null) {
   if (!error) {
-    return "Nao foi possivel entrar com este e-mail e senha.";
+    return "Não foi possível entrar com este e-mail e senha.";
   }
 
   if (error.includes("Banco de dados indisponivel")) {
-    return "O login local foi bloqueado porque o banco de dados nao esta disponivel. Inicie o PostgreSQL e rode db push + seed.";
+    return "O login local foi bloqueado porque o banco de dados não está disponível. Inicie o PostgreSQL e rode db push + seed.";
   }
 
   if (error === "CredentialsSignin") {
-    return "Nao foi possivel entrar com este e-mail e senha.";
+    return "Não foi possível entrar com este e-mail e senha.";
   }
 
   return error;

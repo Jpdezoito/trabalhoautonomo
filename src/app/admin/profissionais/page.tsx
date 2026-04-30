@@ -6,7 +6,7 @@ export default function AdminWorkersPage() {
   return (
     <DashboardShell
       title="Profissionais"
-      description="Revise perfis, documentos, portfolio, disponibilidade, status de verificacao e pendencias administrativas."
+      description="Revise perfis, documentos, portfólio, disponibilidade, status de verificação e pendencias administrativas."
       nav={[...adminNavigation]}
     >
       <AdminWorkersTable />

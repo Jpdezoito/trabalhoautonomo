@@ -39,7 +39,7 @@ export function SearchResultsView({ filters, results }: SearchResultsViewProps) 
             <SearchX className="text-muted" size={38} />
             <h2 className="mt-4 text-2xl font-black text-foreground">Nenhum profissional encontrado</h2>
             <p className="mt-2 max-w-md text-sm leading-6 text-muted">
-              Tente remover alguns filtros, buscar por outra categoria ou ampliar a regiao de atendimento.
+              Tente remover alguns filtros, buscar por outra categoria ou ampliar a região de atendimento.
             </p>
             <LinkButton href="/buscar" variant="outline" className="mt-6">
               Limpar filtros

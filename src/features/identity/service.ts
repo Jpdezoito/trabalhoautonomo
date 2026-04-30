@@ -10,7 +10,7 @@ export const facialEnrollmentRequestSchema = z.object({
   imageDataUrl: z.string().min(40, "Envie a captura facial."),
   captureSource: z.enum(["webcam", "upload"]),
   consentAccepted: z.boolean().refine((value) => value, {
-    message: "Voce precisa aceitar o consentimento antes da captura.",
+    message: "Você precisa aceitar o consentimento antes da captura.",
   }),
 });
 
@@ -27,7 +27,7 @@ export async function createFacialEnrollmentForUser(input: {
   consentAccepted: boolean;
 }) {
   if (!isIdentityVerificationEnabledForRole(input.role)) {
-    throw new Error("A verificacao facial nao esta habilitada para esta conta.");
+    throw new Error("A verificação facial não está habilitada para está conta.");
   }
 
   if (input.imageDataUrl.length > identityFeatureFlags.maxDataUrlLength) {
@@ -110,7 +110,7 @@ export async function reviewFacialEnrollment(input: {
   });
 
   if (!enrollment || enrollment.deletedAt) {
-    throw new Error("Registro de verificacao facial nao encontrado.");
+    throw new Error("Registro de verificação facial não encontrado.");
   }
 
   const now = new Date();

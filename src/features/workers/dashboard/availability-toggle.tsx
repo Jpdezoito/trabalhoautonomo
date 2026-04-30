@@ -31,7 +31,7 @@ export function AvailabilityToggle({ initialAvailable }: AvailabilityToggleProps
       const payload = (await response.json()) as { disponivel?: boolean; message?: string };
 
       if (!response.ok || typeof payload.disponivel !== "boolean") {
-        throw new Error(payload.message || "Nao foi possivel atualizar disponibilidade.");
+        throw new Error(payload.message || "Não foi possível atualizar disponibilidade.");
       }
 
       setAvailable(payload.disponivel);
@@ -55,8 +55,8 @@ export function AvailabilityToggle({ initialAvailable }: AvailabilityToggleProps
           <h2 className="mt-1 text-2xl font-black text-foreground">Receber clientes agora?</h2>
           <p className="mt-2 text-sm leading-6 text-muted">
             {available
-              ? "Seu perfil aparece como disponivel agora nas buscas e no perfil publico."
-              : "Seu perfil fica pausado para novos contatos ate voce ativar novamente."}
+              ? "Seu perfil aparece como disponível agora nas buscas e no perfil público."
+              : "Seu perfil fica pausado para novos contatos ate você ativar novamente."}
           </p>
           {error ? <p className="mt-3 text-sm font-bold text-danger">{error}</p> : null}
         </div>
@@ -69,7 +69,7 @@ export function AvailabilityToggle({ initialAvailable }: AvailabilityToggleProps
           disabled={busy}
         >
           {busy ? <LoaderCircle className="mr-2 animate-spin" size={18} /> : <Power className="mr-2" size={18} />}
-          {available ? "Disponivel agora" : "Ativar disponibilidade"}
+          {available ? "Disponível agora" : "Ativar disponibilidade"}
         </Button>
       </div>
     </section>

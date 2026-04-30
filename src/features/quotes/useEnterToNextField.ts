@@ -1,4 +1,9 @@
-import { useRef, useCallback } from "react";
+import { useCallback } from "react";
+
+type EnterFocusableField = HTMLElement & {
+  disabled?: boolean;
+  select?: () => void;
+};
 
 /**
  * Hook para navegação por Enter entre campos de formulário.
@@ -7,7 +12,10 @@ import { useRef, useCallback } from "react";
  * @param fieldSelectors - Array de refs ou selectors dos campos na ordem desejada
  * @param options - { isTextarea?: boolean }
  */
-export function useEnterToNextField(fieldSelectors: Array<React.RefObject<any>>, options?: { isTextarea?: boolean }) {
+export function useEnterToNextField(
+  fieldSelectors: Array<React.RefObject<EnterFocusableField | null>>,
+  options?: { isTextarea?: boolean },
+) {
   return useCallback(
     (e: React.KeyboardEvent) => {
       if (options?.isTextarea) {

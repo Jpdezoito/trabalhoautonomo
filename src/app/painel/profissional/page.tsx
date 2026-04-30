@@ -9,7 +9,7 @@ export default function WorkerDashboardPage() {
   return (
     <DashboardShell
       title="Painel profissional"
-      description="Gerencie seu perfil publico, agenda, servicos, portfolio, orcamentos, avaliacoes e notificacoes."
+      description="Gerencie seu perfil público, agenda, serviços, portfólio, orçamentos, avaliações e notificações."
       nav={[...workerNavigation]}
     >
       <WorkerDashboardOverview worker={worker} />

@@ -12,18 +12,18 @@ export async function PATCH(request: Request) {
   const session = await getAppSession();
 
   if (!session?.user) {
-    return NextResponse.json({ message: "Autenticacao obrigatoria." }, { status: 401 });
+    return NextResponse.json({ message: "Autenticação obrigatoria." }, { status: 401 });
   }
 
   if (session.user.role !== "WORKER" && session.user.role !== "ADMIN" && session.user.role !== "SUPER_ADMIN") {
-    return NextResponse.json({ message: "Perfil sem permissao para alterar disponibilidade." }, { status: 403 });
+    return NextResponse.json({ message: "Perfil sem permissão para alterar disponibilidade." }, { status: 403 });
   }
 
   const payload = await request.json().catch(() => null);
   const parsed = schema.safeParse(payload);
 
   if (!parsed.success) {
-    return NextResponse.json({ message: "Dados invalidos para disponibilidade." }, { status: 422 });
+    return NextResponse.json({ message: "Dados inválidos para disponibilidade." }, { status: 422 });
   }
 
   await disableStaleWorkerAvailability();
@@ -31,7 +31,7 @@ export async function PATCH(request: Request) {
   const worker = await getWorkerProfileForSession(session.user.id, session.user.role);
 
   if (!worker) {
-    return NextResponse.json({ message: "Perfil profissional nao encontrado." }, { status: 404 });
+    return NextResponse.json({ message: "Perfil profissional não encontrado." }, { status: 404 });
   }
 
   const updated = await prisma.workerProfile.update({

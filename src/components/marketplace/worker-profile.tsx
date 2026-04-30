@@ -42,20 +42,20 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                   </span>
                 ) : trustInReview ? (
                   <Badge variant="warning" className="bg-white/12 text-accent ring-white/20">
-                    Verificacao de identidade em analise
+                    Verificação de identidade em análise
                   </Badge>
                 ) : (
                   <Badge variant="neutral" className="bg-white/12 text-white ring-white/20">
-                    Nao verificado
+                    Não verificado
                   </Badge>
                 )}
                 {worker.trustVerification?.badgeEnabled ? (
                   <Badge variant="info" className="bg-white/12 text-white ring-white/20">
-                    Confianca e protecao
+                    Confiança e protecao
                   </Badge>
                 ) : null}
                 <Badge variant="neutral" className="bg-white/12 text-white ring-white/20">
-                  {worker.available ? "Disponivel agora" : "Agenda pausada"}
+                  {worker.available ? "Disponível agora" : "Agenda pausada"}
                 </Badge>
               </div>
 
@@ -91,7 +91,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
 
             <Card className="border-white/18 bg-white/95 shadow-[var(--shadow-lg)]">
               <CardContent>
-                <p className="text-sm font-bold text-muted">Acoes rapidas</p>
+                <p className="text-sm font-bold text-muted">Acoes rápidas</p>
                 <div className="mt-4 grid gap-3">
                   <ContactActions worker={worker} />
                   <FavoriteButton workerSlug={worker.slug} workerName={worker.name} className="w-full" />
@@ -107,14 +107,14 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
           <Card>
             <CardContent>
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                <Info icon={<Star size={19} />} label="Avaliacao" value={`${formatRating(worker.rating)} de 5`} detail={`${worker.reviewsCount} avaliacoes`} />
-                <Info icon={<BriefcaseBusiness size={19} />} label="Servicos" value={`${worker.jobsDone}`} detail="concluidos pela plataforma" />
-                <Info icon={<CalendarCheck size={19} />} label="Experiencia" value={`${worker.yearsExperience} anos`} detail="de atuacao profissional" />
+                <Info icon={<Star size={19} />} label="Avaliação" value={`${formatRating(worker.rating)} de 5`} detail={`${worker.reviewsCount} avaliações`} />
+                <Info icon={<BriefcaseBusiness size={19} />} label="Serviços" value={`${worker.jobsDone}`} detail="Concluídos pela plataforma" />
+                <Info icon={<CalendarCheck size={19} />} label="Experiência" value={`${worker.yearsExperience} anos`} detail="de atuação profissional" />
                 <Info
                   icon={<ShieldCheck size={19} />}
-                  label="Status da verificacao"
-                  value={trustVerified ? "Verificado" : trustInReview ? "Em analise" : "Nao verificado"}
-                  detail={worker.trustVerification?.badgeEnabled ? "confianca e protecao ativas" : "verificacao de identidade"}
+                  label="Status da verificação"
+                  value={trustVerified ? "Verificado" : trustInReview ? "Em análise" : "Não verificado"}
+                  detail={worker.trustVerification?.badgeEnabled ? "confiança e protecao ativas" : "verificação de identidade"}
                 />
               </div>
             </CardContent>
@@ -129,7 +129,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="rounded-[8px] bg-surface-muted p-4">
                   <WalletCards className="text-primary" size={22} />
-                  <p className="mt-3 text-sm font-bold text-muted">Preco inicial</p>
+                  <p className="mt-3 text-sm font-bold text-muted">Preço inicial</p>
                   <p className="mt-1 font-black text-foreground">{worker.startingPrice}</p>
                 </div>
                 <div className="rounded-[8px] bg-surface-muted p-4">
@@ -143,7 +143,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Servicos oferecidos</CardTitle>
+              <CardTitle>Serviços oferecidos</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -152,7 +152,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                     <CheckCircle2 className="mt-0.5 shrink-0 text-primary" size={19} />
                     <div>
                       <p className="font-black text-foreground">{service}</p>
-                      <p className="mt-1 text-sm leading-6 text-muted">Atendimento com analise de escopo e orcamento personalizado.</p>
+                      <p className="mt-1 text-sm leading-6 text-muted">Atendimento com análise de escopo e orçamento personalizado.</p>
                     </div>
                   </div>
                 ))}
@@ -169,7 +169,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Areas atendidas</CardTitle>
+              <CardTitle>Áreas atendidas</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
@@ -186,7 +186,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
           {worker.trustSignals?.length ? (
             <Card>
               <CardHeader>
-                <CardTitle>Confianca e protecao</CardTitle>
+                <CardTitle>Confiança e protecao</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -194,7 +194,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                     <div key={signal.label} className="flex items-center justify-between gap-3 rounded-[8px] border border-border bg-surface p-3">
                       <span className="text-sm font-bold text-foreground">{signal.label}</span>
                       <Badge variant={signal.status === "verificado" ? "success" : signal.status === "pendente" ? "warning" : "neutral"}>
-                        {signal.status === "verificado" ? "Verificado" : signal.status === "pendente" ? "Em analise" : "Nao informado"}
+                        {signal.status === "verificado" ? "Verificado" : signal.status === "pendente" ? "Em análise" : "Não informado"}
                       </Badge>
                     </div>
                   ))}
@@ -206,19 +206,19 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
           {worker.profileStrength?.experienceSummary || worker.profileStrength?.educationLevel || worker.profileStrength?.qualifications?.length ? (
             <Card>
               <CardHeader>
-                <CardTitle>Experiencia e qualificacoes</CardTitle>
+                <CardTitle>Experiência e qualificações</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-5">
                   {worker.profileStrength?.experienceSummary ? (
                     <div className="rounded-[8px] bg-surface-muted p-4">
-                      <p className="text-sm font-bold text-muted">Experiencia comprovada</p>
+                      <p className="text-sm font-bold text-muted">Experiência comprovada</p>
                       <p className="mt-2 text-sm leading-7 text-foreground">{worker.profileStrength.experienceSummary}</p>
                     </div>
                   ) : null}
                   {worker.profileStrength?.educationLevel || worker.profileStrength?.collegeName || worker.profileStrength?.courseSummary ? (
                     <div className="grid gap-4 md:grid-cols-2">
-                      {worker.profileStrength.educationLevel ? <Info icon={<BadgeCheck size={19} />} label="Formacao" value={worker.profileStrength.educationLevel} detail={worker.profileStrength.collegeName || "Informacao opcional"} /> : null}
+                      {worker.profileStrength.educationLevel ? <Info icon={<BadgeCheck size={19} />} label="Formação" value={worker.profileStrength.educationLevel} detail={worker.profileStrength.collegeName || "Informacao opcional"} /> : null}
                       {worker.profileStrength.courseSummary ? <Info icon={<FileText size={19} />} label="Cursos" value={worker.profileStrength.courseSummary} detail="Informado pelo profissional" /> : null}
                     </div>
                   ) : null}
@@ -228,7 +228,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                         <div key={`${item.type}-${item.title}`} className="flex items-start justify-between gap-4 rounded-[8px] border border-border bg-surface p-4">
                           <div>
                             <p className="font-black text-foreground">{item.title}</p>
-                            <p className="mt-1 text-sm text-muted">{item.institution || "Instituicao nao informada"}</p>
+                            <p className="mt-1 text-sm text-muted">{item.institution || "Instituição não informada"}</p>
                             {item.year ? <p className="mt-1 text-xs font-bold uppercase tracking-normal text-primary">{item.year}</p> : null}
                           </div>
                           <Badge variant={item.verified ? "success" : "neutral"}>{item.verified ? "Validado" : "Informado"}</Badge>
@@ -243,7 +243,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Portfolio verificado</CardTitle>
+              <CardTitle>Portfólio verificado</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -259,7 +259,7 @@ export function WorkerProfile({ worker }: { worker: Worker }) {
                     </div>
                     <div className="p-4">
                       <div className="flex flex-wrap gap-2">
-                        {item.verified ? <Badge variant="success">Portfolio verificado</Badge> : null}
+                        {item.verified ? <Badge variant="success">Portfólio verificado</Badge> : null}
                         {item.workerVisible ? <Badge variant="info">Profissional na imagem</Badge> : null}
                         {item.evidenceLabel ? <Badge variant="neutral">{item.evidenceLabel}</Badge> : null}
                       </div>

@@ -20,7 +20,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
   const fieldErrors = state.status === "error" ? state.errors : undefined;
 
   async function submitReview(formData: FormData) {
-    setState({ status: "submitting", message: "Enviando avaliacao..." });
+    setState({ status: "submitting", message: "Enviando avaliação..." });
 
     const payload = {
       workerSlug: worker.slug,
@@ -43,7 +43,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
     if (!response.ok) {
       setState({
         status: "error",
-        message: result?.message ?? "Nao foi possivel enviar sua avaliacao.",
+        message: result?.message ?? "Não foi possível enviar sua avaliação.",
         errors: result?.errors,
       });
       return;
@@ -51,14 +51,14 @@ export function ReviewForm({ worker }: { worker: Worker }) {
 
     setState({
       status: "success",
-      message: result?.message ?? "Avaliacao enviada para moderacao.",
+      message: result?.message ?? "Avaliação enviada para moderação.",
     });
   }
 
   return (
     <Card id="avaliar">
       <CardHeader>
-        <CardTitle>Publicar avaliacao</CardTitle>
+        <CardTitle>Publicar avaliação</CardTitle>
       </CardHeader>
       <CardContent>
         <form action={submitReview} className="grid gap-4">
@@ -72,14 +72,14 @@ export function ReviewForm({ worker }: { worker: Worker }) {
             <Field>
               <Label htmlFor="review-email">E-mail</Label>
               <Input id="review-email" name="email" type="email" placeholder="voce@email.com" />
-              <FieldHint className="min-h-10">Opcional. Usado apenas para verificacao interna, nunca sera exibido.</FieldHint>
+              <FieldHint className="min-h-10">Opcional. Usado apenas para verificação interna, nunca será exibido.</FieldHint>
               <FieldMessage errors={fieldErrors?.email} />
             </Field>
           </FieldGroup>
 
           <label className="flex items-start gap-3 rounded-[8px] border border-border bg-surface-muted p-3 text-sm font-semibold text-muted-strong">
             <input name="showName" type="checkbox" className="mt-1 size-4 rounded border-border accent-primary" />
-            Quero exibir meu nome na avaliacao
+            Quero exibir meu nome na avaliação
           </label>
 
           <Field>
@@ -104,7 +104,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
           </Field>
 
           <Field>
-            <Label htmlFor="review-service">Servico realizado ou contato</Label>
+            <Label htmlFor="review-service">Serviço realizado ou contato</Label>
             <Input id="review-service" name="serviceReference" placeholder="Ex.: troca de tomada, frete, reparo hidraulico" />
             <FieldMessage errors={fieldErrors?.serviceReference} />
           </Field>
@@ -117,7 +117,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
 
           <Field>
             <Label htmlFor="review-comment">Comentario</Label>
-            <Textarea id="review-comment" name="comment" placeholder="Conte como foi o atendimento, prazo, comunicacao e qualidade do servico." />
+            <Textarea id="review-comment" name="comment" placeholder="Conte como foi o atendimento, prazo, comunicacao e qualidade do serviço." />
             <FieldMessage errors={fieldErrors?.comment} />
           </Field>
 
@@ -136,7 +136,7 @@ export function ReviewForm({ worker }: { worker: Worker }) {
 
           <Button type="submit" disabled={state.status === "submitting"}>
             <Send className="mr-2" size={18} />
-            Enviar para moderacao
+            Enviar para moderação
           </Button>
         </form>
       </CardContent>

@@ -5,8 +5,8 @@ import { ClientPreferencesPanel } from "@/features/clients/dashboard";
 export default function ClientPreferencesPage() {
   return (
     <DashboardShell
-      title="Preferencias"
-      description="Gerencie categorias favoritas, servicos de interesse, filtros salvos e regioes preferidas."
+      title="Preferências"
+      description="Gerencie categorias favoritas, serviços de interesse, filtros salvos e regiões preferidas."
       nav={[...clientNavigation]}
     >
       <ClientPreferencesPanel />

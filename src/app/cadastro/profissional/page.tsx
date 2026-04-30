@@ -21,7 +21,7 @@ export default async function WorkerRegisterPage() {
             Monte um perfil completo para receber pedidos melhores.
           </h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-            Preencha as etapas com calma. Seu rascunho e salvo automaticamente neste navegador antes do envio para analise.
+            Preencha as etapas com calma. Seu rascunho e salvo automaticamente neste navegador antes do envio para análise.
           </p>
         </div>
         <WorkerOnboardingFlow />

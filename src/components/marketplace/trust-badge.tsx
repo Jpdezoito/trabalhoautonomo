@@ -10,7 +10,7 @@ export function TrustBadge({ worker, compact = false }: { worker: Worker; compac
   }
 
   return (
-    <Badge variant="success" title="Identidade analisada pela plataforma. Documentos sensiveis nao sao exibidos publicamente.">
+    <Badge variant="success" title="Identidade analisada pela plataforma. Documentos sensíveis não são exibidos publicamente.">
       {compact ? <BadgeCheck size={14} /> : <ShieldCheck size={14} />}
       {compact ? "Verificado" : "Verificado AutonomoPro"}
     </Badge>

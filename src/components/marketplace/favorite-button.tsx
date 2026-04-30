@@ -62,7 +62,7 @@ export function FavoriteButton({
       if (!response.ok) {
         setFavorited(!nextFavorited);
         window.localStorage.setItem(getAnonymousFavoriteKey(workerSlug), String(!nextFavorited));
-        setMessage("Nao foi possivel sincronizar favorito.");
+        setMessage("Não foi possível sincronizar favorito.");
       }
     } catch {
       setMessage("Favorito salvo neste navegador.");

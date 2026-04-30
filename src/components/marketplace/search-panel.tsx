@@ -7,9 +7,9 @@ export function SearchPanel({ compact = false }: { compact?: boolean }) {
   return (
     <form action="/buscar" className="grid min-w-0 gap-3 rounded-[8px] border border-border bg-surface p-4 shadow-[var(--shadow-lg)] md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
       <label className="grid min-w-0 gap-2 text-sm font-bold text-muted-strong">
-        Tipo de servico
+        Tipo de serviço
         <Select name="servico" className="h-12">
-          <option value="">Todos os servicos</option>
+          <option value="">Todos os serviços</option>
           {publicCategories.map((category) => (
             <option key={category.slug} value={category.slug}>
               {category.name}

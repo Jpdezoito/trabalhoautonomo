@@ -33,10 +33,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         <div className="mb-8 max-w-4xl">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-primary">Busca</p>
           <h1 className="mt-2 text-4xl font-black tracking-tight text-foreground sm:text-5xl">
-            Encontre profissionais por servico, local e perfil.
+            Encontre profissionais por serviço, local e perfil.
           </h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-            Filtre por categoria, cidade, bairro, nota, preco inicial, disponibilidade e verificacao para comparar opcoes com mais clareza.
+            Filtre por categoria, cidade, bairro, nota, preço inicial, disponibilidade e verificação para comparar opções com mais clareza.
           </p>
         </div>
         <SearchResultsView filters={filters} results={results} />

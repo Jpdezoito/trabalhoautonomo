@@ -18,7 +18,7 @@ export function SearchResultsHeader({ filters, total }: SearchResultsHeaderProps
           <div className="flex flex-wrap gap-2">
             <Badge variant="primary">{total} profissional{total === 1 ? "" : "is"} encontrado{total === 1 ? "" : "s"}</Badge>
             {filters.verifiedOnly ? <Badge variant="success">Verificados</Badge> : null}
-            {filters.availableOnly ? <Badge variant="info">Disponiveis</Badge> : null}
+            {filters.availableOnly ? <Badge variant="info">Disponíveis</Badge> : null}
             {filters.minimumRating ? <Badge variant="warning">Nota {filters.minimumRating}+ </Badge> : null}
           </div>
           <p className="mt-2 text-sm text-muted">

@@ -9,7 +9,7 @@ export default function WorkerAvailabilityPage() {
   return (
     <DashboardShell
       title="Disponibilidade"
-      description="Controle agenda, tempo medio de resposta e observacoes exibidas para clientes antes do contato."
+      description="Controle agenda, tempo medio de resposta e observações exibidas para clientes antes do contato."
       nav={[...workerNavigation]}
     >
       <WorkerAvailabilityPanel worker={worker} />

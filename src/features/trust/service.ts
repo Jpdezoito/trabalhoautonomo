@@ -27,22 +27,22 @@ export async function createTrustVerificationFlow(input: {
   });
 
   if (!user) {
-    throw new Error("Conta nao encontrada.");
+    throw new Error("Conta não encontrada.");
   }
 
   if (input.role === UserRole.CLIENT && !user.clientProfile) {
-    throw new Error("Perfil de cliente nao encontrado.");
+    throw new Error("Perfil de cliente não encontrado.");
   }
 
   if (input.role === UserRole.WORKER && !user.workerProfile) {
-    throw new Error("Perfil profissional nao encontrado.");
+    throw new Error("Perfil profissional não encontrado.");
   }
 
   const consent = await prisma.consentRecord.create({
     data: {
       userId: input.userId,
       type: "TRUST_IDENTITY",
-      title: "Consentimento para verificacao de identidade e confianca da plataforma",
+      title: "Consentimento para verificação de identidade e confiança da plataforma",
       acceptedAt: new Date(),
       metadata: {
         backgroundCheckRequested: Boolean(input.requestBackgroundCheck),
@@ -139,7 +139,7 @@ export async function createTrustVerificationFlow(input: {
       data: {
         userId: input.userId,
         type: "BACKGROUND_CHECK",
-        title: "Consentimento para verificacao externa opcional",
+        title: "Consentimento para verificação externa opcional",
         acceptedAt: new Date(),
         metadata: {
           providerIntegration: true,
@@ -189,7 +189,7 @@ export async function reviewTrustVerificationRequest(input: {
   });
 
   if (!request || request.deletedAt) {
-    throw new Error("Solicitacao de verificacao nao encontrada.");
+    throw new Error("Solicitação de verificação não encontrada.");
   }
 
   await prisma.trustVerificationRequest.update({
@@ -398,7 +398,7 @@ export async function getTrustVerificationOverview(userId: string) {
   });
 
   if (!user) {
-    throw new Error("Conta nao encontrada.");
+    throw new Error("Conta não encontrada.");
   }
 
   const trustStatus = user.workerProfile?.trustVerificationStatus ?? user.clientProfile?.trustVerificationStatus ?? TrustVerificationStatus.NOT_VERIFIED;

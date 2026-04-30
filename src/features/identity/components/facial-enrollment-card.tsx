@@ -24,8 +24,8 @@ export function FacialEnrollmentCard({
   audience,
   enabled = true,
   mode = "api",
-  title = "Verificacao facial",
-  description = "Use uma captura clara do rosto para reforcar a verificacao de identidade e habilitar recuperacao segura de senha no futuro.",
+  title = "Verificação facial",
+  description = "Use uma captura clara do rosto para reforcar a verificação de identidade e habilitar recuperação segura de senha no futuro.",
   initialValue,
   onDraftChange,
 }: FacialEnrollmentCardProps) {
@@ -81,7 +81,7 @@ export function FacialEnrollmentCard({
       setCameraActive(true);
       setError(null);
     } catch {
-      setError("Nao foi possivel acessar a webcam. Use o envio seguro de imagem como alternativa.");
+      setError("Não foi possível acessar a webcam. Use o envio seguro de imagem como alternativa.");
     }
   }
 
@@ -150,7 +150,7 @@ export function FacialEnrollmentCard({
     }
 
     if (!value.consentAccepted) {
-      setError("Aceite o consentimento antes de registrar a verificacao facial.");
+      setError("Aceite o consentimento antes de registrar a verificação facial.");
       return;
     }
 
@@ -179,7 +179,7 @@ export function FacialEnrollmentCard({
         const payload = (await response.json()) as { summary?: FacialEnrollmentDraft; error?: string };
 
         if (!response.ok) {
-          throw new Error(payload.error || "Nao foi possivel enviar a verificacao facial.");
+          throw new Error(payload.error || "Não foi possível enviar a verificação facial.");
         }
 
         updateValue({
@@ -194,9 +194,9 @@ export function FacialEnrollmentCard({
         });
       }
 
-      setMessage("Verificacao facial enviada para analise.");
+      setMessage("Verificação facial enviada para análise.");
     } catch (submissionError) {
-      setError(submissionError instanceof Error ? submissionError.message : "Falha ao registrar a verificacao facial.");
+      setError(submissionError instanceof Error ? submissionError.message : "Falha ao registrar a verificação facial.");
     } finally {
       setBusy(false);
     }
@@ -219,7 +219,7 @@ export function FacialEnrollmentCard({
           <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm leading-6 text-muted">A verificacao facial nao esta habilitada para esta conta neste momento.</p>
+          <p className="text-sm leading-6 text-muted">A verificação facial não está habilitada para está conta neste momento.</p>
         </CardContent>
       </Card>
     );
@@ -242,10 +242,10 @@ export function FacialEnrollmentCard({
       <CardContent>
         <div className="grid gap-5">
           <div className="rounded-[8px] border border-border bg-surface-muted p-4">
-            <p className="font-black text-foreground">Seguranca da conta</p>
+            <p className="font-black text-foreground">Segurança da conta</p>
             <p className="mt-2 text-sm leading-6 text-muted">
-              A verificacao facial do {getIdentityAudienceLabel(audience)} reforca a verificacao de identidade e, quando aprovada,
-              pode ser usada como requisito para recuperacao segura de senha.
+              A verificação facial do {getIdentityAudienceLabel(audience)} reforca a verificação de identidade e, quando aprovada,
+              pode ser usada como requisito para recuperação segura de senha.
             </p>
           </div>
 
@@ -259,7 +259,7 @@ export function FacialEnrollmentCard({
             <span>
               <span className="block font-black text-foreground">Consentimento para captura facial</span>
               <span className="mt-1 block leading-6 text-muted">
-                Autorizo a coleta da captura facial para verificacao de identidade e para futura elegibilidade de recuperacao de senha,
+                Autorizo a coleta da captura facial para verificação de identidade e para futura elegibilidade de recuperação de senha,
                 conforme a politica de privacidade da plataforma.
               </span>
             </span>
@@ -286,7 +286,7 @@ export function FacialEnrollmentCard({
                 ) : null}
               </div>
               <FieldHint className="mt-3">
-                Use ambiente iluminado, rosto centralizado e sem obstrucoes. A imagem nao fica exposta publicamente.
+                Use ambiente iluminado, rosto centralizado e sem obstruções. A imagem não fica exposta publicamente.
               </FieldHint>
               <div className="mt-4 overflow-hidden rounded-[8px] border border-dashed border-border-strong bg-[#0f1714]">
                 {cameraActive ? (
@@ -299,7 +299,7 @@ export function FacialEnrollmentCard({
                   <div className="grid aspect-[4/3] place-items-center p-6 text-center">
                     <div>
                       <Camera className="mx-auto text-muted" size={28} />
-                      <p className="mt-3 font-black text-foreground">Captura facial nao registrada</p>
+                      <p className="mt-3 font-black text-foreground">Captura facial não registrada</p>
                       <p className="mt-2 text-sm leading-6 text-muted">Escolha webcam ou envio seguro para continuar.</p>
                     </div>
                   </div>
@@ -309,12 +309,12 @@ export function FacialEnrollmentCard({
             </div>
 
             <div className="grid gap-3">
-              <StatusLine label="Status da verificacao" value={getFacialStatusLabel(value.status)} />
-              <StatusLine label="Origem da captura" value={value.captureSource === "webcam" ? "Verificacao facial por webcam" : value.captureSource === "upload" ? "Upload seguro" : "Nao registrada"} />
-              <StatusLine label="Recuperacao facial" value={value.recoveryEnabled ? "Habilitada" : "Aguardando aprovacao"} />
+              <StatusLine label="Status da verificação" value={getFacialStatusLabel(value.status)} />
+              <StatusLine label="Origem da captura" value={value.captureSource === "webcam" ? "Verificação facial por webcam" : value.captureSource === "upload" ? "Upload seguro" : "Não registrada"} />
+              <StatusLine label="Recuperação facial" value={value.recoveryEnabled ? "Habilitada" : "Aguardando aprovação"} />
               <StatusLine label="Tentativas" value={String(value.retryCount ?? 0)} />
               {value.submittedAt ? <StatusLine label="Enviado em" value={value.submittedAt} /> : null}
-              {value.reviewNotes ? <StatusLine label="Observacoes da analise" value={value.reviewNotes} /> : null}
+              {value.reviewNotes ? <StatusLine label="Observações da análise" value={value.reviewNotes} /> : null}
             </div>
           </div>
 
@@ -329,7 +329,7 @@ export function FacialEnrollmentCard({
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button type="button" onClick={submitEnrollment} disabled={busy}>
               {busy ? <LoaderCircle className="mr-2 animate-spin" size={18} /> : <ShieldCheck className="mr-2" size={18} />}
-              {value.status === "rejeitado" ? "Enviar nova verificacao" : "Registrar verificacao facial"}
+              {value.status === "rejeitado" ? "Enviar nova verificação" : "Registrar verificação facial"}
             </Button>
             {value.status === "rejeitado" ? (
               <Button type="button" variant="outline" onClick={retryEnrollment}>

@@ -6,7 +6,7 @@ export default function ClientDashboardPage() {
   return (
     <DashboardShell
       title="Painel do cliente"
-      description="Acompanhe pedidos de orcamento, profissionais favoritos, preferencias, notificacoes e avaliacoes publicadas."
+      description="Acompanhe pedidos de orçamento, profissionais favoritos, preferências, notificações e avaliações publicadas."
       nav={[...clientNavigation]}
     >
       <ClientDashboardOverview />

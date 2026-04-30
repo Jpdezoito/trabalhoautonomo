@@ -22,8 +22,8 @@ export const verificationQueue = workers.map((worker, index) => ({
 export const moderationCases = [
   {
     id: "MOD-101",
-    target: "Avaliacao publica",
-    reason: "Possivel conteudo ofensivo",
+    target: "Avaliação pública",
+    reason: "Possível conteúdo ofensivo",
     queue: "reviews",
     status: "open",
     detail: "Comentario sinalizado por linguagem inadequada.",
@@ -34,11 +34,11 @@ export const moderationCases = [
     reason: "Documento pendente",
     queue: "profiles",
     status: "in_review",
-    detail: "Solicitada nova documentacao antes da aprovacao.",
+    detail: "Solicitada nova documentacao antes da aprovação.",
   },
   {
     id: "MOD-103",
-    target: "Imagem de portfolio",
+    target: "Imagem de portfólio",
     reason: "Qualidade insuficiente",
     queue: "portfolio",
     status: "action_required",
@@ -47,8 +47,8 @@ export const moderationCases = [
 ] as const;
 
 export const adminActivity = [
-  { label: "Usuarios totais", value: "2.846", detail: "Clientes, profissionais e administradores.", tone: "default" },
-  { label: "Profissionais ativos", value: String(workers.length), detail: "Perfis mockados com dados publicos.", tone: "success" },
+  { label: "Usuários totais", value: "2.846", detail: "Clientes, profissionais e administradores.", tone: "default" },
+  { label: "Profissionais ativos", value: String(workers.length), detail: "Perfis mockados com dados públicos.", tone: "success" },
   { label: "Categorias ativas", value: String(publicCategories.length), detail: "Catalogo amplo com grupos e subcategorias.", tone: "info" },
-  { label: "Orcamentos em aberto", value: String(quotes.length), detail: "Pedidos acompanhados pela operacao.", tone: "warning" },
+  { label: "Orçamentos em aberto", value: String(quotes.length), detail: "Pedidos acompanhados pela operação.", tone: "warning" },
 ] as const;

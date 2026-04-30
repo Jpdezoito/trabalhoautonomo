@@ -10,9 +10,9 @@ const defaultRule: CategoryVerificationRule = {
   minimumPortfolioImages: 3,
   recommendWorkerOnSiteImage: false,
   evidenceGuidance: [
-    "Mostre servicos reais executados por voce.",
+    "Mostre serviços reais executados por você.",
     "Inclua fotos claras do resultado final.",
-    "Adicione contexto do ambiente, ferramenta ou etapa do servico.",
+    "Adicione contexto do ambiente, ferramenta ou etapa do serviço.",
   ],
 };
 
@@ -23,18 +23,18 @@ const ruleMap: Record<string, CategoryVerificationRule> = {
     recommendWorkerOnSiteImage: true,
     evidenceGuidance: [
       "Use fotos de obra real, antes e depois, ou etapas relevantes.",
-      "Quando possivel, inclua pelo menos uma imagem sua no local ou ao lado do resultado.",
-      "Mostre acabamento, instalacao ou execucao final.",
+      "Quando possível, inclua pelo menos uma imagem sua no local ou ao lado do resultado.",
+      "Mostre acabamento, instalacao ou execução final.",
     ],
   },
   eletricista: {
-    title: "Servico tecnico em campo",
+    title: "Serviço técnico em campo",
     minimumPortfolioImages: 3,
     recommendWorkerOnSiteImage: true,
     evidenceGuidance: [
-      "Mostre instalacoes, manutencoes ou correcoes reais.",
-      "Quando aplicavel, inclua voce no ambiente de trabalho.",
-      "Evite imagens genericas sem relacao com o servico.",
+      "Mostre instalações, manutencoes ou correcoes reais.",
+      "Quando aplicável, inclua você no ambiente de trabalho.",
+      "Evite imagens genéricas sem relação com o serviço.",
     ],
   },
   frete: {
@@ -43,7 +43,7 @@ const ruleMap: Record<string, CategoryVerificationRule> = {
     recommendWorkerOnSiteImage: false,
     evidenceGuidance: [
       "Inclua veiculo, carga, acondicionamento ou entrega concluida.",
-      "Mostre contexto do servico real sem expor dados sensiveis de terceiros.",
+      "Mostre contexto do serviço real sem expor dados sensíveis de terceiros.",
       "Vale combinar veiculo, equipamento e resultado da entrega.",
     ],
   },
@@ -53,17 +53,17 @@ const ruleMap: Record<string, CategoryVerificationRule> = {
     recommendWorkerOnSiteImage: false,
     evidenceGuidance: [
       "Mostre moto, bolsa de entrega, equipamento ou contexto do trabalho.",
-      "Use imagens reais de operacao, sem expor dados privados.",
-      "Fotos de equipamento e servico concluido ajudam na analise.",
+      "Use imagens reais de operação, sem expor dados privados.",
+      "Fotos de equipamento e serviço concluído ajudam na análise.",
     ],
   },
   beleza: {
-    title: "Resultado e portfolio visual",
+    title: "Resultado e portfólio visual",
     minimumPortfolioImages: 3,
     recommendWorkerOnSiteImage: false,
     evidenceGuidance: [
       "Inclua resultados reais do trabalho realizado.",
-      "Antes e depois ou sequencias de processo ajudam na verificacao.",
+      "Antes e depois ou sequências de processo ajudam na verificação.",
       "Mostre variedade de resultado sem usar imagens promocionais genéricas.",
     ],
   },

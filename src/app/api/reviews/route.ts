@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   if (!parsed.success) {
     return NextResponse.json(
       {
-        message: "Dados invalidos para enviar avaliacao.",
+        message: "Dados inválidos para enviar avaliação.",
         errors: parsed.error.flatten().fieldErrors,
       },
       { status: 422 },
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   const worker = await findWorkerProfileBySlug(parsed.data.workerSlug);
 
   if (!worker) {
-    return NextResponse.json({ message: "Profissional nao encontrado." }, { status: 404 });
+    return NextResponse.json({ message: "Profissional não encontrado." }, { status: 404 });
   }
 
   const clientProfile = parsed.data.email
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
   return NextResponse.json(
     {
-      message: "Avaliacao enviada. Ela sera publicada apos revisao da moderacao.",
+      message: "Avaliação enviada. Ela será publicada após revisão da moderação.",
       id: review.id,
       status: review.status.toLowerCase(),
     },

@@ -48,9 +48,9 @@ export function AdminOverview() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Usuarios" value="2.846" detail="Clientes e profissionais ativos." icon={<Users size={22} />} />
-        <StatCard label="Verificacoes" value={String(verificationQueue.length)} detail="Perfis aguardando analise." icon={<ClipboardCheck size={22} />} />
-        <StatCard label="Moderacao" value={String(moderationCases.length)} detail="Casos abertos para revisao." icon={<ShieldAlert size={22} />} />
+        <StatCard label="Usuários" value="2.846" detail="Clientes e profissionais ativos." icon={<Users size={22} />} />
+        <StatCard label="Verificacoes" value={String(verificationQueue.length)} detail="Perfis aguardando análise." icon={<ClipboardCheck size={22} />} />
+        <StatCard label="Moderação" value={String(moderationCases.length)} detail="Casos abertos para revisão." icon={<ShieldAlert size={22} />} />
         <StatCard label="Atividade" value="Alta" detail="Fluxo administrativo da ultima semana." icon={<Activity size={22} />} />
       </div>
 
@@ -61,7 +61,7 @@ export function AdminOverview() {
               <CardTitle>Panorama operacional</CardTitle>
               <div className="flex flex-wrap gap-2">
                 <LinkButton href={routes.adminModeration} variant="outline" size="sm">
-                  Ir para moderacao
+                  Ir para moderação
                 </LinkButton>
                 <LinkButton href={routes.adminVerification} variant="outline" size="sm">
                   Revisar verificacoes
@@ -115,7 +115,7 @@ export function AdminOverview() {
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
         <Card>
           <CardHeader>
-            <CardTitle>Fluxo de orcamentos</CardTitle>
+            <CardTitle>Fluxo de orçamentos</CardTitle>
           </CardHeader>
           <CardContent>
             <QuoteTable />
@@ -126,15 +126,15 @@ export function AdminOverview() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <CardTitle>Alertas administrativos</CardTitle>
               <LinkButton href={routes.adminUsers} variant="ghost" size="sm">
-                Ver usuarios
+                Ver usuários
               </LinkButton>
             </div>
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
-              <AlertLine icon={<Flag size={17} />} title="Avaliacao sinalizada" text="Revise a fila de moderacao para manter o marketplace confiavel." href={routes.adminReviews} />
-              <AlertLine icon={<ClipboardCheck size={17} />} title="Verificacoes pendentes" text="Existem perfis aguardando aprovacao documental." href={routes.adminVerification} />
-              <AlertLine icon={<Users size={17} />} title="Contas novas" text="Novos usuarios entraram na plataforma nesta semana." href={routes.adminUsers} />
+              <AlertLine icon={<Flag size={17} />} title="Avaliação sinalizada" text="Revise a fila de moderação para manter o marketplace confiavel." href={routes.adminReviews} />
+              <AlertLine icon={<ClipboardCheck size={17} />} title="Verificacoes pendentes" text="Existem perfis aguardando aprovação documental." href={routes.adminVerification} />
+              <AlertLine icon={<Users size={17} />} title="Contas novas" text="Novos usuários entraram na plataforma nesta semana." href={routes.adminUsers} />
             </div>
           </CardContent>
         </Card>

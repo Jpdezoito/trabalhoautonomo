@@ -5,8 +5,8 @@ import { AdminModerationTable } from "@/features/admin";
 export default function AdminModerationPage() {
   return (
     <DashboardShell
-      title="Moderacao"
-      description="Analise avaliacoes, perfis, portfolio e conteudos sinalizados para manter a plataforma confiavel."
+      title="Moderação"
+      description="Análise avaliações, perfis, portfólio e conteúdos sinalizados para manter a plataforma confiavel."
       nav={[...adminNavigation]}
     >
       <AdminModerationTable />

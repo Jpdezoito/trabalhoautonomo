@@ -28,7 +28,7 @@ export function ClientQuotesPanel() {
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
       <Card>
         <CardHeader>
-          <CardTitle>Historico de orcamentos</CardTitle>
+          <CardTitle>Histórico de orçamentos</CardTitle>
         </CardHeader>
         <CardContent>
           <QuoteTable />
@@ -42,7 +42,7 @@ export function ClientQuotesPanel() {
           <div className="grid gap-3">
             <MetricLine icon={<Search size={18} />} label="Abertos" value="1 pedido aguardando resposta" />
             <MetricLine icon={<Mail size={18} />} label="Respondidos" value="1 pedido com retorno" />
-            <MetricLine icon={<Star size={18} />} label="Concluidos" value="1 pronto para avaliacao" />
+            <MetricLine icon={<Star size={18} />} label="Concluídos" value="1 pronto para avaliação" />
           </div>
         </CardContent>
       </Card>
@@ -82,7 +82,7 @@ export function ClientProfilePanel() {
             <FieldGroup>
               <Field>
                 <Label>Cidade preferida</Label>
-                <Select defaultValue="Sao Paulo">
+                <Select defaultValue="São Paulo">
                   {cities.map((city) => (
                     <option key={city}>{city}</option>
                   ))}
@@ -90,7 +90,7 @@ export function ClientProfilePanel() {
               </Field>
               <Field>
                 <Label>Bairro principal</Label>
-                <Select defaultValue="Tatuape">
+                <Select defaultValue="Tatuapé">
                   {neighborhoods.map((neighborhood) => (
                     <option key={neighborhood}>{neighborhood}</option>
                   ))}
@@ -98,8 +98,8 @@ export function ClientProfilePanel() {
               </Field>
             </FieldGroup>
             <Field>
-              <Label>Observacoes para pedidos</Label>
-              <Textarea defaultValue="Prefiro contato pelo WhatsApp e orcamentos com estimativa de prazo." />
+              <Label>Observações para pedidos</Label>
+              <Textarea defaultValue="Prefiro contato pelo WhatsApp e orçamentos com estimativa de prazo." />
             </Field>
             <Button type="button">Salvar perfil</Button>
           </form>
@@ -113,7 +113,7 @@ export function ClientProfilePanel() {
           <div className="grid gap-3">
             <MetricLine icon={<UserRound size={18} />} label="Tipo de conta" value="Cliente" />
             <MetricLine icon={<Phone size={18} />} label="Contato" value="WhatsApp verificado" />
-            <MetricLine icon={<MapPin size={18} />} label="Local preferido" value="Tatuape, Sao Paulo" />
+            <MetricLine icon={<MapPin size={18} />} label="Local preferido" value="Tatuapé, São Paulo" />
           </div>
         </CardContent>
       </Card>
@@ -126,7 +126,7 @@ export function ClientPreferencesPanel() {
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
       <Card>
         <CardHeader>
-          <CardTitle>Preferencias de busca</CardTitle>
+          <CardTitle>Preferências de busca</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="grid gap-4">
@@ -142,10 +142,10 @@ export function ClientPreferencesPanel() {
               </div>
             </Field>
             <Field>
-              <Label>Servicos de interesse</Label>
-              <Textarea defaultValue="Reparos eletricos&#10;Montagem de moveis&#10;Frete pequeno&#10;Limpeza pos-obra" />
+              <Label>Serviços de interesse</Label>
+              <Textarea defaultValue="Reparos elétricos&#10;Montagem de móveis&#10;Frete pequeno&#10;Limpeza pós-obra" />
             </Field>
-            <Button type="button">Salvar preferencias</Button>
+            <Button type="button">Salvar preferências</Button>
           </form>
         </CardContent>
       </Card>
@@ -155,10 +155,10 @@ export function ClientPreferencesPanel() {
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
-            <Badge variant="primary">Tatuape</Badge>
+            <Badge variant="primary">Tatuapé</Badge>
             <Badge variant="primary">Verificados</Badge>
             <Badge variant="primary">4,5+ estrelas</Badge>
-            <Badge variant="primary">Disponiveis</Badge>
+            <Badge variant="primary">Disponíveis</Badge>
           </div>
         </CardContent>
       </Card>
@@ -168,16 +168,16 @@ export function ClientPreferencesPanel() {
 
 export function ClientNotificationsPanel() {
   const notifications = [
-    ["Orcamento respondido", "Carlos Mendes respondeu seu pedido de troca de quadro eletrico."],
+    ["Orçamento respondido", "Carlos Mendes respondeu seu pedido de troca de quadro elétrico."],
     ["Profissional salvo", "Fernanda Rocha foi adicionada aos seus favoritos."],
-    ["Avaliacao pendente", "Publique sua avaliacao para um atendimento concluido."],
-    ["Nova categoria", "Frete e entregas rapidas agora aparecem nas suas buscas salvas."],
+    ["Avaliação pendente", "Publique sua avaliação para um atendimento concluído."],
+    ["Nova categoria", "Frete e entregas rápidas agora aparecem nas suas buscas salvas."],
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Central de notificacoes</CardTitle>
+        <CardTitle>Central de notificações</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3">
@@ -190,7 +190,7 @@ export function ClientNotificationsPanel() {
                   <p className="mt-1 text-sm leading-6 text-muted">{text}</p>
                 </div>
               </div>
-              <Badge variant="info">Nao lida</Badge>
+              <Badge variant="info">Não lida</Badge>
             </div>
           ))}
         </div>
@@ -209,7 +209,7 @@ function EmptyState() {
           </span>
           <h2 className="mt-5 text-2xl font-black text-foreground">Nenhum favorito salvo</h2>
           <p className="mt-3 leading-7 text-muted">
-            Salve profissionais durante a busca para montar sua lista de comparacao e voltar aos perfis com mais facilidade.
+            Salve profissionais durante a busca para montar sua lista de comparação e voltar aos perfis com mais facilidade.
           </p>
           <LinkButton href={routes.search} className="mt-5">
             <Search className="mr-2" size={18} />

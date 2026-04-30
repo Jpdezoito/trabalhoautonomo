@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const authHeader = request.headers.get("authorization");
 
     if (authHeader !== `Bearer ${cronSecret}`) {
-      return NextResponse.json({ message: "Nao autorizado." }, { status: 401 });
+      return NextResponse.json({ message: "Não autorizado." }, { status: 401 });
     }
   }
 

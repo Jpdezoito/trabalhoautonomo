@@ -98,7 +98,7 @@ function isAppRole(value: unknown): value is AppRole {
 
 function handleUnauthorized(request: NextRequest) {
   if (isApiRequest(request)) {
-    return NextResponse.json({ message: "Autenticacao obrigatoria." }, { status: 401 });
+    return NextResponse.json({ message: "Autenticação obrigatoria." }, { status: 401 });
   }
 
   const loginUrl = new URL("/entrar", request.url);
@@ -109,7 +109,7 @@ function handleUnauthorized(request: NextRequest) {
 
 function handleForbidden(request: NextRequest) {
   if (isApiRequest(request)) {
-    return NextResponse.json({ message: "Perfil sem permissao para acessar este recurso." }, { status: 403 });
+    return NextResponse.json({ message: "Perfil sem permissão para acessar este recurso." }, { status: 403 });
   }
 
   return NextResponse.redirect(new URL("/pos-login", request.url));

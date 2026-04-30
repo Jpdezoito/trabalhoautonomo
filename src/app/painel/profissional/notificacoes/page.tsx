@@ -8,8 +8,8 @@ export default function WorkerNotificationsPage() {
 
   return (
     <DashboardShell
-      title="Notificacoes"
-      description="Veja alertas operacionais sobre pedidos, perfil, portfolio, verificacao e oportunidades."
+      title="Notificações"
+      description="Veja alertas operacionais sobre pedidos, perfil, portfólio, verificação e oportunidades."
       nav={[...workerNavigation]}
     >
       <WorkerNotificationsPanel worker={worker} />

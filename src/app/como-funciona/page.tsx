@@ -11,7 +11,7 @@ export default function HowItWorksPage() {
           title: "Para clientes",
           body: [
             "1. Busque profissionais por categoria, cidade ou bairro, filtrando conforme sua necessidade.",
-            "2. Analise os perfis: veja avaliações, portfólio, preço inicial, áreas de atuação e disponibilidade antes de entrar em contato.",
+            "2. Análise os perfis: veja avaliações, portfólio, preço inicial, áreas de atuação e disponibilidade antes de entrar em contato.",
             "3. Solicite orçamento ou envie mensagem diretamente pelo perfil do profissional.",
             "4. Acompanhe o andamento dos seus pedidos e conversas no painel do cliente.",
             "5. Após o atendimento, avalie o profissional e salve em seus favoritos para futuras necessidades.",

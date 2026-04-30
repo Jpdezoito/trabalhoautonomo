@@ -5,8 +5,8 @@ import { ClientNotificationsPanel } from "@/features/clients/dashboard";
 export default function ClientNotificationsPage() {
   return (
     <DashboardShell
-      title="Notificacoes"
-      description="Acompanhe respostas de orcamento, lembretes de avaliacao, favoritos e atualizacoes da plataforma."
+      title="Notificações"
+      description="Acompanhe respostas de orçamento, lembretes de avaliação, favoritos e atualizações da plataforma."
       nav={[...clientNavigation]}
     >
       <ClientNotificationsPanel />

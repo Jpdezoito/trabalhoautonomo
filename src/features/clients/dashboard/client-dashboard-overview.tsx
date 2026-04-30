@@ -24,10 +24,10 @@ export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boole
       ) : null}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Orcamentos ativos" value="3" detail="Pedidos aguardando resposta ou decisao." icon={<MessageSquareText size={22} />} />
-        <StatCard label="Favoritos" value="6" detail="Profissionais salvos para contato rapido." icon={<Heart size={22} />} />
-        <StatCard label="Avaliacoes" value="4" detail="Feedbacks publicados apos servicos." icon={<Star size={22} />} />
-        <StatCard label="Preferencias" value="8" detail="Categorias e regioes salvas." icon={<MapPin size={22} />} />
+        <StatCard label="Orçamentos ativos" value="3" detail="Pedidos aguardando resposta ou decisao." icon={<MessageSquareText size={22} />} />
+        <StatCard label="Favoritos" value="6" detail="Profissionais salvos para contato rápido." icon={<Heart size={22} />} />
+        <StatCard label="Avaliações" value="4" detail="Feedbacks publicados após serviços." icon={<Star size={22} />} />
+        <StatCard label="Preferências" value="8" detail="Categorias e regiões salvas." icon={<MapPin size={22} />} />
       </div>
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
@@ -35,11 +35,11 @@ export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boole
           <CardHeader>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <CardTitle>Resumo dos orcamentos</CardTitle>
+                <CardTitle>Resumo dos orçamentos</CardTitle>
                 <p className="mt-2 text-sm leading-6 text-muted">Acompanhe pedidos recentes, status e proximos retornos esperados.</p>
               </div>
               <LinkButton href={routes.clientQuotes} variant="outline">
-                Ver historico
+                Ver Histórico
               </LinkButton>
             </div>
           </CardHeader>
@@ -55,7 +55,7 @@ export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boole
           <CardContent>
             <div className="grid gap-3">
               <Shortcut href={routes.search} icon={<Search size={18} />} title="Encontrar profissional" text="Busque por categoria, cidade, bairro e disponibilidade." />
-              <Shortcut href={routes.clientFavorites} icon={<Heart size={18} />} title="Favoritos" text="Compare profissionais salvos antes de pedir orcamento." />
+              <Shortcut href={routes.clientFavorites} icon={<Heart size={18} />} title="Favoritos" text="Compare profissionais salvos antes de pedir orçamento." />
               <Shortcut href={routes.clientProfile} icon={<UserRound size={18} />} title="Perfil e contato" text="Mantenha WhatsApp, e-mail e local preferido atualizados." />
             </div>
           </CardContent>
@@ -83,13 +83,13 @@ export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boole
 
         <Card>
           <CardHeader>
-            <CardTitle>Notificacoes recentes</CardTitle>
+            <CardTitle>Notificações recentes</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
-              <Notice title="Orcamento respondido" text={`${quotes[1]?.worker ?? "Profissional"} enviou retorno para seu pedido.`} />
-              <Notice title="Avalie um atendimento" text="Sua avaliacao ajuda outros clientes a escolherem com mais seguranca." />
-              <Notice title="Favorito disponivel" text="Um profissional salvo esta com agenda aberta esta semana." />
+              <Notice title="Orçamento respondido" text={`${quotes[1]?.worker ?? "Profissional"} enviou retorno para seu pedido.`} />
+              <Notice title="Avalie um atendimento" text="Sua avaliação ajuda outros clientes a escolherem com mais segurança." />
+              <Notice title="Favorito disponível" text="Um profissional salvo está com agenda aberta está semana." />
             </div>
           </CardContent>
         </Card>
@@ -98,7 +98,7 @@ export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boole
       <section id="avaliacoes">
         <Card>
           <CardHeader>
-            <CardTitle>Avaliacoes pendentes</CardTitle>
+            <CardTitle>Avaliações pendentes</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
@@ -122,7 +122,7 @@ export function ClientDashboardOverview({ readOnly = false }: { readOnly?: boole
       <section>
         <Card>
           <CardHeader>
-            <CardTitle>Preferencias salvas</CardTitle>
+            <CardTitle>Preferências salvas</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">

@@ -5,7 +5,7 @@ import { AdminUsersTable } from "@/features/admin";
 export default function AdminUsersPage() {
   return (
     <DashboardShell
-      title="Usuarios"
+      title="Usuários"
       description="Visualize clientes, profissionais e administradores com status de conta e nivel de acesso."
       nav={[...adminNavigation]}
     >

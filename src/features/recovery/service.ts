@@ -126,11 +126,11 @@ export async function verifyRecoveryContactFactor(input: {
       await expireRecoverySession(session.id);
     }
 
-    throw new Error("Este pedido de recuperacao expirou. Inicie novamente.");
+    throw new Error("Este pedido de recuperação expirou. Inicie novamente.");
   }
 
   if (session.status === "UNAVAILABLE") {
-    throw new Error("Este metodo de recuperacao esta indisponivel para esta conta.");
+    throw new Error("Este metodo de recuperação está indisponivel para está conta.");
   }
 
   if (session.contactAttemptCount >= recoveryLimits.maxContactAttempts) {
@@ -142,7 +142,7 @@ export async function verifyRecoveryContactFactor(input: {
       },
     });
 
-    throw new Error("Muitas tentativas de codigo. Inicie uma nova recuperacao.");
+    throw new Error("Muitas tentativas de código. Inicie uma nova recuperação.");
   }
 
   const valid = session.challengeCodeHash === hashCode(input.code);
@@ -172,13 +172,13 @@ export async function verifyRecoveryContactFactor(input: {
   });
 
   if (!valid) {
-    throw new Error("Codigo invalido ou expirado. Tente novamente.");
+    throw new Error("Código inválido ou expirado. Tente novamente.");
   }
 
   return {
     nextStep: "face",
     maskedDestination: session.contactMasked,
-    message: "Contato validado com sucesso. Agora conclua a verificacao facial.",
+    message: "Contato validado com sucesso. Agora conclua a verificação facial.",
   };
 }
 
@@ -197,11 +197,11 @@ export async function verifyRecoveryFaceFactor(input: {
       await expireRecoverySession(session.id);
     }
 
-    throw new Error("Esta sessao de recuperacao expirou. Inicie novamente.");
+    throw new Error("Está sessão de recuperação expirou. Inicie novamente.");
   }
 
   if (session.status !== "CONTACT_VERIFIED") {
-    throw new Error("Valide primeiro o e-mail ou telefone antes da verificacao facial.");
+    throw new Error("Valide primeiro o e-mail ou telefone antes da verificação facial.");
   }
 
   if (session.faceAttemptCount >= recoveryLimits.maxFaceAttempts) {
@@ -213,7 +213,7 @@ export async function verifyRecoveryFaceFactor(input: {
       },
     });
 
-    throw new Error("Limite de tentativas faciais atingido. Inicie uma nova recuperacao.");
+    throw new Error("Limite de tentativas faciais atingido. Inicie uma nova recuperação.");
   }
 
   const result = await verifyFacialRecoveryFactor({
@@ -248,12 +248,12 @@ export async function verifyRecoveryFaceFactor(input: {
   });
 
   if (!result.success) {
-    throw new Error(result.reason || "Nao foi possivel validar a verificacao facial.");
+    throw new Error(result.reason || "Não foi possível validar a verificação facial.");
   }
 
   return {
     nextStep: "password",
-    message: "Verificacao facial concluida. Agora voce pode definir uma nova senha.",
+    message: "Verificação facial concluida. Agora você pode definir uma nova senha.",
   };
 }
 
@@ -276,7 +276,7 @@ export async function resetPasswordAfterRecovery(input: {
   }
 
   if (session.status !== "FACE_VERIFIED") {
-    throw new Error("A recuperacao ainda nao concluiu os dois fatores obrigatorios.");
+    throw new Error("A recuperação ainda não concluiu os dois fatores obrigatórios.");
   }
 
   if (session.passwordAttemptCount >= recoveryLimits.maxPasswordAttempts) {
@@ -288,7 +288,7 @@ export async function resetPasswordAfterRecovery(input: {
       },
     });
 
-    throw new Error("Limite de tentativas excedido. Inicie uma nova recuperacao.");
+    throw new Error("Limite de tentativas excedido. Inicie uma nova recuperação.");
   }
 
   const passwordHash = await bcrypt.hash(input.password, 10);
@@ -324,7 +324,7 @@ export async function resetPasswordAfterRecovery(input: {
 
   return {
     completed: true,
-    message: "Senha redefinida com sucesso. Voce ja pode entrar na plataforma.",
+    message: "Senha redefinida com sucesso. Você já pode entrar na plataforma.",
   };
 }
 

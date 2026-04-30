@@ -91,7 +91,7 @@ export default function PrivacyPage() {
         {
           title: "Alterações nesta política",
           body: [
-            "Esta Política de Privacidade pode ser atualizada para refletir melhorias na plataforma, mudanças legais ou novas funcionalidades. Quando houver alterações relevantes, a AutonomoPro poderá comunicar os usuários por aviso no site ou outros canais disponíveis.",
+            "Está Política de Privacidade pode ser atualizada para refletir melhorias na plataforma, mudanças legais ou novas funcionalidades. Quando houver alterações relevantes, a AutonomoPro poderá comunicar os usuários por aviso no site ou outros canais disponíveis.",
           ],
         },
       ]}

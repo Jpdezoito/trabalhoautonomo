@@ -15,7 +15,7 @@ export function ContactActions({ worker, className }: { worker: Worker; classNam
     allowQuotes: worker.contactSettings?.allowQuotes ?? true,
     allowShare: worker.contactSettings?.allowShare ?? true,
   };
-  const whatsappMessage = `Ola, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de falar sobre um servico.`;
+  const whatsappMessage = `Ola, ${worker.name}. Encontrei seu perfil na AutonomoPro e gostaria de falar sobre um serviço.`;
 
   async function handleShare() {
     const shareUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -55,7 +55,7 @@ export function ContactActions({ worker, className }: { worker: Worker; classNam
         {settings.allowQuotes ? (
           <LinkButton href="#orcamento" className="w-full">
             <LinkIcon className="mr-2" size={18} />
-            Solicitar orcamento
+            Solicitar orçamento
           </LinkButton>
         ) : null}
 

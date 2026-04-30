@@ -11,7 +11,7 @@ export const newPasswordSchema = z
     confirmPassword: z.string().min(8, "Confirme a nova senha."),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas nao conferem.",
+    message: "As senhas não conferem.",
     path: ["confirmPassword"],
   });
 

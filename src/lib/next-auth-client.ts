@@ -34,7 +34,7 @@ async function getCsrfToken() {
   const payload = await readJson<CsrfResponse>(response);
 
   if (!payload.csrfToken) {
-    throw new Error("Nao foi possivel validar a sessao de autenticacao.");
+    throw new Error("Não foi possível validar a sessão de autenticação.");
   }
 
   return payload.csrfToken;

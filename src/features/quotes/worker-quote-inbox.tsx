@@ -39,7 +39,7 @@ export function WorkerQuoteInbox({ initialQuotes }: WorkerQuoteInboxProps) {
         <div className="grid gap-4 md:grid-cols-3">
           <Metric label="Novos" value={stats.open.toString()} icon={<Clock size={20} />} />
           <Metric label="Aceitos" value={stats.accepted.toString()} icon={<CheckCircle2 size={20} />} />
-          <Metric label="Concluidos" value={stats.completed.toString()} icon={<MessageSquareText size={20} />} />
+          <Metric label="Concluídos" value={stats.completed.toString()} icon={<MessageSquareText size={20} />} />
         </div>
 
         <Card>
@@ -99,9 +99,9 @@ export function WorkerQuoteInbox({ initialQuotes }: WorkerQuoteInboxProps) {
                 <Detail label="Cliente" value={selectedQuote.clientName} />
                 <Detail label="Contato" value={`${selectedQuote.clientPhone} - ${selectedQuote.clientEmail}`} />
                 <Detail label="Local" value={`${selectedQuote.neighborhood}, ${selectedQuote.city}`} />
-                <Detail label="Servico" value={selectedQuote.serviceType} />
-                <Detail label="Descricao" value={selectedQuote.description} />
-                {selectedQuote.extraNotes ? <Detail label="Observacoes" value={selectedQuote.extraNotes} /> : null}
+                <Detail label="Serviço" value={selectedQuote.serviceType} />
+                <Detail label="Descrição" value={selectedQuote.description} />
+                {selectedQuote.extraNotes ? <Detail label="Observações" value={selectedQuote.extraNotes} /> : null}
                 {selectedQuote.preferredDate ? (
                   <div className="rounded-[8px] bg-surface-muted p-3">
                     <p className="flex items-center gap-2 text-sm font-bold text-muted">

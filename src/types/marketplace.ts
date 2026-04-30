@@ -127,7 +127,7 @@ export type Quote = {
   worker: string;
   client: string;
   location: string;
-  status: "Aberto" | "Respondido" | "Aprovado" | "Concluido";
+  status: "Aberto" | "Respondido" | "Aprovado" | "Concluído";
   value?: string;
   createdAt: string;
 };

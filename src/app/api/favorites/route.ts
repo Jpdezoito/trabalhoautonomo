@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   if (!parsed.success) {
     return NextResponse.json(
       {
-        message: "Dados invalidos para atualizar favoritos.",
+        message: "Dados inválidos para atualizar favoritos.",
         errors: parsed.error.flatten().fieldErrors,
       },
       { status: 422 },
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   ]);
 
   if (!worker || !clientProfile) {
-    return NextResponse.json({ message: "Profissional nao encontrado." }, { status: 404 });
+    return NextResponse.json({ message: "Profissional não encontrado." }, { status: 404 });
   }
 
   const existingFavorite = await prisma.favorite.findUnique({

@@ -42,8 +42,8 @@ export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: 
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Leads do mes" value="28" detail="Pedidos recebidos no periodo." icon={<MessageSquareText size={22} />} />
-        <StatCard label="Servicos concluidos" value={`${worker.jobsDone}`} detail="Historico visivel no perfil." icon={<BriefcaseBusiness size={22} />} />
-        <StatCard label="Avaliacao media" value={formatRating(worker.rating)} detail={`${worker.reviewsCount} avaliacoes publicas.`} icon={<Star size={22} />} />
+        <StatCard label="Serviços Concluídos" value={`${worker.jobsDone}`} detail="Histórico visível no perfil." icon={<BriefcaseBusiness size={22} />} />
+        <StatCard label="Avaliação média" value={formatRating(worker.rating)} detail={`${worker.reviewsCount} avaliações públicas.`} icon={<Star size={22} />} />
         <StatCard label="Perfil" value={`${profileScore}%`} detail="Completude estimada do cadastro." icon={<BadgeCheck size={22} />} />
       </div>
 
@@ -52,7 +52,7 @@ export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: 
           <CardHeader>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <CardTitle>Saude do perfil</CardTitle>
+                <CardTitle>Saúde do perfil</CardTitle>
                 <p className="mt-2 text-sm leading-6 text-muted">
                   Perfis completos tendem a receber pedidos mais qualificados e melhores respostas dos clientes.
                 </p>
@@ -71,10 +71,10 @@ export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: 
                   <div className="h-full bg-primary" style={{ width: `${profileScore}%` }} />
                 </div>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  <ChecklistItem completed label="Descricao profissional completa" />
-                  <ChecklistItem completed={worker.portfolio.length > 0} label="Portfolio com fotos reais" />
+                  <ChecklistItem completed label="Descrição profissional completa" />
+                  <ChecklistItem completed={worker.portfolio.length > 0} label="Portfólio com fotos reais" />
                   <ChecklistItem completed={worker.verified} label="Perfil verificado" />
-                  <ChecklistItem completed={worker.services.length >= 3} label="Servicos principais definidos" />
+                  <ChecklistItem completed={worker.services.length >= 3} label="Serviços principais definidos" />
                 </div>
               </div>
               <div className="rounded-[8px] bg-primary-soft p-5 text-primary-strong">
@@ -93,9 +93,9 @@ export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: 
             <div className="grid gap-3">
               <StatusLine icon={<Clock size={18} />} label="Resposta" value={worker.responseTime} />
               <StatusLine icon={<CalendarClock size={18} />} label="Agenda" value={worker.available ? "Aberta para pedidos" : "Pausada"} />
-              <StatusLine icon={<WalletCards size={18} />} label="Preco inicial" value={worker.startingPrice} />
-              <StatusLine icon={<ShieldCheck size={18} />} label="Verificacao facial" value={getFacialStatusLabel(worker.identityVerification?.status)} />
-              <StatusLine icon={<Eye size={18} />} label="Perfil publico" value="Publicado" />
+              <StatusLine icon={<WalletCards size={18} />} label="Preço inicial" value={worker.startingPrice} />
+              <StatusLine icon={<ShieldCheck size={18} />} label="Verificação facial" value={getFacialStatusLabel(worker.identityVerification?.status)} />
+              <StatusLine icon={<Eye size={18} />} label="Perfil público" value="Publicado" />
             </div>
           </CardContent>
         </Card>
@@ -129,18 +129,18 @@ export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: 
 
         <Card>
           <CardHeader>
-            <CardTitle>Notificacoes</CardTitle>
+            <CardTitle>Notificações</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
               <NotificationLine title="Novo pedido recebido" text="Responda em ate 24h para manter boa taxa de retorno." />
-              <NotificationLine title="Portfolio atualizado" text={`${worker.portfolio.length} trabalhos estao visiveis no perfil.`} />
+              <NotificationLine title="Portfólio atualizado" text={`${worker.portfolio.length} trabalhos estão visíveis no perfil.`} />
               <NotificationLine
-                title="Verificacao de identidade"
+                title="Verificação de identidade"
                 text={
                   worker.identityVerification?.status === "aprovado"
-                    ? "Sua verificacao facial foi aprovada e ja pode apoiar a recuperacao segura de senha."
-                    : "Envie sua verificacao facial para reforcar a confianca do perfil e a seguranca da conta."
+                    ? "Sua verificação facial foi aprovada e já pode apoiar a recuperação segura de senha."
+                    : "Envie sua verificação facial para reforcar a confiança do perfil e a segurança da conta."
                 }
               />
             </div>
@@ -149,9 +149,9 @@ export function WorkerDashboardOverview({ worker, readOnly = false }: { worker: 
       </section>
 
       <section className="grid gap-6 xl:grid-cols-3">
-        <ShortcutCard icon={<Camera size={22} />} title="Portfolio" text="Ordene imagens, marque destaque e adicione novos trabalhos." href={routes.workerPortfolio} />
-        <ShortcutCard icon={<BriefcaseBusiness size={22} />} title="Servicos" text="Mantenha especialidades, preco inicial e areas atendidas atualizadas." href={routes.workerServices} />
-        <ShortcutCard icon={<Star size={22} />} title="Avaliacoes" text="Acompanhe feedbacks recentes e pontos de melhoria." href={routes.workerReviews} />
+        <ShortcutCard icon={<Camera size={22} />} title="Portfólio" text="Ordene imagens, marque destaque e adicione novos trabalhos." href={routes.workerPortfolio} />
+        <ShortcutCard icon={<BriefcaseBusiness size={22} />} title="Serviços" text="Mantenha especialidades, preço inicial e áreas atendidas atualizadas." href={routes.workerServices} />
+        <ShortcutCard icon={<Star size={22} />} title="Avaliações" text="Acompanhe feedbacks recentes e pontos de melhoria." href={routes.workerReviews} />
       </section>
     </div>
   );

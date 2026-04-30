@@ -19,7 +19,7 @@ export function DashboardShell({ title, description, nav, children }: DashboardS
         </aside>
         <main>
           <div className="mb-6">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-primary">Area segura</p>
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-primary">Área segura</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight text-foreground sm:text-4xl">{title}</h1>
             <p className="mt-3 max-w-3xl leading-7 text-muted">{description}</p>
           </div>

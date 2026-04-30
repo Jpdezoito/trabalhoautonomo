@@ -47,7 +47,7 @@ export function PasswordRecoveryFlow() {
     const payload = (await response.json()) as T & { error?: string };
 
     if (!response.ok) {
-      throw new Error(payload.error || "Falha na operacao.");
+      throw new Error(payload.error || "Falha na operação.");
     }
 
     return payload;
@@ -74,7 +74,7 @@ export function PasswordRecoveryFlow() {
       setMessage(payload.message);
       setStep("contact");
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Nao foi possivel iniciar a recuperacao.");
+      setError(requestError instanceof Error ? requestError.message : "Não foi possível iniciar a recuperação.");
     } finally {
       setBusy(false);
     }
@@ -92,7 +92,7 @@ export function PasswordRecoveryFlow() {
       setMessage(payload.message);
       setStep("face");
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Nao foi possivel validar o codigo.");
+      setError(requestError instanceof Error ? requestError.message : "Não foi possível validar o código.");
     } finally {
       setBusy(false);
     }
@@ -110,7 +110,7 @@ export function PasswordRecoveryFlow() {
       setMessage(payload.message);
       setStep("password");
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Nao foi possivel validar a verificacao facial.");
+      setError(requestError instanceof Error ? requestError.message : "Não foi possível validar a verificação facial.");
     } finally {
       setBusy(false);
     }
@@ -129,7 +129,7 @@ export function PasswordRecoveryFlow() {
       setMessage(payload.message);
       setStep("success");
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Nao foi possivel redefinir a senha.");
+      setError(requestError instanceof Error ? requestError.message : "Não foi possível redefinir a senha.");
     } finally {
       setBusy(false);
     }
@@ -147,7 +147,7 @@ export function PasswordRecoveryFlow() {
       setCameraActive(true);
       setError("");
     } catch {
-      setError("Nao foi possivel acessar a webcam. Use o envio de imagem como alternativa.");
+      setError("Não foi possível acessar a webcam. Use o envio de imagem como alternativa.");
     }
   }
 
@@ -173,7 +173,7 @@ export function PasswordRecoveryFlow() {
 
     context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
     setFaceImage(canvas.toDataURL("image/jpeg", 0.92));
-    setMessage("Captura facial pronta para validacao.");
+    setMessage("Captura facial pronta para validação.");
   }
 
   function handleFaceUpload(file?: File) {
@@ -182,7 +182,7 @@ export function PasswordRecoveryFlow() {
     const reader = new FileReader();
     reader.onload = () => {
       setFaceImage(typeof reader.result === "string" ? reader.result : "");
-      setMessage("Imagem enviada. Agora valide a verificacao facial.");
+      setMessage("Imagem enviada. Agora valide a verificação facial.");
     };
     reader.readAsDataURL(file);
   }
@@ -192,7 +192,7 @@ export function PasswordRecoveryFlow() {
       <CardHeader className="bg-surface">
         <CardTitle>Esqueci minha senha</CardTitle>
         <p className="mt-2 text-sm leading-6 text-muted">
-          Este fluxo exige dois fatores: validacao de e-mail ou telefone e depois verificacao facial, quando a conta possui recuperacao facial habilitada.
+          Este fluxo exige dois fatores: validação de e-mail ou telefone e depois verificação facial, quando a conta possui recuperação facial habilitada.
         </p>
       </CardHeader>
       <CardContent>
@@ -214,8 +214,8 @@ export function PasswordRecoveryFlow() {
 
           {step === "method" ? (
             <div className="grid gap-4">
-              <MethodCard selected={method === "EMAIL_FACE"} title="E-mail + reconhecimento facial" description="Primeiro validamos seu e-mail. Depois exigimos verificacao facial ao vivo." icon={<Mail size={20} />} onClick={() => setMethod("EMAIL_FACE")} />
-              <MethodCard selected={method === "PHONE_FACE"} title="Telefone + reconhecimento facial" description="Primeiro validamos um codigo OTP. Depois exigimos verificacao facial ao vivo." icon={<Phone size={20} />} onClick={() => setMethod("PHONE_FACE")} />
+              <MethodCard selected={method === "EMAIL_FACE"} title="E-mail + reconhecimento facial" description="Primeiro validamos seu e-mail. Depois exigimos verificação facial ao vivo." icon={<Mail size={20} />} onClick={() => setMethod("EMAIL_FACE")} />
+              <MethodCard selected={method === "PHONE_FACE"} title="Telefone + reconhecimento facial" description="Primeiro validamos um código OTP. Depois exigimos verificação facial ao vivo." icon={<Phone size={20} />} onClick={() => setMethod("PHONE_FACE")} />
               <Button type="button" onClick={() => setStep("start")}>Continuar</Button>
             </div>
           ) : null}
@@ -225,7 +225,7 @@ export function PasswordRecoveryFlow() {
               <div className="rounded-[8px] border border-border bg-surface-muted p-4">
                 <p className="font-black text-foreground">{methodLabel}</p>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  Informe {method === "EMAIL_FACE" ? "o e-mail" : "o telefone"} associado a sua conta para iniciar a recuperacao multifator.
+                  Informe {method === "EMAIL_FACE" ? "o e-mail" : "o telefone"} associado a sua conta para iniciar a recuperação multifator.
                 </p>
               </div>
               <Field>
@@ -239,7 +239,7 @@ export function PasswordRecoveryFlow() {
               </Field>
               <Button type="button" onClick={startFlow} disabled={busy}>
                 {busy ? <LoaderCircle className="mr-2 animate-spin" size={18} /> : null}
-                Enviar codigo
+                Enviar código
               </Button>
             </div>
           ) : null}
@@ -247,19 +247,19 @@ export function PasswordRecoveryFlow() {
           {step === "contact" ? (
             <div className="grid gap-4">
               <div className="rounded-[8px] border border-border bg-surface-muted p-4">
-                <p className="font-black text-foreground">Validacao do contato</p>
+                <p className="font-black text-foreground">Validação do contato</p>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  Digite o codigo enviado para <strong>{maskedDestination}</strong>. So depois disso a verificacao facial sera liberada.
+                  Digite o código enviado para <strong>{maskedDestination}</strong>. So depois disso a verificação facial será liberada.
                 </p>
-                {developmentCode ? <p className="mt-2 text-xs font-bold text-primary">Codigo de desenvolvimento: {developmentCode}</p> : null}
+                {developmentCode ? <p className="mt-2 text-xs font-bold text-primary">Código de desenvolvimento: {developmentCode}</p> : null}
               </div>
               <Field>
-                <Label>Codigo recebido</Label>
-                <Input value={contactCode} onChange={(event) => setContactCode(event.target.value)} placeholder="Digite o codigo de 6 digitos" />
+                <Label>Código recebido</Label>
+                <Input value={contactCode} onChange={(event) => setContactCode(event.target.value)} placeholder="Digite o código de 6 digitos" />
               </Field>
               <Button type="button" onClick={verifyContact} disabled={busy}>
                 {busy ? <LoaderCircle className="mr-2 animate-spin" size={18} /> : null}
-                Validar codigo
+                Validar código
               </Button>
             </div>
           ) : null}
@@ -269,7 +269,7 @@ export function PasswordRecoveryFlow() {
               <div className="rounded-[8px] border border-border bg-surface-muted p-4">
                 <p className="font-black text-foreground">Reconhecimento facial</p>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  Agora valide a verificacao facial ao vivo. Sem esse segundo fator, a redefinicao de senha nao sera liberada.
+                  Agora valide a verificação facial ao vivo. Sem esse segundo fator, a redefinicao de senha não será liberada.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -307,10 +307,10 @@ export function PasswordRecoveryFlow() {
                 )}
               </div>
               <canvas ref={canvasRef} className="hidden" />
-              <FieldHint>Somente contas com recuperacao facial previamente aprovada podem concluir esta etapa.</FieldHint>
+              <FieldHint>Somente contas com recuperação facial previamente aprovada podem concluir está etapa.</FieldHint>
               <Button type="button" onClick={verifyFace} disabled={busy || !faceImage}>
                 {busy ? <LoaderCircle className="mr-2 animate-spin" size={18} /> : null}
-                Validar verificacao facial
+                Validar verificação facial
               </Button>
             </div>
           ) : null}
@@ -323,7 +323,7 @@ export function PasswordRecoveryFlow() {
               </div>
               <Field>
                 <Label>Nova senha</Label>
-                <Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Minimo de 8 caracteres" />
+                <Input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Mínimo de 8 caracteres" />
               </Field>
               <Field>
                 <Label>Confirmar nova senha</Label>

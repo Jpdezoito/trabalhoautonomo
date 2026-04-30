@@ -8,7 +8,7 @@ export async function verifyFacialRecoveryFactor(input: {
   if (!input.userId) {
     return {
       success: false,
-      reason: "Nao foi possivel validar a verificacao facial para esta conta.",
+      reason: "Não foi possível validar a verificação facial para está conta.",
     };
   }
 
@@ -25,7 +25,7 @@ export async function verifyFacialRecoveryFactor(input: {
   if (!enrollment) {
     return {
       success: false,
-      reason: "A recuperacao facial nao esta disponivel para esta conta.",
+      reason: "A recuperação facial não está disponível para está conta.",
     };
   }
 

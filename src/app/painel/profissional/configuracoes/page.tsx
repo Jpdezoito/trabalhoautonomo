@@ -5,8 +5,8 @@ import { WorkerSettingsPanel } from "@/features/settings";
 export default function WorkerSettingsPage() {
   return (
     <DashboardShell
-      title="Configuracoes"
-      description="Ajuste dados da conta, contato, seguranca, privacidade e preferencias de notificacao."
+      title="Configurações"
+      description="Ajuste dados da conta, contato, segurança, privacidade e preferências de notificacao."
       nav={[...workerNavigation]}
     >
       <WorkerSettingsPanel />

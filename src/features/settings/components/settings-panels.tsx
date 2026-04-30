@@ -84,7 +84,7 @@ export function WorkerSettingsPanel() {
         <NotificationSettingsCard audience="worker" />
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section id="plano" className="scroll-mt-20 grid gap-6 xl:grid-cols-2">
         <WorkerVisibilitySettingsCard />
         <PrivacySettingsCard audience="worker" />
       </section>

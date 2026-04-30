@@ -5,6 +5,7 @@ export const publicNavigation = [
   { href: routes.howItWorks, label: "Como funciona" },
   { href: routes.search, label: "Buscar profissionais" },
   { href: routes.categories, label: "Categorias" },
+  { href: routes.plans, label: "Planos" },
 ] as const;
 
 export const clientNavigation = [
@@ -25,6 +26,7 @@ export const workerNavigation = [
   { href: routes.workerAvailability, label: "Disponibilidade" },
   { href: routes.workerPortfolio, label: "Portfólio" },
   { href: routes.workerQuotes, label: "Orçamentos" },
+  { href: routes.workerPlan, label: "Meu plano" },
   { href: routes.workerReviews, label: "Avaliações" },
   { href: routes.workerNotifications, label: "Notificações" },
   { href: routes.workerSettings, label: "Configurações" },

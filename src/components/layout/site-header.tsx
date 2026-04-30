@@ -27,6 +27,7 @@ export async function SiteHeader() {
             { href: routes.workerDashboard, label: "Meu painel" },
             { href: routes.workerQuotes, label: "Orçamentos" },
             { href: routes.workerPortfolio, label: "Portfólio" },
+            { href: routes.workerPlan, label: "Meu plano" },
           ]
         : role === "CLIENT"
           ? [

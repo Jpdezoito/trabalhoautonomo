@@ -23,6 +23,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { StatCard } from "@/components/ui/stat-card";
 import { routes } from "@/config/routes";
+import { getAppSession } from "@/lib/app-session";
 import { workers } from "@/lib/marketplace-data";
 
 const heroStats = [
@@ -87,33 +88,45 @@ const professionalPlans = [
   {
     name: "Free",
     price: "R$ 0",
-    description: "Para entrar na plataforma, criar perfil e receber pedidos organicos.",
+    description: "Para entrar na plataforma, criar perfil e receber pedidos orgânicos.",
     features: ["Perfil público", "Portfólio básico", "Orçamentos pela plataforma", "Selo de verificação quando aprovado"],
-    cta: "Comecar gratis",
-    href: routes.registerWorker,
+    cta: "Começar grátis",
     highlighted: false,
   },
   {
     name: "Pro",
-    price: "R$ 29/mes",
+    price: "R$ 29/mês",
     description: "Para profissionais que querem mais visibilidade e mais controle comercial.",
     features: ["Prioridade sobre perfis Free", "Mais destaque nos cards", "Leads de WhatsApp rastreados", "Badge Plano Pro"],
     cta: "Virar Pro",
-    href: routes.registerWorker,
     highlighted: true,
   },
   {
     name: "Destaque",
-    price: "R$ 59/mes",
-    description: "Para aparecer no topo do bairro/cidade e acelerar captacao local.",
+    price: "R$ 59/mês",
+    description: "Para aparecer no topo do bairro/cidade e acelerar captação local.",
     features: ["Topo por relevância local", "Badge Destaque no bairro", "Mais exposição em /buscar", "Ideal para dominar uma região"],
     cta: "Quero destaque",
-    href: routes.registerWorker,
     highlighted: false,
   },
 ];
 
-export default function Home() {
+function getPlanCtaHref(planName: string, role?: string) {
+  if (planName === "Free") {
+    return routes.registerWorker;
+  }
+
+  if (role === "WORKER") {
+    return routes.workerPlan;
+  }
+
+  return routes.registerWorker;
+}
+
+export default async function Home() {
+  const session = await getAppSession();
+  const role = session?.user?.role;
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -306,11 +319,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-y bg-surface">
+        <section id="planos" className="section-y scroll-mt-20 bg-surface">
           <div className="container-page">
             <SectionHeader
               eyebrow="Planos para profissionais"
-              title="Comece gratis e cresca por bairro"
+              title="Comece grátis e cresça por bairro"
               description="O plano do profissional define visibilidade no marketplace. Perfis Destaque aparecem antes em buscas locais relevantes."
               align="center"
             />
@@ -334,7 +347,7 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
-                    <LinkButton href={plan.href} variant={plan.highlighted ? "primary" : "outline"} className="mt-auto w-full">
+                    <LinkButton href={getPlanCtaHref(plan.name, role)} variant={plan.highlighted ? "primary" : "outline"} className="mt-auto w-full">
                       {plan.cta}
                     </LinkButton>
                   </CardContent>

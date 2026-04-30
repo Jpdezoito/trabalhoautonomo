@@ -1,14 +1,31 @@
+"use client";
+
 import Image from "next/image";
-import { MapPin, Star } from "lucide-react";
+import { MapPin, MessageCircle, Star } from "lucide-react";
 import { FavoriteButton } from "@/components/marketplace/favorite-button";
 import { TrustBadge } from "@/components/marketplace/trust-badge";
 import { Badge } from "@/components/ui/badge";
-import { LinkButton } from "@/components/ui/button";
+import { Button, LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { formatRating } from "@/lib/utils";
+import { formatRating, getWhatsappUrl } from "@/lib/utils";
 import type { Worker } from "@/types/marketplace";
 
-export function WorkerCard({ worker }: { worker: Worker }) {
+type WorkerCardProps = {
+  worker: Worker;
+  onWhatsappClick?: (worker: Worker) => void;
+};
+
+export function WorkerCard({ worker, onWhatsappClick }: WorkerCardProps) {
+  const showWhatsapp = Boolean(worker.whatsapp) && worker.contactSettings?.showWhatsapp !== false;
+
+  function handleWhatsappClick() {
+    onWhatsappClick?.(worker);
+
+    if (!onWhatsappClick && typeof window !== "undefined") {
+      window.open(getWhatsappUrl(worker.whatsapp, `Olá, ${worker.name}. Encontrei seu perfil no AutonomoPro.`), "_blank", "noopener,noreferrer");
+    }
+  }
+
   return (
     <Card className="flex h-full flex-col overflow-hidden">
       <div className="relative h-40">
@@ -53,6 +70,18 @@ export function WorkerCard({ worker }: { worker: Worker }) {
             <LinkButton href={`/profissionais/${worker.slug}#orcamento`} variant="outline" className="flex-1">
               Pedir orçamento
             </LinkButton>
+            {showWhatsapp ? (
+              <Button
+                type="button"
+                variant="subtle"
+                className="flex-1"
+                onClick={handleWhatsappClick}
+                aria-label={`Chamar ${worker.name} no WhatsApp`}
+              >
+                <MessageCircle className="mr-2" size={18} />
+                WhatsApp
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>

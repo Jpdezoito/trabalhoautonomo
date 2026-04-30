@@ -1,4 +1,4 @@
-import { forwardRef, type InputHTMLAttributes, type LabelHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { forwardRef, type HTMLAttributes, type InputHTMLAttributes, type LabelHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export function FieldGroup({ className, children }: { className?: string; children: ReactNode }) {
@@ -46,10 +46,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<H
   );
 });
 
-export function FieldHint({ className, children }: { className?: string; children: ReactNode }) {
-  return <p className={cn("text-xs leading-5 text-muted", className)}>{children}</p>;
+export function FieldHint({ className, children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p className={cn("text-xs leading-5 text-muted", className)} {...props}>
+      {children}
+    </p>
+  );
 }
 
-export function FieldError({ className, children }: { className?: string; children: ReactNode }) {
-  return <p className={cn("text-xs font-semibold leading-5 text-danger", className)}>{children}</p>;
+export function FieldError({ className, children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p className={cn("text-xs font-semibold leading-5 text-danger", className)} {...props}>
+      {children}
+    </p>
+  );
 }

@@ -352,3 +352,35 @@ Authentication failed against the database server, the provided database credent
  GET / 200 in 1197ms (next.js: 10ms, application-code: 1187ms)
  GET / 200 in 1105ms (next.js: 282ms, application-code: 823ms)
  GET / 200 in 32ms (next.js: 13ms, application-code: 19ms)
+✓ Compiled in 296ms
+✓ Compiled in 548ms
+ GET / 200 in 16.9s (next.js: 487ms, application-code: 16.4s)
+ GET / 200 in 14.1s (next.js: 2.7s, application-code: 11.4s)
+ GET / 200 in 13.3s (next.js: 2.1s, application-code: 11.2s)
+ GET / 200 in 13.3s (next.js: 2.0s, application-code: 11.3s)
+ GET / 200 in 13.3s (next.js: 2.2s, application-code: 11.2s)
+ GET / 200 in 13.3s (next.js: 2.1s, application-code: 11.3s)
+ GET / 200 in 5.9s (next.js: 6ms, application-code: 5.9s)
+ GET / 200 in 5.8s (next.js: 118ms, application-code: 5.7s)
+ GET / 200 in 1925ms (next.js: 6ms, application-code: 1920ms)
+✓ Compiled in 1239ms
+ GET / 200 in 6.5s (next.js: 2.0s, application-code: 4.4s)
+ GET /cadastro 200 in 375ms (next.js: 213ms, application-code: 161ms)
+○ Compiling /cadastro/cliente ...
+ GET /cadastro/cliente 200 in 11.2s (next.js: 11.2s, application-code: 63ms)
+ GET /cadastro 200 in 56ms (next.js: 4ms, application-code: 52ms)
+ GET /cadastro/profissional 200 in 271ms (next.js: 175ms, application-code: 96ms)
+ GET / 200 in 267ms (next.js: 39ms, application-code: 228ms)
+✓ Compiled in 162ms
+ GET / 200 in 718ms (next.js: 123ms, application-code: 594ms)
+✓ Compiled in 167ms
+ GET / 200 in 500ms (next.js: 127ms, application-code: 373ms)
+✓ Compiled in 116ms
+ GET / 200 in 418ms (next.js: 107ms, application-code: 311ms)
+✓ Compiled in 143ms
+ GET / 200 in 1819ms (next.js: 247ms, application-code: 1572ms)
+ GET / 200 in 1394ms (next.js: 122ms, application-code: 1272ms)
+ GET / 200 in 1052ms (next.js: 148ms, application-code: 904ms)
+ GET / 200 in 1052ms (next.js: 190ms, application-code: 862ms)
+ GET / 200 in 1056ms (next.js: 109ms, application-code: 947ms)
+ GET / 200 in 1059ms (next.js: 77ms, application-code: 982ms)

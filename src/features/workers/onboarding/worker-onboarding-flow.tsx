@@ -26,7 +26,7 @@ import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Field, FieldGroup, FieldHint, Input, Label, Select, Textarea } from "@/components/ui/form";
+import { Field, FieldError, FieldGroup, FieldHint, Input, Label, Select, Textarea } from "@/components/ui/form";
 import { SectionHeader } from "@/components/ui/section-header";
 import { FacialEnrollmentStep } from "@/features/identity/components/facial-enrollment-step";
 import { getCategoryVerificationRule } from "@/features/workers/onboarding/category-verification-rules";
@@ -797,14 +797,17 @@ function QualificationsStep({
   const [year, setYear] = useState("");
   const [registrationNumber, setRegistrationNumber] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | undefined>();
+  const [qualificationError, setQualificationError] = useState("");
 
   function addQualification() {
     if (!title.trim()) {
+      setQualificationError("Informe o título da qualificação antes de adicionar.");
       return;
     }
 
+    setQualificationError("");
     onAddQualification({
-      id: crypto.randomUUID(),
+      id: createDraftId(),
       type,
       title: title.trim(),
       institution: institution.trim(),
@@ -898,7 +901,19 @@ function QualificationsStep({
             </FieldGroup>
             <Field>
               <Label>Titulo</Label>
-              <Input value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Ex.: NR10 básico" />
+              <Input
+                value={title}
+                onChange={(event) => {
+                  setTitle(event.target.value);
+                  if (qualificationError) {
+                    setQualificationError("");
+                  }
+                }}
+                placeholder="Ex.: NR10 básico"
+                aria-invalid={Boolean(qualificationError)}
+                aria-describedby={qualificationError ? "qualification-title-error" : undefined}
+              />
+              {qualificationError ? <FieldError id="qualification-title-error">{qualificationError}</FieldError> : null}
             </Field>
             <FieldGroup>
               <Field>
@@ -912,7 +927,7 @@ function QualificationsStep({
             </FieldGroup>
             <Button type="button" variant="subtle" onClick={addQualification}>
               <Plus className="mr-2" size={18} />
-              Adicionar qualificacao
+              Adicionar qualificação
             </Button>
           </div>
         </div>
@@ -1141,6 +1156,10 @@ function flattenZodErrors(error: z.ZodError) {
 
     return acc;
   }, {});
+}
+
+function createDraftId() {
+  return globalThis.crypto?.randomUUID?.() ?? `draft-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
 function getQualificationLabel(type: WorkerQualificationDraft["type"]) {
